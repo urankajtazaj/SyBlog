@@ -2,11 +2,17 @@
 
 
 {% block body %}
-    <a href="{{ path('post_list') }}" class="btn btn-primary float-right"><i class="fas fa-home"></i> All posts</a>
-    <a href="{{ path('post_edit', {'slug': post.title|replace({' ': '-'})}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
-    <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
-    <hr>
-    <h2>{{ post.title }}</h2>
-    <hr>
-    <p>{{ post.content | nl2br }}</p>    
+    <div class="post">
+        <br>
+        <h2>{{ post.title }}</h2>
+        <hr>
+        <br>
+        <p>{{ post.content | nl2br }}</p>
+        <br>
+        <hr>
+        <a href="{{ path('post_list') }}" class="btn btn-primary float-right"><i class="fas fa-home"></i> All posts</a>
+        <a href="{{ path('post_edit', {'slug': post.title|replace({' ': '-'})}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
+        <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>   
+        <br><br> 
+    </div>
 {% endblock %}
