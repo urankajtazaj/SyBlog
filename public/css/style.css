@@ -1,0 +1,25 @@
+.post {
+    padding: 10px;
+    padding-left: 20px;
+    border: none;
+    background-color: rgba(255,255,255,.8);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    color: initial;
+}
+
+.post a:not(.btn) {
+    color: initial;
+}
+
+.post:hover {
+    background-color: #fff;
+}
+
+.post:hover a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #eee
+}

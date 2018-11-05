@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('post_new') }}" class="btn btn-primary">Add post</a>
+<hr>
+    {% for post in posts %}
+    <div class="row post align-items-center">
+        <div class="col-md-8 col-12">
+            <a href="{{ path('post_single', {'slug': post.title|replace({' ': '-'})}) }}">
+                <h5><b>{{ post.title }}</b></h5>
+                <p>{{ post.content | slice(0, 90) }}...</p>
+            </a>
+        </div>
+
+        <div class="col-md-3 col-12 text-right">
+            <a href="{{ path('post_edit', {'slug': post.title|replace({' ': '-'})}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
+            <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

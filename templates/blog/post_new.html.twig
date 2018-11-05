@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-12">
+        <div class="post">
+            <h4>New Post</h4>
+            <hr>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
