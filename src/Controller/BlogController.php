@@ -14,18 +14,9 @@ use App\Entity\Post;
 
 class BlogController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     */
-    public function index()
-    {
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
-    }
 
     /**
-     * @Route("/posts", name="post_list")
+     * @Route("/", name="post_list")
      */
     public function post_list() {
 

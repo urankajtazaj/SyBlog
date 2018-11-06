@@ -2,8 +2,17 @@
 
 {% block body %}
 
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+    <a href="{{ path('app_logout') }}" class="btn btn-danger float-right">Logout</a>
+{% else %}
+    <a href="{{ path('app_login') }}" class="btn btn-success float-right">Login</a><br><br>
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
 <a href="{{ path('post_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add post</a>
+{% endif %}
 <hr>
+
     {% for post in posts %}
     <div class="row post align-items-center">
         <div class="col-md-8 col-12">
@@ -13,10 +22,13 @@
             </a>
         </div>
 
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="col-md-3 col-12 text-right">
             <a href="{{ path('post_edit', {'slug': post.title|replace({' ': '-'})}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
             <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
         </div>
+        {% endif %}
+
     </div>
     {% endfor %}
 </div>
