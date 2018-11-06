@@ -9,7 +9,7 @@
                 <a href="{{ path('post_single', {'id': post.id}) }}">
                     <h3><b>{{ post.title }}</b></h3>
                     <br>
-                    <p>{{ post.content | slice(0, 150) }}...</p>
+                    <p>{{ post.content | slice(0, 160) }}... [Read More]</p>
                 </a>
                 {% if is_granted('ROLE_ADMIN') %}
                 <hr>
