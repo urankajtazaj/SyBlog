@@ -9,9 +9,8 @@
         <br>
         <p>{{ post.content | nl2br }}</p>
         <br>
-        <hr>
-        <a href="{{ path('post_list') }}" class="btn btn-primary float-right"><i class="fas fa-home"></i> All posts</a>
         {% if is_granted('ROLE_ADMIN') %}
+            <hr>
             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
             <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
         {% endif %}  
