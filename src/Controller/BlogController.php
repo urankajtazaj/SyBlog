@@ -78,11 +78,11 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/post/edit/{slug}", name="post_edit")
+     * @Route("/post/edit/{id}", name="post_edit")
      */
-    public function post_edit(Request $request, $slug) {
+    public function post_edit(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->findOneBy(["title" => str_replace('-', ' ', $slug)]);
+        $post = $em->getRepository(Post::class)->find($id);
 
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, [
@@ -112,7 +112,7 @@ class BlogController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                return $this->redirectToRoute("post_single", ["slug" => str_replace(' ', '-', $data->getTitle())]);
+                return $this->redirectToRoute("post_single", ['id' => $data->getId()]);
             }
 
         return $this->render(
@@ -141,11 +141,11 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/post/{slug}", name="post_single")
+     * @Route("/post/{id}", name="post_single")
      */
-    public function post_single($slug) {
+    public function post_single($id) {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->findOneBy(["title" => str_replace('-', ' ', $slug)]);
+        $post = $em->getRepository(Post::class)->find($id);
 
         return $this->render(
             "blog/post_single.html.twig",
