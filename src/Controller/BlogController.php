@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\Post;
 
@@ -34,7 +36,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/posts/new", name="post_new")
      */
-    public function post_new(Request $request) {
+    public function post_new(Request $request, UserInterface $user) {
         $post = new Post();
 
         $form = $this->createFormBuilder($post)
@@ -48,6 +50,9 @@ class BlogController extends AbstractController
                     'class' => 'form-control mb-3',
                     'rows' => 10
                 ]
+            ])
+            ->add('author', HiddenType::class, [
+                'data' => $user->getId()
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
@@ -96,6 +101,7 @@ class BlogController extends AbstractController
                     'rows' => 10
                 ]
             ])
+            ->add('author', HiddenType::class)
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success'
