@@ -37,7 +37,7 @@ class Post
     private $view_count;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $author;
 
