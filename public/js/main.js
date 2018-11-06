@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
     $(".btn-delete").each(function(i, el) {
         var el = $(el);
     
@@ -14,6 +13,5 @@ $(document).ready(function() {
         })
     
     });
-
 
 });

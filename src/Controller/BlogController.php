@@ -61,18 +61,18 @@ class BlogController extends AbstractController
             ])
             ->getForm();
 
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                $data = $form->getData();
-                
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($data);
-                $em->flush();
+            $data = $form->getData();
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
 
-                return $this->redirectToRoute("post_list");
-            }
+            return $this->redirectToRoute("post_list");
+        }
 
         return $this->render(
             "blog/post_new.html.twig",
@@ -109,17 +109,17 @@ class BlogController extends AbstractController
             ])
             ->getForm();
 
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                $data = $form->getData();
-                
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
+            $data = $form->getData();
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
 
-                return $this->redirectToRoute("post_single", ['id' => $data->getId()]);
-            }
+            return $this->redirectToRoute("post_single", ['id' => $data->getId()]);
+        }
 
         return $this->render(
             "blog/post_new.html.twig",
@@ -159,6 +159,6 @@ class BlogController extends AbstractController
                 'post' => $post
             ]
         );
-
+        
     }
 }
