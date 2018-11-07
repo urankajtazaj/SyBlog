@@ -48,11 +48,8 @@ class BlogController extends AbstractController
             ->add('content', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3',
-                    'rows' => 10
+                    'rows' => 20
                 ]
-            ])
-            ->add('author', HiddenType::class, [
-                'data' => $user->getId()
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
@@ -66,6 +63,8 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
+
+            $data->setUser($user);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
@@ -77,7 +76,8 @@ class BlogController extends AbstractController
         return $this->render(
             "blog/post_new.html.twig",
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'headline' => 'New post'
             ]
         );
     }
@@ -98,10 +98,9 @@ class BlogController extends AbstractController
             ->add('content', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3',
-                    'rows' => 10
+                    'rows' => 20
                 ]
             ])
-            ->add('author', HiddenType::class)
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success'
@@ -126,8 +125,9 @@ class BlogController extends AbstractController
             [
                 'form' => $form->createView(),
                 [
-                    'post' => $post
-                ]
+                    'post' => $post,
+                ],
+                'headline' => 'Edit post'
             ]
         );
 
@@ -153,10 +153,19 @@ class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
 
+        $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+                                                    ->andWhere('p.id != :id')
+                                                    ->setParameter('id', $id)
+                                                    ->orderBy('p.id', 'DESC')
+                                                    ->getQuery();
+
+        $all_posts = $qb->execute();
+
         return $this->render(
             "blog/post_single.html.twig",
             [
-                'post' => $post
+                'post' => $post,
+                'posts' => $all_posts
             ]
         );
         

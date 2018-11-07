@@ -5,14 +5,19 @@
     border-radius: 15px;
     margin-bottom: 10px;
     color: initial;
+    transition: 250ms ease;
+}
+
+.post.card {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.post.card:hover {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .post a:not(.btn) {
     color: initial;
-}
-
-.post:hover {
-    background-color: #fff;
 }
 
 .post:hover a {

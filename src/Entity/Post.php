@@ -37,9 +37,10 @@ class Post
     private $view_count;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
+    private $user;
 
     public function getId(): ?int
     {
@@ -94,14 +95,14 @@ class Post
         return $this;
     }
 
-    public function getAuthor(): ?int
+    public function getUser(): ?User
     {
-        return $this->author;
+        return $this->user;
     }
 
-    public function setAuthor(int $author): self
+    public function setUser(?User $user): self
     {
-        $this->author = $author;
+        $this->user = $user;
 
         return $this;
     }
