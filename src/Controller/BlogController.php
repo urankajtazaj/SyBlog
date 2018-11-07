@@ -159,7 +159,7 @@ class BlogController extends AbstractController
                                                     ->orderBy('p.id', 'DESC')
                                                     ->getQuery();
 
-        $all_posts = $qb->execute();
+        $all_posts = $qb->setMaxResults(5)->execute();
 
         return $this->render(
             "blog/post_single.html.twig",
