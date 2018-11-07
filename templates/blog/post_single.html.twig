@@ -11,22 +11,24 @@
                 <br>
                 <p>{{ post.content | nl2br }}</p>
                 <br>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <hr>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-warning"><i class="fas fa-cog"></i> Edit</a>
-                    <a href="#" data-id="{{ post.id }}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
-                {% endif %}  
-                <br><br> 
             </div>
         </div>
         <div class="col-md-4 col-12">
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="post">
+                    <h5><b>Admin</b></h5>
+                    <hr>
+                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-warning"></i> Edit</a><br>
+                    <a href="#" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-danger"></i> Delete</a>
+                </div>
+            {% endif %}              
             <div class="post">
                 <h5><b>Latest Posts</b></h5>
                 <hr>
                 <ul class="list-unstyled">
                     {% for p in posts %}
                     <li class="mb-3">
-                        <a href="#">
+                        <a href="{{ path('post_single', {'id': p.id}) }}">
                             {{ p.title }} <br><small>&mdash; by <i>{{ p.user.username }}</i></small>
                         </a>
                     </li>
