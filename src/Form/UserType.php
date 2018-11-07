@@ -24,12 +24,18 @@ class UserType extends AbstractType {
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password', 'attr' => [
-                    'class' => 'form-control mb-3'
-                ]],
-                'second_options' => ['label' => 'Repeat Password', 'attr' => [
-                    'class' => 'form-control mb-3'
-                ]]
+                'first_options' => [
+                    'label' => 'Password', 
+                    'attr' => [
+                        'class' => 'form-control mb-3'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password', 
+                    'attr' => [
+                    '   class' => 'form-control mb-3'
+                    ]
+                ]
             ])
             ->add('admin', CheckboxType::class, [
                 'label' => 'Is admin ',
