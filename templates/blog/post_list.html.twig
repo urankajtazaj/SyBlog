@@ -2,6 +2,21 @@
 
 {% block body %}
 
+<div class="row">
+    <div class="col-md-12 col-12">
+        {{ form_start(form) }}
+            <div class="row align-items-center">
+                <div class="col-md-10 col-12">
+                    {{ form_row(form.query) }}        
+                </div>
+                <div class="col-md-2 col-12">
+                    {{ form_row(form.search) }}                        
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+<br><br>
 <div class="row align-items-center">
     {% for post in posts %}
         <div class="col-md-4 col-12">

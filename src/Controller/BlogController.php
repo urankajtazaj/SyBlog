@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Post;
 use App\Entity\Category;
+use App\Form\SearchForm;
 
 class BlogController extends AbstractController
 {
@@ -22,15 +23,43 @@ class BlogController extends AbstractController
     /**
      * @Route("/", name="post_list")
      */
-    public function post_list() {
+    public function post_list(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findAll();
 
+        $searchForm = [];
+
+        $form = $this->createForm(SearchForm::class, $searchForm);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+                                                            ->where('p.title like :title or p.content like :content')
+                                                            ->setParameter('title', '%' . $data['query'] . '%')
+                                                            ->setParameter('content', '%' . $data['query'] . '%')
+                                                            ->orderBy('p.id', 'DESC')
+                                                            ->getQuery();
+                                            
+            $filteredPosts = $qb->execute();
+
+            return $this->render(
+                "blog/post_list.html.twig",
+                [
+                    'posts' => $filteredPosts,
+                    'form' => $form->createView()
+                ]
+            );
+        }
+
         return $this->render(
             "blog/post_list.html.twig",
             [
-                'posts' => $posts
+                'posts' => $posts,
+                'form' => $form->createView()
             ]
         );
     }
