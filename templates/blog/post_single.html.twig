@@ -9,12 +9,14 @@
                 <h2>{{ post.title }}</h2>
                 <hr>
                 <br>
-                <p>{{ post.content | nl2br }}</p>
+                <div class="content">
+                    <p>{{ post.content | raw | nl2br }}</p>
+                </div>
                 <br>
             </div>
         </div>
         <div class="col-md-4 col-12">
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
                 <div class="post">
                     <h5><b>Admin</b></h5>
                     <hr>

@@ -5,9 +5,13 @@
 {% block body %}
 <div class="row justify-content-center">
     <div class="col-md-6 col-12">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <div class="post">
+            <h4>Add user</h4>
+            <hr>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 </div>
 
