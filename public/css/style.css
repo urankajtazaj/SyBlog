@@ -30,6 +30,7 @@
 
 body {
     background-color: #eee;
+    height: 100%;
 }
 
 .badge {
@@ -48,4 +49,14 @@ body {
 
 .badge-danger {
     background-color: #c44721;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper > .body {
+    flex: 1;
 }

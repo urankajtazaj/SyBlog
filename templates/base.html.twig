@@ -14,32 +14,44 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container">		
-			<a class="navbar-brand" href="{{ path('post_list') }}">BLOG</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	<div class="wrapper">
+		<div class="body">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container">		
+					<a class="navbar-brand" href="{{ path('post_list') }}">BLOG</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-				</ul>
-				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{ path('post_new') }}" class="btn">Add post</a>
-				{% endif %}
-				{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-					<a href="{{ path('app_logout') }}" class="nav-link text-danger">Logout</a>
-					<a href="{{ path('profile') }}">Profile</a>
-				{% else %}
-					<a href="{{ path('app_login') }}" class="nav-link">Login</a>
-				{% endif %}
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+						</ul>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('post_new') }}" class="btn">Add post</a>
+						{% endif %}
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+							<a href="{{ path('app_logout') }}" class="nav-link text-danger">Logout</a>
+							<a href="{{ path('profile') }}">Profile</a>
+						{% else %}
+							<a href="{{ path('app_login') }}" class="nav-link">Login</a>
+						{% endif %}
+					</div>
+				</div>
+			</nav>
+			<br><br>
+			<div class="container">
+				{% block body %}{% endblock %}
 			</div>
 		</div>
-	</nav>
-	<br><br>
-	<div class="container">
-		{% block body %}{% endblock %}
+
+		<footer>
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center col-12">
+					<p class="lead">Copyrights &copy; 2018</p>
+				</div>
+			</div>
+		</footer>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
