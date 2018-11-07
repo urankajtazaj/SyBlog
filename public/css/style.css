@@ -29,5 +29,23 @@
 }
 
 body {
-    background-color: #eee
+    background-color: #eee;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+.badge-primary {
+    background-color: #2c54c2;
+}
+
+.badge-success {
+    background-color: #1da06e;
+}
+
+.badge-danger {
+    background-color: #c44721;
 }

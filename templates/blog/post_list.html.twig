@@ -11,9 +11,9 @@
                     <br>
                     <p>{{ post.content | slice(0, 115) }}... <br><i>[Read More]</i></p>
                     <span class="badge badge-{{ post.category.labelName }}">{{ post.category.name }}</span><br><br>
-                    <small>&mdash; <i>{{ post.user.username }}</i> on <i>{{ post.dateCreated|date('d-m-Y H:i') }}</i></small>
+                    <small>&mdash; <i>{{ post.user.name }}</i> on <i>{{ post.dateCreated|date('d-m-Y H:i') }}</i></small>
                 </a>
-                {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
+                {% if is_granted('ROLE_ADMIN') and post.user.id == app.user.id %}
                 <hr>
                 <div class="text-right">
                     <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-cog"></i> Edit</a>

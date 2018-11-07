@@ -103,6 +103,8 @@ class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
 
+        $category = $em->getRepository(Category::class)->findAll();
+
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, [
                 'attr' => [
@@ -113,6 +115,15 @@ class BlogController extends AbstractController
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'rows' => 20
+                ]
+            ])
+            ->add('category', ChoiceType::class, [
+                'choices' => $category,
+                'choice_label' => function($category) {
+                    return $category->getName();
+                },
+                'attr' => [
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('save', SubmitType::class, [
