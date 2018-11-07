@@ -65,6 +65,7 @@ class BlogController extends AbstractController
             $data = $form->getData();
 
             $data->setUser($user);
+            $data->setViewCount(0);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
@@ -152,6 +153,10 @@ class BlogController extends AbstractController
     public function post_single($id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
+
+        // Update view count
+        $post->setViewCount($post->getViewCount() + 1);
+        $em->flush();
 
         $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
                                                     ->andWhere('p.id != :id')

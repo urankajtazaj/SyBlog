@@ -30,6 +30,7 @@
 				{% endif %}
 				{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
 					<a href="{{ path('app_logout') }}" class="nav-link text-danger">Logout</a>
+					<a href="{{ path('profile') }}">Profile</a>
 				{% else %}
 					<a href="{{ path('app_login') }}" class="nav-link">Login</a>
 				{% endif %}
