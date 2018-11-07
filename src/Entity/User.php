@@ -25,6 +25,11 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -65,6 +70,16 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    public function setName(string $name): self {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getName(): string {
+        return (string) $this->name;
     }
 
     /**

@@ -6,9 +6,8 @@
     <div class="row">
         <div class="col-md-12 col-12">
             <div class="post card">
-                <h1>{{ app.user.username }}</h1>            
+                <h1>{{ app.user.name }}</h1>            
             </div>
-            {# <br> #}
             <div class="post card">
                 <h5>Your Posts ({{ posts | length }})</h5>
                 <br>
@@ -17,6 +16,7 @@
                     <thead>
                         <th>Title</th>
                         <th>Clicks</th>
+                        <th>Created</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -24,6 +24,7 @@
                         <tr>
                             <td>{{ post.title }}</td>
                             <td>{{ post.viewCount }}</td>
+                            <td>{{ post.dateCreated | date('d-m-Y') }}</td>
                             <td>
                                 <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn"><i class="fas fa-eye text-dark"></i></a>
                                 <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn"><i class="fas fa-pen text-warning"></i></a>

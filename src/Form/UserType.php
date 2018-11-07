@@ -17,6 +17,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class UserType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+            ->add('name', TextType::class, [
+                'label' => 'Full Name',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
+            ])
             ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3'

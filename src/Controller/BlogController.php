@@ -11,8 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Post;
+use App\Entity\Category;
 
 class BlogController extends AbstractController
 {
@@ -38,6 +40,7 @@ class BlogController extends AbstractController
      */
     public function post_new(Request $request, UserInterface $user) {
         $post = new Post();
+        $category = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
 
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, [
@@ -49,6 +52,15 @@ class BlogController extends AbstractController
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'rows' => 20
+                ]
+            ])
+            ->add('category', ChoiceType::class, [
+                'choices' => $category,
+                'choice_label' => function($category) {
+                    return $category->getName();
+                },
+                'attr' => [
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('save', SubmitType::class, [
@@ -66,6 +78,7 @@ class BlogController extends AbstractController
 
             $data->setUser($user);
             $data->setViewCount(0);
+            $data->setDateCreated(new \DateTime("now"));
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
