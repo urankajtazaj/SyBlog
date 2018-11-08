@@ -84,19 +84,22 @@ class BlogController extends AbstractController
 
             $data = $form->getData();
 
-            $file = $post->getCover();
-            $filename = md5(uniqid()) . "." . $file->getExtension();
+            if ($data->getCover()) {
+                $file = $post->getCover();
+                $filename = md5(uniqid()) . "." . $file->getExtension();
 
+                $data->setCover($filename);
+
+                $file->move(
+                    $this->getParameter('cover_folder'),
+                    $filename
+                );
+            }
+            
             $data->setUser($user);
             $data->setViewCount(0);
             $data->setDateCreated(new \DateTime("now"));
-            $data->setCover($filename);
 
-            $file->move(
-                $this->getParameter('cover_folder'),
-                $filename
-            );
-            
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
             $em->flush();
@@ -160,9 +163,8 @@ class BlogController extends AbstractController
             "blog/post_new.html.twig",
             [
                 'form' => $form->createView(),
-                [
-                    'post' => $post,
-                ],
+                'post' => $post,
+                'cover_img' => $prevFilename,
                 'headline' => 'Edit post'
             ]
         );

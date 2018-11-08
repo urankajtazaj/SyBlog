@@ -21,7 +21,7 @@ class SearchForm extends AbstractType {
             ])
             ->add('search', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-lg btn-success'
                 ]
             ]);
     }

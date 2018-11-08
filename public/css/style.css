@@ -9,11 +9,11 @@
 }
 
 .post.card {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .post.card:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 .post a:not(.btn) {
@@ -62,7 +62,17 @@ body {
 }
 
 .cover-img {
-    height: 400px;
+    width: 100%;
+    height: 350px;
+    border-radius: 10px 10px 0 0;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 100px;
+}
+
+.img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +80,7 @@ body {
     overflow: hidden;
 }
 
-.cover-img img {
+.img img {
     min-width: 100%;
     max-width: 110%;
 }
