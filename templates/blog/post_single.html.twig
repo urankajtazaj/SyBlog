@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -76,7 +77,10 @@
                     <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-warning"></i> Edit</a><br>
                     <a href="#" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-danger"></i> Delete</a>
                     <hr>
-                    <span class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</span>
+                    <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
+                    <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>
+                    <hr>
+                    <p class="lead">&nbsp;&nbsp;{{ app.user.posts | length }} Post(s)</p>
                 </div>
             {% endif %}
 
