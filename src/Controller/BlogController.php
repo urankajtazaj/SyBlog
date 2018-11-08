@@ -14,10 +14,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\File;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Category;
 use App\Form\SearchForm;
 use App\Form\PostForm;
+use App\Form\CommentForm;
 
 class BlogController extends AbstractController
 {
@@ -187,9 +189,32 @@ class BlogController extends AbstractController
     /**
      * @Route("/post/{id}", name="post_single")
      */
-    public function post_single($id) {
+    public function post_single(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
+
+        $comments = $post->getComments();
+
+        $comment_form = $this->createForm(CommentForm::class, []);
+
+        $comment_form->handleRequest($request);
+
+        if ($comment_form->isSubmitted() && $comment_form->isValid()) {
+            $data = $comment_form->getData();
+
+            $c = new Comment();
+
+            $c->setUser($this->getUser());
+            $c->setComment($data['comment']);
+            $c->setDateCreated(new \DateTime("now"));
+            $c->setPost($post);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($c);
+            $manager->flush();
+
+            return $this->redirectToRoute("post_single", ['id' => $post->getId()]);
+        }
 
         // Update view count
         $post->setViewCount($post->getViewCount() + 1);
@@ -207,7 +232,9 @@ class BlogController extends AbstractController
             "blog/post_single.html.twig",
             [
                 'post' => $post,
-                'posts' => $all_posts
+                'posts' => $all_posts,
+                'comments' => $comments,
+                'comment_form' => $comment_form->createView()
             ]
         );
         

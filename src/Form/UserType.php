@@ -44,6 +44,7 @@ class UserType extends AbstractType {
                 ]
             ])
             ->add('admin', CheckboxType::class, [
+                'required' => false,
                 'label' => 'Is admin ',
                 'mapped' => false,
                 'attr' => [

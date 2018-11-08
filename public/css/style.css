@@ -84,3 +84,15 @@ body {
     min-width: 100%;
     max-width: 110%;
 }
+
+.comment {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 15px;
+}
+
+.comment p {
+    padding-left: 10px;
+    opacity: .7;
+}
