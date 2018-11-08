@@ -28,7 +28,11 @@ class BlogController extends AbstractController
     public function post_list(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository(Post::class)->findAll();
+        $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+                                                ->orderBy('p.id', 'DESC')
+                                                ->getQuery();
+
+        $posts = $posts_qb->execute();
 
         $searchForm = [];
 
