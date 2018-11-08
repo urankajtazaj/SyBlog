@@ -12,10 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\File\File;
 
 use App\Entity\Post;
 use App\Entity\Category;
 use App\Form\SearchForm;
+use App\Form\PostForm;
 
 class BlogController extends AbstractController
 {
@@ -69,35 +71,8 @@ class BlogController extends AbstractController
      */
     public function post_new(Request $request, UserInterface $user) {
         $post = new Post();
-        $category = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
 
-        $form = $this->createFormBuilder($post)
-            ->add('title', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control mb-3'
-                ]
-            ])
-            ->add('content', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control mb-3',
-                    'rows' => 20
-                ]
-            ])
-            ->add('category', ChoiceType::class, [
-                'choices' => $category,
-                'choice_label' => function($category) {
-                    return $category->getName();
-                },
-                'attr' => [
-                    'class' => 'form-control mb-3'
-                ]
-            ])
-            ->add('save', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
-            ->getForm();
+        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
 
         $form->handleRequest($request);
 
@@ -105,9 +80,18 @@ class BlogController extends AbstractController
 
             $data = $form->getData();
 
+            $file = $post->getCover();
+            $filename = md5(uniqid()) . "." . $file->getExtension();
+
             $data->setUser($user);
             $data->setViewCount(0);
             $data->setDateCreated(new \DateTime("now"));
+            $data->setCover($filename);
+
+            $file->move(
+                $this->getParameter('cover_folder'),
+                $filename
+            );
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
@@ -132,41 +116,35 @@ class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
 
-        $category = $em->getRepository(Category::class)->findAll();
+        $prevFilename = $post->getCover();
 
-        $form = $this->createFormBuilder($post)
-            ->add('title', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control mb-3'
-                ]
-            ])
-            ->add('content', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control mb-3',
-                    'rows' => 20
-                ]
-            ])
-            ->add('category', ChoiceType::class, [
-                'choices' => $category,
-                'choice_label' => function($category) {
-                    return $category->getName();
-                },
-                'attr' => [
-                    'class' => 'form-control mb-3'
-                ]
-            ])
-            ->add('save', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
-            ->getForm();
+        if ($post->getCover()) {
+            $post->setCover(
+                new File($this->getParameter('cover_folder') . '/' . $post->getCover())
+            );
+        }
+
+        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
+
+            if ($data->getCover()) {
+                $file = $post->getCover();
+                $filename = md5(uniqid()) . "." . $file->guessExtension();
+    
+                $data->setCover($filename);
+    
+                $file->move(
+                    $this->getParameter('cover_folder'),
+                    $filename
+                );
+            } else {
+                $data->setCover($prevFilename);
+            }
             
             $em = $this->getDoctrine()->getManager();
             $em->flush();

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -47,6 +48,12 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg", "image/jpg", "image/webp" })
+     */
+    private $cover;
 
     public function getId(): ?int
     {
@@ -121,6 +128,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function setCover($cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }
