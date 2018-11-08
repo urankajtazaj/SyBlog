@@ -179,7 +179,16 @@ class BlogController extends AbstractController
     public function post_delete($id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
+        $comments = $em->getRepository(Comment::class)->findBy(['post' => $id]);
 
+        foreach ($comments as $comment) {
+            $comment->setPost(null);
+            $em->persist($comment);
+            $em->flush();
+        } 
+
+        
+        // $em->remove($post->getComments());
         $em->remove($post);
         $em->flush();
 
