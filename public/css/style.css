@@ -61,6 +61,11 @@ body {
     flex: 1;
 }
 
+footer {
+    background-color: #fff;
+    padding: 20px;
+}
+
 .cover-img {
     width: 100%;
     height: 350px;
@@ -95,4 +100,12 @@ body {
 .comment p {
     padding-left: 10px;
     opacity: .7;
+}
+
+.faded {
+    opacity: .5 !important;
+}
+
+a .faded:hover {
+    opacity: .85 !important;
 }

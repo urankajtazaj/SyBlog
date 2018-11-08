@@ -18,7 +18,7 @@
 		<div class="body">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container">		
-					<a class="navbar-brand" href="{{ path('post_list') }}">BLOG</a>
+					<a class="navbar-brand" href="{{ path('post_list') }}"><b>BLOG</b></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -27,15 +27,27 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 						</ul>
-						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('post_new') }}" class="btn">Add post</a>
-						{% endif %}
-						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-							<a href="{{ path('app_logout') }}" class="nav-link text-danger">Logout</a>
-							<a href="{{ path('profile') }}">Profile</a>
-						{% else %}
-							<a href="{{ path('app_login') }}" class="nav-link">Login</a>
-						{% endif %}
+						<ul class="navbar-nav">
+							{% if is_granted('ROLE_ADMIN') %}
+								<li class="nav-item">
+									<a href="{{ path('post_new') }}" class="nav-link"><i class="fas fa-plus"></i> Post</a>
+								</li>
+							{% endif %}
+							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+								<li class="nav-item">
+									<a href="{{ path('profile') }}" class="nav-link">Profile</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{ path('app_logout') }}" class="nav-link">Logout</a>
+								</li>
+							{% else %}
+								<li class="nav-item form-inline">
+									<a href="{{ path('app_login') }}" class="nav-link">Login</a>
+									or
+									<a href="{{ path('register') }}" class="nav-link">Register</a>								
+								</li>
+							{% endif %}
+						</ul>
 					</div>
 				</div>
 			</nav>
@@ -43,12 +55,13 @@
 			<div class="container">
 				{% block body %}{% endblock %}
 			</div>
+			<br><br>
 		</div>
 
 		<footer>
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center col-12">
-					<p class="lead">Copyrights &copy; 2018</p>
+					<span class="lead">Copyrights &copy; 2018</span>
 				</div>
 			</div>
 		</footer>

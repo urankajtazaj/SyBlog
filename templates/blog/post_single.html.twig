@@ -3,6 +3,8 @@
 
 {% block body %}
     <div class="row">
+
+        {# POST CONTENT #}
         <div class="col-md-8 col-12">
             <div class="post">
                 {% if (post.cover) %}
@@ -34,7 +36,10 @@
                 </div>
                 <br>
             </div>
-            <div class="post">
+            {# END POST CONTENT #}
+
+            {# COMMENTS SECTION #}
+            <div class="post" id="comments">
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                     {{ form_start(comment_form) }}
                     {{ form_widget(comment_form) }}
@@ -60,6 +65,9 @@
                 {% endif %}
             </div>
         </div>
+        {# END COMMENTS SECTION #}
+
+        {# SIDEBAR #}
         <div class="col-md-4 col-12">
             {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
                 <div class="post">
@@ -67,6 +75,8 @@
                     <hr>
                     <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-warning"></i> Edit</a><br>
                     <a href="#" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-danger"></i> Delete</a>
+                    <hr>
+                    <span class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</span>
                 </div>
             {% endif %}
 
@@ -86,5 +96,7 @@
             </div>
             {% endif %}
         </div>
+        {# END SIDEBAR #}
+
     </div>
 {% endblock %}
