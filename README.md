@@ -1,2 +1,2 @@
 # CRUD
-A simple CRUD web app made with symfony
+A simple blog made with symfony
