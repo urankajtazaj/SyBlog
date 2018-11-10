@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PostForm extends AbstractType {
@@ -22,6 +23,13 @@ class PostForm extends AbstractType {
         $builder
             ->add('cover', FileType::class, [
                 'label' => 'Cover image',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('delete_cover', CheckboxType::class, [
+                'mapped' => false,
                 'required' => false
             ])
             ->add('title', TextType::class, [
@@ -46,7 +54,7 @@ class PostForm extends AbstractType {
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-lg btn-success'
                 ]
             ]);
     }

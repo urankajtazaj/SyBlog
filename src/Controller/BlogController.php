@@ -113,7 +113,7 @@ class BlogController extends AbstractController
             "blog/post_new.html.twig",
             [
                 'form' => $form->createView(),
-                'headline' => 'New post'
+                'headline' => 'New Post'
             ]
         );
     }
@@ -126,6 +126,7 @@ class BlogController extends AbstractController
         $post = $em->getRepository(Post::class)->find($id);
 
         $prevFilename = $post->getCover();
+
 
         if ($post->getCover()) {
             $post->setCover(
@@ -152,9 +153,13 @@ class BlogController extends AbstractController
                     $filename
                 );
             } else {
-                $data->setCover($prevFilename);
+                if ($form['delete_cover']) {
+                    $data->setCover(null);
+                } else {
+                    $data->setCover($prevFilename);
+                }
             }
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
@@ -167,7 +172,7 @@ class BlogController extends AbstractController
                 'form' => $form->createView(),
                 'post' => $post,
                 'cover_img' => $prevFilename,
-                'headline' => 'Edit post'
+                'headline' => 'Edit Post'
             ]
         );
 

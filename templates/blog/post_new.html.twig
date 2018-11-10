@@ -7,29 +7,61 @@
 {% endblock %}
 
 {% block body %}
-<div class="row justify-content-center">
-    <div class="col-md-12 col-12">
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-8 col-12">
         <div class="post">
-            <h4>{{ headline }}</h4>
-            <hr>
-            {{ form_start(form) }}
+            <h3>{{ headline }}</h3>
+            <br>
+            <br>
 
-            {% if post is defined and post.cover %}
-            <div class="text-right">
-                Current image<br>
-                <div class="img thumbnail float-right">
-                    <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
-                </div>
-            <br><br>
+            <div class="form-group">
+                {{ form_row(form.title) }}
             </div>
-            {% endif %}
 
-            {{ form_row(form.cover) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+            <div class="form-group">
+                {{ form_row(form.content) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.category) }}<small><a href="#" class="btn"><i class="fas fa-plus"></i></a></small>
+                {{ form_widget(form.category) }}
+            </div>
+
+            <br>
+            <hr>
         </div>
     </div>
+
+    <div class="col-md-4 col-12">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-group">
+            {{ form_row(form.cover) }}
+        </div>
+
+        {% if post is defined and post.cover %}
+            <div class="form-group">
+                Current image<br>
+                <div class="img post-thumbnail">
+                    <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.delete_cover) }} {{ form_label(form.delete_cover) }}
+            </div>
+        {% else %}
+                {{ form_widget(form.delete_cover, {'attr': { 'class': 'd-hidden' }}) }}
+        {% endif %}
+    </div>
+    <div class="col-md-6 col-12">
+        {{ form_row(form.save) }}
+    </div>
 </div>
+{{ form_end(form) }}
 {% endblock %}
 
 

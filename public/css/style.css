@@ -16,14 +16,6 @@ h4, h5, h6 {
     font-family: "Lora";
 }
 
-.post.card {
-    /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
-}
-
-.post.card:hover {
-    /* box-shadow: 0 5px 15px rgba(0,0,0,0.08); */
-}
-
 .post a:not(.btn) {
     color: initial;
 }
@@ -134,7 +126,7 @@ footer {
 }
 
 .faded {
-    opacity: .5 !important;
+    opacity: .7 !important;
 }
 
 a .faded:hover {
@@ -147,4 +139,16 @@ nav {
     z-index: 2;
     background-color: #fff;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.form-control {
+    border-radius: 0;
+    font-size: 20px;
+    /* padding: 8px 5px; */
+    height: unset;
+    font-family: "Lora";
+}
+
+.d-hidden {
+    visibility: hidden;
 }
