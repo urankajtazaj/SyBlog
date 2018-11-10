@@ -34,14 +34,14 @@
                         {% endif %}
 
                         <h3><b>{{ post.title }}</b></h3>
-                        <br>
+                        <p class="faded">&mdash; {{ post.category.name }}</p>
                         <p>{{ post.content | slice(0, 115) }}... <br><i>[Read More]</i></p>
-                        <small><i>{{ post.dateCreated|date('d-m-Y H:i') }}</i></small>
+                        <p class="faded"><small>{{ post.dateCreated|date('d-m-Y H:i') }}</small></p>
                     </a>
                     <hr>
                     <div class="text-right">
-                        <a href="{{ path('post_single', {'id': post.id}) }}#comments"><span class="faded float-left "><i class="fas fa-comment-dots"></i> {{ post.comments | length }}</span></a>
-                        <i class="faded float-right">{{ post.category.name }}</i><br>                   
+                        {# <a href="{{ path('post_single', {'id': post.id}) }}#comments"><p class="faded float-left ">{{ post.comments | length }} Comment(s)</p></a>
+                        <p class="faded float-right">{{ post.category.name }}</p><br>                    #}
                         {% if is_granted('ROLE_ADMIN') and post.user.id == app.user.id %}
                         <hr>
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-cog"></i> Edit</a>
