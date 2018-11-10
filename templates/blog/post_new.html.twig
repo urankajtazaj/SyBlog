@@ -2,6 +2,10 @@
 
 {% block title %}{{ headline }}{% endblock %}
 
+{% block stylesheets %}
+<script src="{{ asset('js/ckeditor.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 <div class="row justify-content-center">
     <div class="col-md-12 col-12">
@@ -26,4 +30,11 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    CKEDITOR.replace('post_form_content');
+</script>
 {% endblock %}
