@@ -187,8 +187,6 @@ class BlogController extends AbstractController
             $em->flush();
         } 
 
-        
-        // $em->remove($post->getComments());
         $em->remove($post);
         $em->flush();
 

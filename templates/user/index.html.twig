@@ -4,10 +4,21 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-12 col-12">
-            <div class="post card">
-                <h1>{{ app.user.name }}</h1>            
+        <div class="col-md-2 col-12">
+            <div class="img thumbnail" style="background-color: #eee;">
+            
             </div>
+        </div>
+        <div class="col-md-8 col-12">
+            <h2>{{ app.user.name }}</h2>
+            <p>{{ app.user.bio }}</p>
+        </div>
+        <div class="col-md-2 col-12 text-center">
+            <p class="lead display-4">{{ posts | length }}</p>
+            <p>Posts</p>
+        </div>
+        <div class="col-md-12">
+            <hr>
             <div class="post card">
                 <h5>Your Posts ({{ posts | length }})</h5>
                 <br>

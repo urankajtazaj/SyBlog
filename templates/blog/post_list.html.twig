@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="row">
+{# <div class="row">
     <div class="col-md-12 col-12">
         {{ form_start(form) }}
         <div class="post card">
@@ -19,23 +19,31 @@
         </div>
         {{ form_end(form) }}
     </div>
-</div>
-<div class="row align-items-center">
+</div> #}
+<div class="row">
     {% if posts %}
         {% for post in posts %}
-            <div class="col-md-4 col-12">
+            <div class="col-md-6 col-12">
                 <div class="post card">
                     <a href="{{ path('post_single', {'id': post.id}) }}">
+                    
+                        {% if post.cover %}
+                        <div class="img post-thumbnail">
+                            <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                        </div>
+                        {% endif %}
+
                         <h3><b>{{ post.title }}</b></h3>
                         <br>
                         <p>{{ post.content | slice(0, 115) }}... <br><i>[Read More]</i></p>
-                        <span class="badge badge-{{ post.category.labelName }}">{{ post.category.name }}</span><br><br>
                         <small><i>{{ post.dateCreated|date('d-m-Y H:i') }}</i></small>
                     </a>
                     <hr>
                     <div class="text-right">
                         <a href="{{ path('post_single', {'id': post.id}) }}#comments"><span class="faded float-left "><i class="fas fa-comment-dots"></i> {{ post.comments | length }}</span></a>
+                        <i class="faded float-right">{{ post.category.name }}</i><br>                   
                         {% if is_granted('ROLE_ADMIN') and post.user.id == app.user.id %}
+                        <hr>
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-cog"></i> Edit</a>
                             <a href="#" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
                         {% endif %}
