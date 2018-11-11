@@ -10,6 +10,15 @@
 {{ form_start(form) }}
 <div class="row">
     <div class="col-md-8 col-12">
+        <div class="col-md-12 col-12">
+            {{ form_widget(form.save) }}
+
+            {% if post is defined %}
+            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="float-right btn btn-lg btn-secondary"><i class="fas fa-external-link-alt"></i> View post</a>
+            {% endif %}
+        </div>
+        <br>
+        <hr>
         <div class="post">
             <h3>{{ headline }}</h3>
             <br>
@@ -27,9 +36,6 @@
                 {{ form_label(form.category) }}<small><a href="#" class="btn"><i class="fas fa-plus"></i></a></small>
                 {{ form_widget(form.category) }}
             </div>
-
-            <br>
-            <hr>
         </div>
     </div>
 
@@ -56,9 +62,6 @@
         {% else %}
                 {{ form_widget(form.delete_cover, {'attr': { 'class': 'd-hidden' }}) }}
         {% endif %}
-    </div>
-    <div class="col-md-6 col-12">
-        {{ form_row(form.save) }}
     </div>
 </div>
 {{ form_end(form) }}

@@ -52,7 +52,7 @@
                     <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br><hr>
                 {% endif %}
                 
-                <h4>Comments</h4><br>
+                <h4>{{ comments | length }} Comment{% if comments | length > 1 or comments | length == 0 %}s{% endif %}</h4>
                 {% if comments | length > 0 %}
                     {% for comment in comments %}
                     <div class="comment">
@@ -62,7 +62,7 @@
                     </div>
                     {% endfor %}
                 {% else %}
-                    <p class="lead">Be the first to comment</p>
+                    <p class="faded">Be the first to comment</p>
                 {% endif %}
             </div>
             {# END COMMENTS SECTION #}
