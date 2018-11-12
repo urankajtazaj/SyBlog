@@ -152,3 +152,8 @@ nav {
 .d-hidden {
     visibility: hidden;
 }
+
+.dropdown.custom {
+    background-color: transparent;
+    color: #222;
+}

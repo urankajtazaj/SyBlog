@@ -9,7 +9,7 @@
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	 crossorigin="anonymous">
-	 <link href="https://fonts.googleapis.com/css?family=Lora|Montserrat:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora|Montserrat:700" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	{% block stylesheets %}{% endblock %}
 </head>
@@ -18,10 +18,10 @@
 	<div class="wrapper">
 		<div class="body">
 			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container">		
+				<div class="container">
 					<a class="navbar-brand" href="{{ path('post_list') }}"><b>BLOG</b></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
@@ -29,25 +29,34 @@
 						<ul class="navbar-nav mr-auto">
 						</ul>
 						<ul class="navbar-nav">
-							{% if is_granted('ROLE_ADMIN') %}
-								<li class="nav-item">
-									<a href="{{ path('post_new') }}" class="nav-link"><i class="fas fa-plus"></i> Post</a>
-								</li>
-							{% endif %}
+
 							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-								<li class="nav-item">
-									<a href="{{ path('profile') }}" class="nav-link">Profile</a>
-								</li>
-								<li class="nav-item">
-									<a href="{{ path('app_logout') }}" class="nav-link">Logout</a>
-								</li>
+							<li class="nav-item">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+									 aria-haspopup="true" aria-expanded="false">
+										{{ app.user.name }}
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
+										<hr>
+										{% if is_granted('ROLE_ADMIN') %}
+										<a class="dropdown-item" href="{{ path('post_new') }}">Add post</a>
+										<a class="dropdown-item" href="#">Add category</a>
+										<hr>
+										{% endif %}
+										<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+									</div>
+								</div>
+							</li>
 							{% else %}
 								<li class="nav-item form-inline">
 									<a href="{{ path('app_login') }}" class="nav-link">Login</a>
 									or
-									<a href="{{ path('register') }}" class="nav-link">Register</a>								
+									<a href="{{ path('register') }}" class="nav-link">Register</a>
 								</li>
 							{% endif %}
+
 						</ul>
 					</div>
 				</div>
@@ -71,9 +80,13 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
 	{% block javascripts %}{% endblock %}
 </body>
+
 </html>

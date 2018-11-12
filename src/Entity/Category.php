@@ -28,10 +28,6 @@ class Category
      */
     private $posts;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $label_name;
 
     public function __construct()
     {
@@ -51,16 +47,6 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLabelName(): ?string {
-        return $this->label_name;
-    }
-
-    public function setLabelName(string $label_name): self {
-        $this->label_name = $label_name;
 
         return $this;
     }

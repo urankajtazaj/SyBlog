@@ -172,7 +172,8 @@ class BlogController extends AbstractController
                 'form' => $form->createView(),
                 'post' => $post,
                 'cover_img' => $prevFilename,
-                'headline' => 'Edit Post'
+                'headline' => 'Edit Post',
+                'id' => $id
             ]
         );
 
