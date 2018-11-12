@@ -56,7 +56,7 @@
                 {% if comments | length > 0 %}
                     {% for comment in comments %}
                     <div class="comment">
-                        <h6>{{ comment.user.name }}</h6>
+                        <h5>{{ comment.user.name }}</h5>
                         <p>{{ comment.comment | nl2br }}</p>
                         <small><i>&mdash; {{ comment.dateCreated | date('d/m/Y (H:i)') }}</i></small>              
                     </div>
@@ -80,8 +80,6 @@
                     <hr>
                     <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
                     <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>
-                    <hr>
-                    <p class="lead">&nbsp;&nbsp;{{ app.user.posts | length }} Post(s)</p>
                 </div>
             {% endif %}
 
