@@ -35,7 +35,6 @@
 
                         <h3><b>{{ post.title }}</b></h3>
                         <p class="faded">{{ post.category.name }}</p>
-                        <p class="faded"><small>{{ post.dateCreated|date('d-m-Y H:i') }}</small></p>
                     </a>
                 </div>
             </div>
@@ -89,7 +88,26 @@
                 </ul>
             </div>
         {% endif %}
+
+    {# <br> #}
+
+        {# {% if popular %}
+            <div class="post">
+                <p>Latest comments</p>
+                <ul class="list-unstyled">
+                    {% for c in comments %}
+                    <li class="mb-3">
+                        <a href="{{ path('post_single', {'id': c.post.id}) }}#comments">
+                            {{ c.user.name }} commented on {{ c.post.viewCount }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %} #}
+    
     </div>  
+
 </div>
 
 {% endblock %}
