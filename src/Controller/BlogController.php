@@ -34,7 +34,18 @@ class BlogController extends AbstractController
                                                 ->orderBy('p.id', 'DESC')
                                                 ->getQuery();
 
-        $posts = $posts_qb->execute();
+        $other_posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setFirstResult(2)
+            ->getQuery();
+
+        $popular_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+            ->orderBy('p.view_count', 'DESC')
+            ->getQuery();
+
+        $posts = $posts_qb->setMaxResults(2)->execute();
+        $other_posts = $other_posts_qb->execute();
+        $popular_posts = $popular_qb->setMaxResults(10)->execute();
 
         $searchForm = [];
 
@@ -46,27 +57,21 @@ class BlogController extends AbstractController
             $data = $form->getData();
 
             $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
-                                                            ->where('p.title like :title or p.content like :content')
-                                                            ->setParameter('title', '%' . $data['query'] . '%')
-                                                            ->setParameter('content', '%' . $data['query'] . '%')
-                                                            ->orderBy('p.id', 'DESC')
-                                                            ->getQuery();
+                                                ->where('p.title like :title or p.content like :content')
+                                                ->setParameter('title', '%' . $data['query'] . '%')
+                                                ->setParameter('content', '%' . $data['query'] . '%')
+                                                ->orderBy('p.id', 'DESC')
+                                                ->getQuery();
                                             
             $filteredPosts = $qb->execute();
-
-            return $this->render(
-                "blog/post_list.html.twig",
-                [
-                    'posts' => $filteredPosts,
-                    'form' => $form->createView()
-                ]
-            );
         }
 
         return $this->render(
             "blog/post_list.html.twig",
             [
                 'posts' => $posts,
+                'other_posts' => $other_posts,
+                'popular' => $popular_posts,
                 'form' => $form->createView()
             ]
         );

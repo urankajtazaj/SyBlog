@@ -42,7 +42,7 @@
 										<hr>
 										{% if is_granted('ROLE_ADMIN') %}
 										<a class="dropdown-item" href="{{ path('post_new') }}">Add post</a>
-										<a class="dropdown-item" href="#">Add category</a>
+										<a class="dropdown-item" href="{{ path('category_add') }}">Add category</a>
 										<hr>
 										{% endif %}
 										<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>

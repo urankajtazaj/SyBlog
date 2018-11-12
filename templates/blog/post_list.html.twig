@@ -34,17 +34,9 @@
                         {% endif %}
 
                         <h3><b>{{ post.title }}</b></h3>
-                        <p class="faded">&mdash; {{ post.category.name }}</p>
-                        <p class="faded">{{ post.content | striptags | slice(0, 115) }}... <br><i>[Read More]</i></p>
+                        <p class="faded">{{ post.category.name }}</p>
                         <p class="faded"><small>{{ post.dateCreated|date('d-m-Y H:i') }}</small></p>
                     </a>
-                    <hr>
-                    <div class="text-right">
-                        {% if is_granted('ROLE_ADMIN') and post.user.id == app.user.id %}
-                            <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-cog"></i> Edit</a>
-                            <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -53,7 +45,51 @@
             <p class="lead text-center">No posts found :(</p>
         </div>
     {% endif %}
+</div>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-8 col-12">
+        <h4>Other posts</h4>
+        <br>
+        {% if other_posts %}
+            {% for post in other_posts %}
+            <a class="text-dark" href="{{ path('post_single', {'id': post.id}) }}">
+                <div class="row">
+                    <div class="col-md-4 col-12 mb-3">
+                        {% if post.cover %}
+                            <div style="height: 100%; width: 100%;" class="img thumbnail">
+                                <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <h5>{{ post.title }}</h5>
+                        <p class="faded">{{ post.content | striptags | slice(0, 120) }}</p>        
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        {% endif %}
     </div>
+    <div class="col-md-4 col-12">
+        {% if popular %}
+            <div class="post">
+                <p>Popular</p>
+                <ul class="list-unstyled">
+                    {% for p in popular %}
+                    <li class="mb-3">
+                        <a href="{{ path('post_single', {'id': p.id}) }}">
+                            {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>  
 </div>
 
 {% endblock %}

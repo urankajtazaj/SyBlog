@@ -20,10 +20,10 @@
         <div class="col-md-12">
             <hr>
             <div class="post card">
-                <h5>Your Posts ({{ posts | length }})</h5>
+                <h5>Your Posts</h5>
                 <br>
                 {% if posts | length > 0 %}
-                <table class="table table-hover">
+                <table class="table table-hover table-striped table-bordered">
                     <thead>
                         <th>Title</th>
                         <th>Category</th>
@@ -38,10 +38,10 @@
                             <td>{{ post.category.name }}</td>
                             <td>{{ post.viewCount }}</td>
                             <td>{{ post.dateCreated | date('d-m-Y') }}</td>
-                            <td>
-                                <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn"><i class="fas fa-eye text-dark"></i></a>
-                                <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn"><i class="fas fa-pen text-warning"></i></a>
-                                <a href="#" data-id="{{ post.id }}" class="btn btn-delete"><i class="fas fa-trash-alt text-danger"></i></a>
+                            <td class="text-center">
+                                <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn">View</a>
+                                <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn">Edit</a>
+                                <a href="#" data-id="{{ post.id }}" class="btn text-danger btn-delete">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
