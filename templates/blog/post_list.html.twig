@@ -42,7 +42,7 @@
                     <div class="text-right">
                         {% if is_granted('ROLE_ADMIN') and post.user.id == app.user.id %}
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-warning"><i class="fas fa-cog"></i> Edit</a>
-                            <a href="#" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
+                            <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
                         {% endif %}
                     </div>
                 </div>

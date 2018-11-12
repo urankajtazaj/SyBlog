@@ -5,10 +5,30 @@
 {% block body %}
 
 <div class="row justify-content-center">
-    <div class="col-md-8 col-12">
+    <div class="col-md-6 col-12">
+        <h4>Categories</h4><br>
+        <table class="table table-sm">
+            <thead>
+                <th>Name</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm text-dark">Edit</a>
+                        <a href="#" data-url="/category/delete/" data-id="{{ category.id }}" class="btn btn-sm text-danger btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5 col-12">
 
-        <h3>{{ title }}</h3>
-        <hr>
+        <h4>{{ title }}</h4>
         <br>
         {{ form_start(form) }}
         <div class="form-group">

@@ -6,9 +6,10 @@ $(document).ready(function() {
         el.click(function(e) {
             e.preventDefault();
             var id = $(this).data("id");
+            var url = $(this).data("url") + id;
 
             if (confirm("Are you sure you want to delete this post?")) {
-                location.href = "/post/delete/" + id
+                location.href = url
             }
         })
     

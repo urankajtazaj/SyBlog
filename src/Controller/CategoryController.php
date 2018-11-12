@@ -18,6 +18,8 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryForm::class, $category);
 
+        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
+
         $responseType = null;
         $responseMessage = null;
 
@@ -31,14 +33,15 @@ class CategoryController extends AbstractController
                 $em->persist($data);
                 $em->flush();
 
-                return $this->redirectToRoute('post_list');
+                return $this->redirectToRoute('category_add');
             }
         }
 
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
             'form' => $form->createView(),
-            'title' => 'New Category'
+            'title' => 'New Category',
+            'categories' => $categories
         ]);
     }
 
@@ -49,6 +52,8 @@ class CategoryController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository(Category::class)->find($id);
+
+        $categories = $em->getRepository(Category::class)->findAll();
 
         $form = $this->createForm(CategoryForm::class, $category);
 
@@ -68,8 +73,23 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
             'form' => $form->createView(),
-            'title' => 'New Category'
+            'title' => 'New Category',
+            'categories' => $categories
         ]);
+    }
+
+    /**
+     * @Route("/category/delete/{id}", name="category_delete")
+     */
+    public function delete($id) {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->find($id);
+    
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute('category_add');
+    
     }
 
 }
