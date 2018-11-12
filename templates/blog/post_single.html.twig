@@ -32,13 +32,6 @@
             </div>
             {# END POST CONTENT #}
 
-            <div class="post">
-                <h4>About the author</h4>
-                <hr>
-                <h5>{{ post.user.name }}</h5>
-                <p class="faded">{{ post.user.bio }}</p>
-            </div>
-
             {# COMMENTS SECTION #}
             <div class="post" id="comments">
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
