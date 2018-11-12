@@ -43,14 +43,14 @@ class BlogController extends AbstractController
             ->orderBy('p.view_count', 'DESC')
             ->getQuery();
 
-        $comments_qb = $em->getRepository(Comment::class)->createQueryBuilder('c')
-            ->orderBy('c.id', 'DESC')
-            ->getQuery();
+        // $comments_qb = $em->getRepository(Comment::class)->createQueryBuilder('c')
+        //     ->orderBy('c.id', 'DESC')
+        //     ->getQuery();
 
         $posts = $posts_qb->setMaxResults(2)->execute();
         $other_posts = $other_posts_qb->execute();
-        $popular_posts = $popular_qb->setMaxResults(5)->execute();
-        $comments = $comments_qb->setMaxResults(5)->execute();
+        $popular_posts = $popular_qb->setMaxResults(7)->execute();
+        // $comments = $comments_qb->setMaxResults(5)->execute();
 
         $searchForm = [];
 
@@ -77,7 +77,7 @@ class BlogController extends AbstractController
                 'posts' => $posts,
                 'other_posts' => $other_posts,
                 'popular' => $popular_posts,
-                'comments' => $comments,
+                // 'comments' => $comments,
                 'form' => $form->createView()
             ]
         );
