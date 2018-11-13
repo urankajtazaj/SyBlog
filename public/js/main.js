@@ -15,4 +15,15 @@ $(document).ready(function() {
     
     });
 
+    $(".pop-up #close").click(function(e) {
+        e.stopPropagation();
+        $(".pop-up").hide();
+    });
+
 });
+
+
+// Show popup
+function showPopup() {
+    $(".pop-up").show();
+}

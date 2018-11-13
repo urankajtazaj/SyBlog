@@ -3,19 +3,45 @@
 {% block title %}{{ app.user.name }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-2 col-12">
-            <div class="img thumbnail" style="background-color: #eee;">
-            
+
+    <div class="pop-up">
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="box">
+                    <h4>Edit info</h4>
+                    <br>
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_row(form.name) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(form.bio) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_widget(form.save) }}
+                        <span class="float-right btn btn-lg btn-secondary" id="close">Close</span>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
-        <div class="col-md-8 col-12">
-            <h2>{{ app.user.name }}</h2>
-            <p>{{ app.user.bio }}</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-12">
+            <div class="post">
+                <h2>{{ app.user.name }}</h2>
+                <p class="faded">{{ app.user.bio }}</p>
+                <span onclick="showPopup()" class="btn btn-sm btn-primary">Edit profile info</span>
+            </div>
         </div>
         <div class="col-md-2 col-12 text-center">
-            <p class="lead display-4">{{ posts | length }}</p>
-            <p>Posts</p>
+            <div class="post">
+                <p class="lead display-4">{{ posts | length }}</p>
+                <p>Posts</p>
+            </div>
         </div>
         <div class="col-md-12">
             <hr>

@@ -157,3 +157,26 @@ nav {
     background-color: transparent;
     color: #222;
 }
+
+.pop-up {
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    display: none;
+}
+
+.pop-up, .pop-up .container-fluid, .pop-up .row {
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+}
+
+.pop-up .box {
+    margin-top: -100px;
+    background-color: #fff;
+    width: 450px;
+    /* height: 400px; */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 20px;
+}
