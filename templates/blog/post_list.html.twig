@@ -33,7 +33,7 @@
                         </div>
                         {% endif %}
 
-                        <h3><b>{{ post.title }}</b></h3>
+                        <h3><b class="text-capitalize">{{ post.title }}</b></h3>
                         <p class="faded">{{ post.category.name }}</p>
                     </a>
                 </div>
@@ -51,9 +51,9 @@
 <br>
 <div class="row">
     <div class="col-md-8 col-12">
-        <h4>Other posts</h4>
-        <br>
         {% if other_posts %}
+            <h4>Other posts</h4>
+            <br>
             {% for post in other_posts %}
             <a class="text-dark" href="{{ path('post_single', {'id': post.id}) }}">
                 <div class="row">
@@ -74,7 +74,7 @@
         {% endif %}
     </div>
     <div class="col-md-4 col-12">
-        {% if popular %}
+        {% if popular and popular | length > 5 %}
             <div class="post">
                 <p>Popular</p>
                 <ul class="list-unstyled">
