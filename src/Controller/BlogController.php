@@ -154,6 +154,10 @@ class BlogController extends AbstractController
                 $file = $post->getCover();
                 $filename = md5(uniqid()) . "." . $file->guessExtension();
     
+                if (!empty($prevFilename) && $prevFilename != null) {
+                    unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
+                }
+
                 $data->setCover($filename);
     
                 $file->move(
