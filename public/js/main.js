@@ -8,7 +8,7 @@ $(document).ready(function() {
             var id = $(this).data("id");
             var url = $(this).data("url") + id;
 
-            if (confirm("Are you sure you want to delete this post?")) {
+            if (confirm("Are you sure you want to execute this action?")) {
                 location.href = url
             }
         })
