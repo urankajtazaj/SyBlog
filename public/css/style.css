@@ -10,6 +10,7 @@
 
 h1, h2, h3 {
     font-family: "Montserrat";
+    color: #333;
 }
 
 h4, h5, h6 {
@@ -31,7 +32,7 @@ p {
 
 .post .content p {
     font-size: 21px;
-    color: #434343;;
+    color: #4d4d4d;;
 }
 
 .post:hover a {
