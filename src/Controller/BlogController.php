@@ -167,6 +167,10 @@ class BlogController extends AbstractController
             } else {                
                 if ($form->get('delete_cover')->getData()) {
                     $data->setCover(null);
+
+                    if (!empty($prevFilename) && $prevFilename != null) {
+                        unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
+                    }
                 } else {
                     $data->setCover($prevFilename);
                 }
