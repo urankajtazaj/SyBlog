@@ -144,7 +144,6 @@ nav {
 .form-control {
     border-radius: 0;
     font-size: 20px;
-    /* padding: 8px 5px; */
     height: unset;
     font-family: "Lora";
 }
@@ -153,9 +152,13 @@ nav {
     visibility: hidden;
 }
 
-.dropdown.custom {
+.dropdown .btn {
     background-color: transparent;
     color: #222;
+}
+
+.dropdown .btn:focus {
+    box-shadow: none;
 }
 
 .pop-up {
@@ -179,4 +182,26 @@ nav {
     /* height: 400px; */
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     padding: 20px;
+}
+
+blockquote {
+    padding: 10px;
+    padding-left: 20px;
+    border-left: 2px solid #aaa;
+    font-style: italic;
+    position: relative;
+    background: linear-gradient(to right, #f5f5f5, transparent);
+}
+
+blockquote p {
+    color: #888 !important;
+}
+
+.content a {
+    color: #3c6cf0 !important;
+    transition: 200ms ease;
+}
+
+.content a:hover {
+    background-color: #eee;
 }
