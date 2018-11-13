@@ -30,16 +30,19 @@ class BlogController extends AbstractController
     public function post_list(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
-        $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
-                                                ->orderBy('p.id', 'DESC')
-                                                ->getQuery();
+        $posts_qb = $em->getRepository(Post::class)
+            ->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
 
-        $other_posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+        $other_posts_qb = $em->getRepository(Post::class)
+            ->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(2)
             ->getQuery();
 
-        $popular_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+        $popular_qb = $em->getRepository(Post::class)
+            ->createQueryBuilder('p')
             ->orderBy('p.view_count', 'DESC')
             ->getQuery();
 
@@ -56,12 +59,13 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
-                                                ->where('p.title like :title or p.content like :content')
-                                                ->setParameter('title', '%' . $data['query'] . '%')
-                                                ->setParameter('content', '%' . $data['query'] . '%')
-                                                ->orderBy('p.id', 'DESC')
-                                                ->getQuery();
+            $qb = $em->getRepository(Post::class)
+                ->createQueryBuilder('p')
+                ->where('p.title like :title or p.content like :content')
+                ->setParameter('title', '%' . $data['query'] . '%')
+                ->setParameter('content', '%' . $data['query'] . '%')
+                ->orderBy('p.id', 'DESC')
+                ->getQuery();
                                             
             $posts = $qb->execute();
         }
@@ -131,7 +135,6 @@ class BlogController extends AbstractController
         $post = $em->getRepository(Post::class)->find($id);
 
         $prevFilename = $post->getCover();
-
 
         if ($post->getCover()) {
             $post->setCover(
@@ -210,7 +213,6 @@ class BlogController extends AbstractController
     public function post_single(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
-
         $comments = $post->getComments();
 
         $comment_form = $this->createForm(CommentForm::class, []);
@@ -238,11 +240,12 @@ class BlogController extends AbstractController
         $post->setViewCount($post->getViewCount() + 1);
         $em->flush();
 
-        $qb = $em->getRepository(Post::class)->createQueryBuilder('p')
-                                                    ->andWhere('p.id != :id')
-                                                    ->setParameter('id', $id)
-                                                    ->orderBy('p.id', 'DESC')
-                                                    ->getQuery();
+        $qb = $em->getRepository(Post::class)
+            ->createQueryBuilder('p')
+            ->andWhere('p.id != :id')
+            ->setParameter('id', $id)
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
 
         $all_posts = $qb->setMaxResults(5)->execute();
 

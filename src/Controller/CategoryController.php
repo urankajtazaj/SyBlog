@@ -20,9 +20,6 @@ class CategoryController extends AbstractController
 
         $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
 
-        $responseType = null;
-        $responseMessage = null;
-
         $form->handleRequest($request);
 
         if ($request->isMethod('POST')) {
@@ -45,20 +42,19 @@ class CategoryController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/category/edit/{id}", name="category_edit")
      */
     public function edit(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository(Category::class)->find($id);
-
         $categories = $em->getRepository(Category::class)->findAll();
 
         $form = $this->createForm(CategoryForm::class, $category);
 
         $form->handleRequest($request);
-
+        
         if ($request->isMethod('POST')) {
             if ($form->isSubmitted() && $form->isValid()) {
                 $data = $form->getData();
