@@ -22,7 +22,7 @@ class UserInfoForm extends AbstractType {
             ])
             ->add('bio', TextareaType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'rows' => 5
                 ]
             ])
