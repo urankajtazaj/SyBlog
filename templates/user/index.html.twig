@@ -37,8 +37,8 @@
                             <td>{{ post.title }}</td>
                             <td>{{ post.category.name }}</td>
                             <td>{{ post.viewCount }}</td>
-                            <td>{{ post.dateCreated | date('d-m-Y') }}</td>
-                            <td class="text-center">
+                            <td style="min-width: 110px">{{ post.dateCreated | date('d-m-Y') }}</td>
+                            <td style="min-width: 220px" class="text-center">
                                 <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn">View</a>
                                 <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn">Edit</a>
                                 <a href="#" data-id="{{ post.id }}" class="btn text-danger btn-delete">Delete</a>
