@@ -71,11 +71,11 @@
                         <b><i class="fas fa-tag"></i> {{ post.category.name }}</b>
                         <br><br>
                     </small>
-                    <p class="faded">{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0, 120) }}</p>
+                    <p class="faded">{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0,
+                        120) }}</p>
                 </div>
             </div>
         </a>
-        {# <hr> #}
         {% endfor %}
         {% endif %}
     </div>

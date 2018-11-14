@@ -7,15 +7,17 @@
     <div class="col-md-4 col-12">
         <form method="post" class="post card">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
             <h4 class="mb-3">Please sign in</h4>
             <br>
             <label for="inputUsername" class="sr-only">Username</label>
-            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus><br>
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control"
+                placeholder="Username" required autofocus><br>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
+                required>
             <br>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

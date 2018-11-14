@@ -4,68 +4,68 @@
 
 {% block body %}
 
-    <div class="pop-up">
-        <div class="container-fluid">
-            <div class="row justify-content-center align-items-center">
-                <div class="box">
-                    <h4>{{ title }}<span class="float-right btn-lg btn text-danger" id="close"><i class="fas fa-times-circle"></i></span></h4> 
-                    <br>
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    {{ form_end(form) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-10 col-12">
-            <div class="post">
-                <h2>{{ app.user.name }}</h2>
-                <p class="faded">{{ app.user.bio }}</p>
-                <span onclick="showPopup()" class="btn btn-sm btn-primary">Edit profile info</span>
-            </div>
-        </div>
-        <div class="col-md-2 col-12 text-center">
-            <div class="post">
-                <p class="lead display-4">{{ posts | length }}</p>
-                <p>Posts</p>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <hr>
-            <div class="post card">
-                <h5>Your Posts</h5>
+<div class="pop-up">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="box">
+                <h4>{{ title }}<span class="float-right btn-lg btn text-danger" id="close"><i class="fas fa-times-circle"></i></span></h4>
                 <br>
-                {% if posts | length > 0 %}
-                <table class="table table-hover table-striped table-bordered">
-                    <thead>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Clicks</th>
-                        <th>Created</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                    {% for post in posts %}
-                        <tr>
-                            <td>{{ post.title }}</td>
-                            <td>{{ post.category.name }}</td>
-                            <td>{{ post.viewCount }}</td>
-                            <td style="min-width: 110px">{{ post.dateCreated | date('d-m-Y') }}</td>
-                            <td style="min-width: 220px" class="text-center">
-                                <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn">View</a>
-                                <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn">Edit</a>
-                                <a href="#" data-id="{{ post.id }}" class="btn text-danger btn-delete">Delete</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                    <p class="lead">No posts to show</p>
-                {% endif %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-12">
+        <div class="post">
+            <h2>{{ app.user.name }}</h2>
+            <p class="faded">{{ app.user.bio }}</p>
+            <span onclick="showPopup()" class="btn btn-sm btn-primary">Edit profile info</span>
+        </div>
+    </div>
+    <div class="col-md-2 col-12 text-center">
+        <div class="post">
+            <p class="lead display-4">{{ posts | length }}</p>
+            <p>Posts</p>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr>
+        <div class="post card">
+            <h5>Your Posts</h5>
+            <br>
+            {% if posts | length > 0 %}
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Clicks</th>
+                    <th>Created</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.category.name }}</td>
+                        <td>{{ post.viewCount }}</td>
+                        <td style="min-width: 110px">{{ post.dateCreated | date('d-m-Y') }}</td>
+                        <td style="min-width: 220px" class="text-center">
+                            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn">View</a>
+                            <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn">Edit</a>
+                            <a href="#" data-id="{{ post.id }}" class="btn text-danger btn-delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="lead">No posts to show</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

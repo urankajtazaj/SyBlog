@@ -14,7 +14,8 @@
             {{ form_widget(form.save) }}
 
             {% if post is defined %}
-            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="float-right btn btn-lg btn-secondary"><i class="fas fa-external-link-alt"></i> View post</a>
+            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="float-right btn btn-lg btn-secondary"><i
+                    class="fas fa-external-link-alt"></i> View post</a>
             {% endif %}
         </div>
         <br>
@@ -50,17 +51,17 @@
         </div>
 
         {% if post is defined and post.cover %}
-            <div class="form-group">
-                Current image<br>
-                <div class="img post-thumbnail">
-                    <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
-                </div>
+        <div class="form-group">
+            Current image<br>
+            <div class="img post-thumbnail">
+                <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
             </div>
-            <div class="form-group">
-                {{ form_widget(form.delete_cover) }} {{ form_label(form.delete_cover) }}
-            </div>
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.delete_cover) }} {{ form_label(form.delete_cover) }}
+        </div>
         {% else %}
-                {{ form_widget(form.delete_cover, {'attr': { 'class': 'd-hidden' }}) }}
+        {{ form_widget(form.delete_cover, {'attr': { 'class': 'd-hidden' }}) }}
         {% endif %}
     </div>
 </div>

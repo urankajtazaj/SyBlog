@@ -3,95 +3,98 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-12">
-            {# POST CONTENT #}
-            <div class="row align-items-center">
-                <div class="col-md-6 col-12">
-                    <h1>{{ post.title }}</h1>
-                    <br>
-                    <p class="faded">{{ post.dateCreated | date('d/m/Y') }}</p>
-                    <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
-                </div>
-                <div class="col-md-6 col-12">
-                    {% if (post.cover) %}
-                        <div class="img cover-img">
-                            <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8 col-12">
-            <div class="post">
-                <br><br>
-                <div class="content">
-                    {{ post.content | raw }}
-                </div>
+<div class="row justify-content-center">
+    <div class="col-md-12 col-12">
+        {# POST CONTENT #}
+        <div class="row align-items-center">
+            <div class="col-md-6 col-12">
+                <h1>{{ post.title }}</h1>
                 <br>
+                <p class="faded">{{ post.dateCreated | date('d/m/Y') }}</p>
+                <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
             </div>
-            {# END POST CONTENT #}
-
-            {# COMMENTS SECTION #}
-            <div class="post" id="comments">
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-                    {{ form_start(comment_form) }}
-                    {{ form_widget(comment_form) }}
-                    {{ form_end(comment_form) }}
-                    <br>
-                    <hr>
-                    <br>
-                {% else %}
-                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br><hr>
-                {% endif %}
-                
-                <h4>{{ comments | length }} Comment{% if comments | length > 1 or comments | length == 0 %}s{% endif %}</h4>
-                {% if comments | length > 0 %}
-                    {% for comment in comments %}
-                    <div class="comment">
-                        <h5>{{ comment.user.name }}</h5>
-                        <p>{{ comment.comment | nl2br }}</p>
-                        <small><i>&mdash; {{ comment.dateCreated | date('d/m/Y (H:i)') }}</i></small>              
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <p class="faded">Be the first to comment</p>
-                {% endif %}
-            </div>
-            {# END COMMENTS SECTION #}
-        </div>
-
-        {# SIDEBAR #}
-        <div class="col-md-4 col-12">
-            <br><br>
-            {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
-                <div class="post">
-                    <h5><b>Admin</b></h5>
-                    <hr>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-dark"></i> Edit</a><br>
-                    <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-dark"></i> Delete</a>
-                    <hr>
-                    <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
-                    <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>
+            <div class="col-md-6 col-12">
+                {% if (post.cover) %}
+                <div class="img cover-img">
+                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
                 </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-12">
+        <div class="post">
+            <br><br>
+            <div class="content">
+                {{ post.content | raw }}
+            </div>
+            <br>
+        </div>
+        {# END POST CONTENT #}
+
+        {# COMMENTS SECTION #}
+        <div class="post" id="comments">
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+            {{ form_start(comment_form) }}
+            {{ form_widget(comment_form) }}
+            {{ form_end(comment_form) }}
+            <br>
+            <hr>
+            <br>
+            {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br>
+            <hr>
             {% endif %}
 
-            {% if posts %}
-            <div class="post">
-                <p>Other Posts</p>
-                <ul class="list-unstyled">
-                    {% for p in posts %}
-                    <li class="mb-3">
-                        <a href="{{ path('post_single', {'id': p.id}) }}">
-                            {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
+            <h4>{{ comments | length }} Comment{% if comments | length > 1 or comments | length == 0 %}s{% endif %}</h4>
+            {% if comments | length > 0 %}
+            {% for comment in comments %}
+            <div class="comment">
+                <h5>{{ comment.user.name }}</h5>
+                <p>{{ comment.comment | nl2br }}</p>
+                <small><i>&mdash; {{ comment.dateCreated | date('d/m/Y (H:i)') }}</i></small>
             </div>
+            {% endfor %}
+            {% else %}
+            <p class="faded">Be the first to comment</p>
             {% endif %}
         </div>
-        {# END SIDEBAR #}
-
+        {# END COMMENTS SECTION #}
     </div>
+
+    {# SIDEBAR #}
+    <div class="col-md-4 col-12">
+        <br><br>
+        {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
+        <div class="post">
+            <h5><b>Admin</b></h5>
+            <hr>
+            <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-dark"></i>
+                Edit</a><br>
+            <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-dark"></i>
+                Delete</a>
+            <hr>
+            <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
+            <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>
+        </div>
+        {% endif %}
+
+        {% if posts %}
+        <div class="post">
+            <p>Other Posts</p>
+            <ul class="list-unstyled">
+                {% for p in posts %}
+                <li class="mb-3">
+                    <a href="{{ path('post_single', {'id': p.id}) }}">
+                        {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {# END SIDEBAR #}
+
+</div>
 {% endblock %}

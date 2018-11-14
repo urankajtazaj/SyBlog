@@ -29,12 +29,12 @@
 						<ul class="navbar-nav mr-auto">
 						</ul>
 						<ul class="navbar-nav">
-						
+
 							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
 							<li class="nav-item">
 								<div class="dropdown">
-									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-									 aria-haspopup="true" aria-expanded="false">
+									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+									 aria-expanded="false">
 										{{ app.user.name }}
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -50,11 +50,11 @@
 								</div>
 							</li>
 							{% else %}
-								<li class="nav-item form-inline">
-									<a href="{{ path('app_login') }}" class="nav-link">Login</a>
-									or
-									<a href="{{ path('register') }}" class="nav-link">Register</a>
-								</li>
+							<li class="nav-item form-inline">
+								<a href="{{ path('app_login') }}" class="nav-link">Login</a>
+								or
+								<a href="{{ path('register') }}" class="nav-link">Register</a>
+							</li>
 							{% endif %}
 
 						</ul>

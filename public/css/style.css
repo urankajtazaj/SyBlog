@@ -12,12 +12,16 @@ a:hover {
     text-decoration: none;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: "Montserrat";
     color: #333;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     font-family: "Lora";
 }
 
@@ -36,7 +40,8 @@ p {
 
 .post .content p {
     font-size: 21px;
-    color: #4d4d4d;;
+    color: #4d4d4d;
+    ;
 }
 
 .post:hover a {
@@ -73,7 +78,7 @@ body {
     flex-direction: column;
 }
 
-.wrapper > .body {
+.wrapper>.body {
     flex: 1;
 }
 
@@ -122,7 +127,6 @@ footer {
     margin: 10px 0;
     padding: 15px;
     border: 1px solid #eee;
-    /* border-radius: 15px; */
 }
 
 .comment p {
@@ -143,7 +147,7 @@ nav {
     width: 100%;
     z-index: 2;
     background-color: #fff;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .form-control {
@@ -168,12 +172,14 @@ nav {
 
 .pop-up {
     position: fixed;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     display: none;
 }
 
-.pop-up, .pop-up .container-fluid, .pop-up .row {
+.pop-up,
+.pop-up .container-fluid,
+.pop-up .row {
     height: 100vh;
     width: 100vw;
     left: 0;
@@ -184,7 +190,7 @@ nav {
     margin-top: -100px;
     background-color: #fff;
     width: 450px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     padding: 20px;
 }
 
