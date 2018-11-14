@@ -184,7 +184,6 @@ nav {
     margin-top: -100px;
     background-color: #fff;
     width: 450px;
-    /* height: 400px; */
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     padding: 20px;
 }
@@ -223,4 +222,14 @@ blockquote p {
 
 .dark {
     background-color: #f2f2f2;
+}
+
+.dark li {
+    padding: 5px;
+    padding: 10px;
+    transition: 200ms ease;
+}
+
+.dark li:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }

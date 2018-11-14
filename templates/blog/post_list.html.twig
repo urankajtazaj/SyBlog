@@ -71,8 +71,7 @@
                         <b><i class="fas fa-tag"></i> {{ post.category.name }}</b>
                         <br><br>
                     </small>
-                    <p class="faded">{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0,
-                        120) }}</p>
+                    <p class="faded">{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0, 120) }}</p>
                 </div>
             </div>
         </a>
@@ -84,9 +83,10 @@
         {% if popular and popular | length > 5 %}
         <div class="post dark">
             <p>Popular</p>
+            <hr>
             <ul class="list-unstyled">
                 {% for p in popular %}
-                <li class="mb-3">
+                <li>
                     <a href="{{ path('post_single', {'id': p.id}) }}">
                         {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
                     </a>
@@ -96,20 +96,21 @@
         </div>
         {% endif %}
 
-        {# {% if popular %}
-        <div class="post">
+        {% if popular %}
+        <div class="post dark">
             <p>Latest comments</p>
+            <hr>
             <ul class="list-unstyled">
                 {% for c in comments %}
-                <li class="mb-3">
+                <li>
                     <a href="{{ path('post_single', {'id': c.post.id}) }}#comments">
-                        {{ c.user.name }} commented on {{ c.post.viewCount }}
+                        {{ c.user.name }} <i class="faded">commented on</i> {{ c.post.title }}
                     </a>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        {% endif %} #}
+        {% endif %}
 
     </div>
 
