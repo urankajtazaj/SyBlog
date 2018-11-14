@@ -56,7 +56,7 @@
         <br>
         {% for post in other_posts %}
         <a class="text-dark" href="{{ path('post_single', {'id': post.id}) }}">
-            <div class="row">
+            <div class="row align-items-center hover">
                 <div class="col-md-4 col-12 mb-3">
                     {% if post.cover %}
                     <div style="height: 200px; width: 100%;" class="img thumbnail">
@@ -82,7 +82,7 @@
     </div>
     <div class="col-md-4 col-12">
         {% if popular and popular | length > 5 %}
-        <div class="post">
+        <div class="post dark">
             <p>Popular</p>
             <ul class="list-unstyled">
                 {% for p in popular %}

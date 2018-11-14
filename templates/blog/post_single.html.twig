@@ -68,8 +68,8 @@
                 <div class="post">
                     <h5><b>Admin</b></h5>
                     <hr>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-warning"></i> Edit</a><br>
-                    <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-danger"></i> Delete</a>
+                    <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-dark"></i> Edit</a><br>
+                    <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-dark"></i> Delete</a>
                     <hr>
                     <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
                     <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>

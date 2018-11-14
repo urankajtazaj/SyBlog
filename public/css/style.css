@@ -8,6 +8,10 @@
     transition: 250ms ease;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 h1, h2, h3 {
     font-family: "Montserrat";
     color: #333;
@@ -205,4 +209,18 @@ blockquote p {
 
 .content a:hover {
     background-color: #eee;
+}
+
+.hover {
+    padding: 10px;
+    transition: 250ms ease;
+}
+
+.hover:hover {
+    text-decoration: none !important;
+    background-color: #f2f2f2 !important;
+}
+
+.dark {
+    background-color: #f2f2f2;
 }
