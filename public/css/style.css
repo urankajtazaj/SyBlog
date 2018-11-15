@@ -14,15 +14,15 @@ a:hover {
 
 h1,
 h2,
-h3 {
+h3, 
+h4 {
     font-family: "Montserrat";
     color: #333;
 }
 
-h4,
 h5,
 h6 {
-    font-family: "Lora";
+    font-family: "Merriweather";
 }
 
 .post a:not(.btn) {
@@ -40,12 +40,8 @@ p {
 
 .post .content p {
     font-size: 21px;
-    color: #4d4d4d;
+    color: #2b2b2b;
     ;
-}
-
-.post:hover a {
-    text-decoration: none;
 }
 
 body {
@@ -212,25 +208,25 @@ nav {
 }
 
 blockquote {
-    padding: 10px;
-    padding-left: 20px;
-    border-left: 2px solid #aaa;
+    padding: 20px 10px 20px 20px;
     font-style: italic;
     position: relative;
-    background: linear-gradient(to right, #f5f5f5, transparent);
 }
 
 blockquote p {
-    color: #888 !important;
+    /* color: #888 !important; */
+    font-size: 25px !important;
+    font-weight: bold;
 }
 
 .content a {
-    color: #3c6cf0 !important;
+    text-decoration: underline;
+    color: #2b2b2b !important;
     transition: 200ms ease;
 }
 
 .content a:hover {
-    background-color: #eee;
+
 }
 
 .hover {
