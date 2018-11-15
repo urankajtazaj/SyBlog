@@ -1,0 +1,44 @@
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand" href="{{ path('post_list') }}"><b>BLOG</b></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+						</ul>
+						<ul class="navbar-nav">
+
+							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+							<li class="nav-item">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+									 aria-expanded="false">
+										{{ app.user.name }}
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
+										<hr>
+										{% if is_granted('ROLE_ADMIN') %}
+										<a class="dropdown-item" href="{{ path('post_new') }}">Add post</a>
+										<a class="dropdown-item" href="{{ path('category_add') }}">Add category</a>
+										<hr>
+										{% endif %}
+										<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+									</div>
+								</div>
+							</li>
+							{% else %}
+							<li class="nav-item form-inline">
+								<a href="{{ path('app_login') }}" class="nav-link">Login</a>
+								or
+								<a href="{{ path('register') }}" class="nav-link">Register</a>
+							</li>
+							{% endif %}
+
+						</ul>
+					</div>
+				</div>
+			</nav>
