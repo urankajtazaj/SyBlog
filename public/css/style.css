@@ -84,6 +84,8 @@ footer {
 }
 
 .cover-img {
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
     background-position: center;
     background-size: cover;
@@ -109,7 +111,7 @@ footer {
 }
 
 .cover-img, .cover-img .row {
-    height: 600px;
+    height: 35vw;
 }
 
 .thumbnail {
