@@ -66,13 +66,7 @@
                 </div>
                 <div class="col-md-8 col-12">
                     <h4>{{ post.title }}</h4>
-                    <small class="faded text-right">
-                        <b><i class="fas fa-comment"></i> {{ post.comments | length }}</b> &nbsp;|&nbsp;
-                        <b><i class="fas fa-tag"></i> {{ post.category.name }}</b>
-                        <br><br>
-                    </small>
-                    <p class="faded">{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0,
-                        120) }}</p>
+                    <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0, 100) }}</p>
                 </div>
             </div>
         </a>
