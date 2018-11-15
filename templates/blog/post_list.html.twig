@@ -35,6 +35,7 @@
 
                 <h3><b class="text-capitalize">{{ post.title }}</b></h3>
                 <p class="faded">{{ post.category.name }}</p>
+                <p class="faded">{{ post.dateCreated | time_ago }}</p>
             </a>
         </div>
     </div>
@@ -67,6 +68,7 @@
                 <div class="col-md-8 col-12">
                     <h4>{{ post.title }}</h4>
                     <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0, 100) }}</p>
+                    <small class="faded">{{ post.dateCreated | time_ago }}</small>
                 </div>
             </div>
         </a>
@@ -82,7 +84,7 @@
                 {% for p in popular %}
                 <li>
                     <a href="{{ path('post_single', {'id': p.id}) }}">
-                        {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
+                        {{ p.title }} <br><small><i>{{ p.dateCreated | time_ago }}</i></small>
                     </a>
                 </li>
                 {% endfor %}

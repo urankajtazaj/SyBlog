@@ -9,7 +9,7 @@
             <div class="col-md-10 col-12">
                 <h1 class="display-4">{{ post.title }}</h1>
                 <br>
-                <p class="faded">{{ post.dateCreated | date('d/m/Y') }}</p>
+                <p class="faded">{{ post.dateCreated | time_ago }}</p>
                 <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <div class="comment">
                     <h5>{{ comment.user.name }}</h5>
                     <p>{{ comment.comment | nl2br }}</p>
-                    <small><i>&mdash; {{ comment.dateCreated | date('d/m/Y (H:i)') }}</i></small>
+                    <small><i>&mdash; {{ comment.dateCreated | time_ago }}</i></small>
                 </div>
                 {% endfor %}
                 {% else %}
@@ -83,7 +83,7 @@
                     {% for p in posts %}
                     <li class="mb-3">
                         <a href="{{ path('post_single', {'id': p.id}) }}">
-                            {{ p.title }} <br><small><i>{{ p.dateCreated | date('d/m/Y') }}</i></small>
+                            {{ p.title }} <br><small><i>{{ p.dateCreated | time_ago }}</i></small>
                         </a>
                     </li>
                     {% endfor %}

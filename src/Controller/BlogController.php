@@ -10,8 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Entity\Comment;
@@ -230,6 +230,8 @@ class BlogController extends AbstractController
         $post = $em->getRepository(Post::class)->find($id);
         $comments = $post->getComments();
 
+        // $timeAgo = $this->showTime($post->getDateCreated());
+
         $comment_form = $this->createForm(CommentForm::class, []);
 
         $comment_form->handleRequest($request);
@@ -268,6 +270,7 @@ class BlogController extends AbstractController
             "blog/post_single.html.twig",
             [
                 'post' => $post,
+                // 'time_ago' => $timeAgo,
                 'posts' => $all_posts,
                 'comments' => $comments,
                 'comment_form' => $comment_form->createView()
