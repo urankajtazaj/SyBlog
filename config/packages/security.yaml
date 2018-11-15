@@ -37,4 +37,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/posts/new, roles: ROLE_ADMIN }
+        - { path: ^/post/edit, roles: ROLE_ADMIN }
+        - { path: ^/post/delete, roles: ROLE_ADMIN }
+        - { path: ^/register, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

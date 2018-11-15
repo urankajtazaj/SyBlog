@@ -269,3 +269,32 @@ blockquote p {
     margin-left: -10px;
     padding-right: 10px;
 }
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-success {
+    border: 2px solid #1da06e;
+    background-color: transparent;
+    color: #1da06e;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: rgba(29, 160, 110, 0.1);
+    color: #1da06e;
+}
+
+.btn-primary {
+    border: 2px solid #2c54c2;
+    background-color: transparent;
+    color: #2c54c2;
+    font-weight: bold;
+    /* width: 100%; */
+}
+
+.btn-primary:hover {
+    background-color: rgba(44, 84, 194, 0.1);
+    color: #2c54c2;
+}

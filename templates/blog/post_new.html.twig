@@ -14,8 +14,7 @@
             {{ form_widget(form.save) }}
 
             {% if post is defined %}
-            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="float-right btn btn-lg btn-secondary"><i
-                    class="fas fa-external-link-alt"></i> View post</a>
+            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn float-right btn-primary">View post</a>
             {% endif %}
         </div>
         <br>

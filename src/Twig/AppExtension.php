@@ -30,24 +30,29 @@ class AppExtension extends AbstractExtension
                 return 'Yesterday';
             }
 
-            $range = 'day';    
+            $range = 'days';    
             $char = 'd';
         } else if ($this->getdiff($diff, 'h') > 0) {
-            $range = 'hour';   
+
+            $range = 'hours';   
             $char = 'h';
+
+            if ($this->getdiff($diff, 'h') == 1)
+                $range = 'hour';
+
         } else if ($this->getdiff($diff, 'i') > 0) {
 
             if ($this->getdiff($diff, 'i') == 1) {
                 return 'A minute ago';
             }
 
-            $range = 'minute';   
+            $range = 'minutes';   
             $char = 'i';
         } else {
             return 'Less than a minute ago';
         }
 
-        return $diff->format("%{$char} {$range}s ago");
+        return $diff->format("%{$char} {$range} ago");
     }
 
     private function getDiff($diff, $char) {

@@ -25,7 +25,7 @@ class CategoryForm extends AbstractType {
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-lg btn-success'
+                    'class' => 'btn btn-success'
                 ]
             ]);
     }
