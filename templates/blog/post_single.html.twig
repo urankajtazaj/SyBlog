@@ -63,8 +63,8 @@
         <div class="col-md-4 col-12">
             <br><br>
             {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
-            <div class="post">
-                <h5><b>Admin</b></h5>
+            <div class="post dark">
+                <p>Admin</p>
                 <hr>
                 <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-dark"></i>
                     Edit</a><br>
@@ -77,7 +77,7 @@
             {% endif %}
 
             {% if posts %}
-            <div class="post">
+            <div class="post dark">
                 <p>Other Posts</p>
                 <ul class="list-unstyled">
                     {% for p in posts %}
