@@ -9,7 +9,7 @@
             <div class="col-md-10 col-sm-12 col-12">
                 <h1 class="display-4">{{ post.title }}</h1>
                 <br>
-                <p class="faded">{{ post.dateCreated | time_ago }}</p>
+                <p title="{{ post.dateCreated | date('d/m/Y H:i') }}" class="faded">{{ post.dateCreated | time_ago }}</p>
                 <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
             </div>
         </div>

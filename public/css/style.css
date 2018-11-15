@@ -298,3 +298,16 @@ blockquote p {
     background-color: rgba(44, 84, 194, 0.1);
     color: #2c54c2;
 }
+
+.btn-danger {
+    border: 2px solid #e62e2e;
+    background-color: transparent;
+    color: #e62e2e;
+    font-weight: bold;
+    /* width: 100%; */
+}
+
+.btn-danger:hover {
+    background-color: rgba(230, 46, 46, 0.1);
+    color: #e62e2e;
+}
