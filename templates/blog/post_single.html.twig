@@ -11,6 +11,13 @@
                 <br>
                 <p title="{{ post.dateCreated | date('d/m/Y H:i') }}" class="faded">{{ post.dateCreated | time_ago }}</p>
                 <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
+                <a href="#comments" class="text-white">
+                    <p class="faded">
+                    {% if post.comments | length > 0 %}
+                        {{ post.comments | length }} comment{% if post.comments | length > 1 %}s{% endif %} 
+                    {% endif %}
+                    </p>
+                </a>
             </div>
         </div>
     </div>
@@ -82,7 +89,7 @@
                 <ul class="list-unstyled">
                     {% for p in posts %}
                     <li class="mb-3">
-                        <a href="{{ path('post_single', {'id': p.id}) }}">
+                        <a href="{{ path('post_single', {'slug': p.slug}) }}">
                             {{ p.title }} <br><small><i>{{ p.dateCreated | time_ago }}</i></small>
                         </a>
                     </li>

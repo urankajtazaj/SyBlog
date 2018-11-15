@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+use Doctrine\ORM\Query;
+
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Category;
@@ -99,6 +101,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $title = str_replace('\'', '', strtolower($form->get('title')->getData()));
+            $slug = strip_tags(str_replace(' ', '-', stripslashes($title))) . '-' . \uniqid();
 
             $data = $form->getData();
 
@@ -113,7 +117,8 @@ class BlogController extends AbstractController
                     $filename
                 );
             }
-            
+
+            $data->setSlug($slug);
             $data->setUser($user);
             $data->setViewCount(0);
             $data->setDateCreated(new \DateTime("now"));
@@ -186,7 +191,7 @@ class BlogController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute("post_single", ['id' => $data->getId()]);
+            return $this->redirectToRoute("post_single", ['slug' => $data->getSlug()]);
         }
 
         return $this->render(
@@ -223,14 +228,13 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}", name="post_single")
+     * @Route("/post/{slug}", name="post_single")
      */
-    public function post_single(Request $request, $id) {
+    public function post_single(Request $request, $slug) {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->find($id);
-        $comments = $post->getComments();
+        $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
 
-        // $timeAgo = $this->showTime($post->getDateCreated());
+        $comments = $post->getComments();
 
         $comment_form = $this->createForm(CommentForm::class, []);
 
@@ -259,8 +263,8 @@ class BlogController extends AbstractController
 
         $qb = $em->getRepository(Post::class)
             ->createQueryBuilder('p')
-            ->andWhere('p.id != :id')
-            ->setParameter('id', $id)
+            ->andWhere('p.slug != :slug')
+            ->setParameter('slug', $slug)
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 

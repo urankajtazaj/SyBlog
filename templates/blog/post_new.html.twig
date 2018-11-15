@@ -14,7 +14,7 @@
             {{ form_widget(form.save) }}
 
             {% if post is defined %}
-            <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn float-right btn-primary">View post</a>
+            <a href="{{ path('post_single', {'slug': post.slug}) }}" target="_blank" class="btn float-right btn-primary">View post</a>
             {% endif %}
         </div>
         <br>
@@ -33,8 +33,7 @@
             </div>
 
             <div class="form-group">
-                {{ form_label(form.category) }}<small><a href="{{ path('category_add') }}" class="btn"><i class="fas fa-plus"></i></a></small>
-                {{ form_widget(form.category) }}
+                {{ form_row(form.category) }}
             </div>
         </div>
     </div>
