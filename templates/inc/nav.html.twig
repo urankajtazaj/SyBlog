@@ -19,16 +19,16 @@
 										{{ app.user.name }}
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
-										<hr>
+										<a class="dropdown-item" href="{{ path('profile') }}"><i class="material-icons">person_outline</i> Profile</a>
+										<div class="divider"></div>
 										{% if is_granted('ROLE_ADMIN') %}
-										<a class="dropdown-item" href="{{ path('post_new') }}">Add post</a>
-										<a class="dropdown-item" href="{{ path('category_add') }}">Add category</a>
-										<hr>
-										<a href="#" class="dropdown-item">Settings</a>
-										<hr>
+										<a class="dropdown-item" href="{{ path('post_new') }}"><i class="material-icons">add</i> Add post</a>
+										<a class="dropdown-item" href="{{ path('category_add') }}"><i class="material-icons">add</i> Add category</a>
+										<div class="divider"></div>
+										<a href="#" class="dropdown-item"><i class="material-icons">settings</i> Settings</a>
+										<div class="divider"></div>
 										{% endif %}
-										<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+										<a class="dropdown-item" href="{{ path('app_logout') }}"><i class="material-icons">power_settings_new</i> Logout</a>
 									</div>
 								</div>
 							</li>

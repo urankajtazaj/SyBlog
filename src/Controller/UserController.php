@@ -19,11 +19,16 @@ class UserController extends AbstractController
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(User::class);
+        $repo = $em->getRepository(Post::class);
 
         $user = $this->getUser();
 
-        $posts = $repo->find($user->getId())->getPosts();
+        $posts_qb = $repo->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $user->getId())
+            ->getQuery();
+
+        $posts = $posts_qb->execute();
 
         $form = $this->createForm(UserInfoForm::class, $user);
 

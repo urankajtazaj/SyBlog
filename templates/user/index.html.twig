@@ -28,7 +28,7 @@
     </div>
     <div class="col-md-2 col-12 text-center">
         <div class="post">
-            <p class="lead display-4">{{ posts | length }}</p>
+            <h1 class="display-4">{{ posts | length }}</h1>
             <p>Posts</p>
         </div>
     </div>
@@ -38,8 +38,9 @@
             <h5>Your Posts</h5>
             <br>
             {% if posts | length > 0 %}
-            <table class="table table-hover table-striped table-bordered">
+            <table class="table table-hover  table-bordered">
                 <thead>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Clicks</th>
@@ -49,10 +50,11 @@
                 <tbody>
                     {% for post in posts %}
                     <tr>
+                        <td>{{ loop.index }}</td>
                         <td>{{ post.title }}</td>
                         <td>{{ post.category.name }}</td>
                         <td>{{ post.viewCount }}</td>
-                        <td style="min-width: 110px">{{ post.dateCreated | date('d-m-Y') }}</td>
+                        <td style="min-width: 110px">{{ post.dateCreated | date('d/m/Y') }}</td>
                         <td style="min-width: 220px" class="text-center">
                             <a href="{{ path('post_single', {'id': post.id}) }}" target="_blank" class="btn">View</a>
                             <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn">Edit</a>
