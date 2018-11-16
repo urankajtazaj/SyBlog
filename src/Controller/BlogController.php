@@ -82,10 +82,16 @@ class BlogController extends AbstractController
         );
     }
 
+
+    private function slugify($title) {
+        $slug = str_replace('\'', '', strtolower($title));
+        return strip_tags(str_replace(' ', '-', stripslashes($slug))) . '-' . \uniqid();
+    }
+
     /**
      * @Route("/posts/new", name="post_new")
      */
-    public function post_new(Request $request, UserInterface $user) {
+    public function post_new(Request $request) {
         $post = new Post();
 
         $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
@@ -93,8 +99,6 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $title = str_replace('\'', '', strtolower($form->get('title')->getData()));
-            $slug = strip_tags(str_replace(' ', '-', stripslashes($title))) . '-' . \uniqid();
 
             $data = $form->getData();
 
@@ -110,7 +114,9 @@ class BlogController extends AbstractController
                 );
             }
 
-            $data->setSlug($slug);
+            $user = $this->getUser();
+
+            $data->setSlug($this->slugify($form->get('title')->getData()));
             $data->setUser($user);
             $data->setViewCount(0);
             $data->setDateCreated(new \DateTime("now"));
@@ -130,6 +136,7 @@ class BlogController extends AbstractController
             ]
         );
     }
+
 
     /**
      * @Route("/post/edit/{id}", name="post_edit")
@@ -199,6 +206,7 @@ class BlogController extends AbstractController
 
     }
 
+
     /**
      * @Route("/post/delete/{id}", name="delete")
      */
@@ -218,6 +226,7 @@ class BlogController extends AbstractController
 
         return $this->redirectToRoute("post_list");
     }
+
 
     /**
      * @Route("/post/{slug}", name="post_single")
