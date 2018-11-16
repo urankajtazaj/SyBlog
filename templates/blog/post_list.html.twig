@@ -22,23 +22,28 @@
 </div> #}
 <div class="row">
     {% if posts %}
-    {% for post in posts %}
-    <div class="col-md-6 col-12">
-        <div class="post card">
-            <a href="{{ path('post_single', {'slug': post.slug}) }}">
 
-                {% if post.cover %}
-                <div class="img post-thumbnail">
-                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
-                </div>
-                {% endif %}
+    {% set break = false %}
+    {% for post in posts if not break %}
+        <div class="col-md-6 col-12">
+            <div class="post card">
+                <a href="{{ path('post_single', {'slug': post.slug}) }}">
 
-                <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                <p class="faded">{{ post.category.name }}</p>
-                <p class="faded">{{ post.dateCreated | time_ago }}</p>
-            </a>
+                    {% if post.cover %}
+                    <div class="img post-thumbnail">
+                        <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                    </div>
+                    {% endif %}
+
+                    <h3><b class="text-capitalize">{{ post.title }}</b></h3>
+                    <p class="faded">{{ post.category.name }}</p>
+                    <p class="faded">{{ post.dateCreated | time_ago }}</p>
+                </a>
+            </div>
         </div>
-    </div>
+        {% if loop.index == 2 %}
+            {% set break = true %}
+        {% endif %}
     {% endfor %}
     {% else %}
     <div class="col-md-12 col-12">
@@ -52,28 +57,34 @@
 <br>
 <div class="row">
     <div class="col-md-8 col-12">
-        {% if other_posts %}
-        {% for post in other_posts %}
-        <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
-            <div class="row align-items-center hover">
-                <div class="col-md-4 col-12 mb-3">
-                    {% if post.cover %}
-                    <div style="height: 200px; width: 100%;" class="img thumbnail">
-                        <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
+        {% if posts | length > 2 %}
+        {% for post in posts %}
+            {% if loop.index > 2 %}
+                <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
+                    <div class="row align-items-center hover">
+                        <div class="col-md-4 col-12 mb-3">
+                            {% if post.cover %}
+                            <div style="height: 200px; width: 100%;" class="img thumbnail">
+                                <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8 col-12">
+                            <h4>{{ post.title }}</h4>
+                            <p class="faded">
+                                <small>
+                                    By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}
+                                </small>
+                            </p>
+                        </div>
                     </div>
-                    {% endif %}
-                </div>
-                <div class="col-md-8 col-12">
-                    <h4>{{ post.title }}</h4>
-                    <p class="faded">
-                        <small>
-                            By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}
-                        </small>
-                    </p>
-                </div>
-            </div>
-        </a>
+                </a>
+            {% endif %}
         {% endfor %}
+
+        {% if posts | length == 3 %}
+        <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
+        {% endif %}
         {% endif %}
     </div>
     <div class="col-md-4 col-12">

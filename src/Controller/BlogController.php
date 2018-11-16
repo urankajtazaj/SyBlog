@@ -37,12 +37,6 @@ class BlogController extends AbstractController
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
-        $other_posts_qb = $em->getRepository(Post::class)
-            ->createQueryBuilder('p')
-            ->orderBy('p.id', 'DESC')
-            ->setFirstResult(2)
-            ->getQuery();
-
         $popular_qb = $em->getRepository(Post::class)
             ->createQueryBuilder('p')
             ->orderBy('p.view_count', 'DESC')
@@ -53,8 +47,7 @@ class BlogController extends AbstractController
             ->orderBy('c.id', 'DESC')
             ->getQuery();
 
-        $posts = $posts_qb->setMaxResults(2)->execute();
-        $other_posts = $other_posts_qb->execute();
+        $posts = $posts_qb->setMaxResults(10)->execute();
         $popular_posts = $popular_qb->setMaxResults(7)->execute();
         $comments = $comment_qb->setMaxResults(5)->execute();
 
@@ -82,7 +75,6 @@ class BlogController extends AbstractController
             "blog/post_list.html.twig",
             [
                 'posts' => $posts,
-                'other_posts' => $other_posts,
                 'popular' => $popular_posts,
                 'comments' => $comments,
                 'form' => $form->createView()
