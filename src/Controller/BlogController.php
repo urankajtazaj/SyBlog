@@ -254,17 +254,18 @@ class BlogController extends AbstractController
             $manager->persist($c);
             $manager->flush();
 
-            return $this->redirectToRoute("post_single", ['id' => $post->getId()]);
+            return $this->redirectToRoute("post_single", ['slug' => $post->getSlug()]);
         }
 
         // Update view count
         $post->setViewCount($post->getViewCount() + 1);
         $em->flush();
 
+        // Get other posts
         $qb = $em->getRepository(Post::class)
             ->createQueryBuilder('p')
-            ->andWhere('p.slug != :slug')
-            ->setParameter('slug', $slug)
+            ->andWhere('p.id != :id')
+            ->setParameter('id', $post->getId())
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
@@ -274,7 +275,6 @@ class BlogController extends AbstractController
             "blog/post_single.html.twig",
             [
                 'post' => $post,
-                // 'time_ago' => $timeAgo,
                 'posts' => $all_posts,
                 'comments' => $comments,
                 'comment_form' => $comment_form->createView()

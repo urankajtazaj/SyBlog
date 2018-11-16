@@ -36,7 +36,7 @@
             {# END POST CONTENT #}
 
             {# COMMENTS SECTION #}
-            <div class="post" id="comments">
+            <div class="post dark" id="comments">
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
                 {{ form_start(comment_form) }}
                 {{ form_widget(comment_form) }}

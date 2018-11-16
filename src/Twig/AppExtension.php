@@ -22,27 +22,27 @@ class AppExtension extends AbstractExtension
         $range = null;
         $char = null;
 
-        if ($this->getdiff($diff, 'W') > 0) {
+        if ($diff->format('%W') > 0) {
             return  $dateTime->format('d/m/Y');
-        } else if ($this->getdiff($diff, 'd') > 0) {
+        } else if ($diff->format('%d') > 0) {
 
-            if ($this->getdiff($diff, 'd') == 1) {
+            if ($diff->format('%d') == 1) {
                 return 'Yesterday';
             }
 
             $range = 'days';    
             $char = 'd';
-        } else if ($this->getdiff($diff, 'h') > 0) {
+        } else if ($diff->format('%h') > 0) {
 
             $range = 'hours';   
             $char = 'h';
 
-            if ($this->getdiff($diff, 'h') == 1)
+            if ($diff->format('%h') == 1)
                 $range = 'hour';
 
-        } else if ($this->getdiff($diff, 'i') > 0) {
+        } else if ($diff->format('%i') > 0) {
 
-            if ($this->getdiff($diff, 'i') == 1) {
+            if ($diff->format('%i') == 1) {
                 return 'A minute ago';
             }
 
@@ -53,10 +53,6 @@ class AppExtension extends AbstractExtension
         }
 
         return $diff->format("%{$char} {$range} ago");
-    }
-
-    private function getDiff($diff, $char) {
-        return $diff->format('%' . $char . '');
     }
 
 }

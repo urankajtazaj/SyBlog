@@ -65,8 +65,11 @@
                 </div>
                 <div class="col-md-8 col-12">
                     <h4>{{ post.title }}</h4>
-                    <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&rsquo;': '\''}) | slice(0, 100) }}</p>
-                    <small class="faded">{{ post.dateCreated | time_ago }}</small>
+                    <p class="faded">
+                        <small>
+                            By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}
+                        </small>
+                    </p>
                 </div>
             </div>
         </a>
@@ -90,21 +93,21 @@
         </div>
         {% endif %}
 
-        {# {% if popular %}
+        {% if popular %}
         <div class="post dark">
             <p>Latest comments</p>
             <hr>
             <ul class="list-unstyled">
                 {% for c in comments %}
                 <li>
-                    <a href="{{ path('post_single', {'id': c.post.id}) }}#comments">
+                    <a href="{{ path('post_single', {'slug': c.post.slug}) }}#comments">
                         {{ c.user.name }} <i class="faded">commented on</i> {{ c.post.title }}
                     </a>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        {% endif %} #}
+        {% endif %}
 
     </div>
 
