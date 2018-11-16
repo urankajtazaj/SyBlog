@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{% block body %}
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 col-12">
+            <div class="post">
+                <div style="height: 200px; width: 100%;" class="img thumbnail">
+                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="">
+                </div>
+                <br>
+                <h4>{{ post.title }}</h4>
+                <p class="faded">
+                    <small>
+                        By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}
+                    </small><br>
+                    <small>In {{ post.category.name }}</small>
+                </p>
+                <a href="{{ path('post_single', {'slug': post.slug}) }}" class="btn btn-primary">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
