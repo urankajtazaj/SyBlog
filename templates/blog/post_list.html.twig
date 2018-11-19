@@ -25,25 +25,25 @@
 
     {% set break = false %}
     {% for post in posts if not break %}
-        <div class="col-md-6 col-12">
-            <div class="post card">
-                <a href="{{ path('post_single', {'slug': post.slug}) }}">
+    <div class="col-md-6 col-12">
+        <div class="post card">
+            <a href="{{ path('post_single', {'slug': post.slug}) }}">
 
-                    {% if post.cover %}
-                    <div class="img post-thumbnail">
-                        <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
-                    </div>
-                    {% endif %}
+                {% if post.cover %}
+                <div class="img post-thumbnail">
+                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                </div>
+                {% endif %}
 
-                    <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                    <p class="faded">{{ post.category.name }}</p>
-                    <p class="faded">{{ post.dateCreated | time_ago }}</p>
-                </a>
-            </div>
+                <h3><b class="text-capitalize">{{ post.title }}</b></h3>
+                <p class="faded">{{ post.category.name }}</p>
+                <p class="faded">{{ post.dateCreated | time_ago }}</p>
+            </a>
         </div>
-        {% if loop.index == 2 %}
-            {% set break = true %}
-        {% endif %}
+    </div>
+    {% if loop.index == 2 %}
+    {% set break = true %}
+    {% endif %}
     {% endfor %}
     {% else %}
     <div class="col-md-12 col-12">
@@ -59,27 +59,26 @@
     <div class="col-md-8 col-12">
         {% if posts | length > 2 %}
         {% for post in posts %}
-            {% if loop.index > 2 %}
+        {% if loop.index > 2 %}
+        <div class="row align-items-center hover">
+            <div class="col-md-4 col-12 mb-3">
                 <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
-                    <div class="row align-items-center hover">
-                        <div class="col-md-4 col-12 mb-3">
-                            {% if post.cover %}
-                            <div style="height: 200px; width: 100%;" class="img thumbnail">
-                                <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
-                            </div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-8 col-12">
-                            <h4>{{ post.title }}</h4>
-                            <p class="faded">
-                                <small>
-                                    By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}
-                                </small>
-                            </p>
-                        </div>
+                    {% if post.cover %}
+                    <div style="height: 200px; width: 100%;" class="img thumbnail">
+                        <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
                     </div>
+                    {% endif %}
+            </div>
+            <div class="col-md-8 col-12">
+                <h4>{{ post.title }}</h4>
                 </a>
-            {% endif %}
+                {# <br> #}
+                <span class="faded">
+                    {{ post.dateCreated | time_ago }} | <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a>
+                </span>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
 
         {% if posts | length == 3 %}
