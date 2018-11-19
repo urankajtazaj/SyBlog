@@ -38,7 +38,7 @@
             <h5>Your Posts</h5>
             <br>
             {% if posts | length > 0 %}
-            <table class="table table-sm table-bordered">
+            <table class="table table-bordered">
                 <thead>
                     <th>#</th>
                     <th>Title</th>
@@ -51,12 +51,12 @@
                     {% for post in posts %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td><a href="{{ path('post_single', {'slug': post.slug}) }}" target="_blank">{{ post.title }}</a></td>
-                        <td>{{ post.category.name }}</td>
+                        <td><a href="{{ path('post_single', {'slug': post.slug}) }}" >{{ post.title }}</a></td>
+                        <td><a href="{{ path('archive_cat', {'category': post.category.name }) }}">{{ post.category.name }}</a></td>
                         <td>{{ post.viewCount }}</td>
                         <td style="min-width: 110px">{{ post.dateCreated | date('d/m/Y') }}</td>
                         <td style="min-width: 150px" class="text-center">
-                            <a href="{{ path('post_edit', {'id': post.id}) }}" target="_blank" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{{ path('post_edit', {'id': post.id}) }}"  class="btn btn-sm btn-primary">Edit</a>
                             <a href="#" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete">Delete</a>
                         </td>
                     </tr>
