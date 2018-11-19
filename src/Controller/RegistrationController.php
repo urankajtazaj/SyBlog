@@ -26,8 +26,10 @@ class RegistrationController extends AbstractController
             $pw = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($pw);
 
-            if ($form['admin']->getData()) {
+            if ($form['admin']->getData() == 'a') {
                 $user->setRoles(["ROLE_ADMIN"]);
+            } else if ($form['admin']->getData() == 'w') {
+                $user->setRoles(["ROLE_WRITER"]);
             }
 
             $em = $this->getDoctrine()->getManager();
