@@ -19,29 +19,30 @@
                         <a href="#" class="sidebar-item"><i class="fas fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-item"><i class="fas fa-font"></i> Posts</a>
+                        <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><i
+                                class="fas fa-font"></i> Posts</a>
                     </li>
-                    <li class="dropdown">
-                        <a class="sidebar-item"><i class="fas fa-tag"></i> Categories</a>
-                        <ul>
-                            <li><a href="#" class="sidebar-item"> View</a></li>
-                            <li><a href="#" class="sidebar-item"> Add</a></li>
-                            <li><a href="#" class="sidebar-item"> Edit</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{ path('category_add') }}" class="{% if current == 'category' %}active{% endif %} sidebar-item"><i
+                                class="fas fa-tag"></i> Categories</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('comments') }}" class="{% if current == 'comments' %}active{% endif %} sidebar-item"><i class="fas fa-comment"></i> Comments</a>
                     </li>
                     <li>
                         <a href="#" class="sidebar-item"><i class="fas fa-user"></i> Users</a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-item"><i class="fas fa-power-off"></i> Logout</a>
+                        <a href="{{ path('app_logout') }}" class="sidebar-item"><i class="fas fa-power-off"></i> Logout</a>
                     </li>
                 </ul>
             </div>
-            <div class="container-fluid" style="padding: 20px">
-                <div class="row">
-                    <div class="col-md-10 col-12">
-                        {% block body %}{% endblock %}
-                    </div>
+            <div style="width: 100%">
+                <div class="info-bar text-right">
+                    <span>Hello, {{ app.user.name }}</span>
+                </div>
+                <div class="container-fluid" style="padding: 20px">
+                    {% block body %}{% endblock %}
                 </div>
             </div>
         </div>

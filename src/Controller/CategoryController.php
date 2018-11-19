@@ -38,7 +38,8 @@ class CategoryController extends AbstractController
             'controller_name' => 'CategoryController',
             'form' => $form->createView(),
             'title' => 'New Category',
-            'categories' => $categories
+            'categories' => $categories,
+            'current' => 'category'
         ]);
     }
 
@@ -70,7 +71,8 @@ class CategoryController extends AbstractController
             'controller_name' => 'CategoryController',
             'form' => $form->createView(),
             'title' => 'Edit Category',
-            'categories' => $categories
+            'categories' => $categories,
+            'current' => 'category'
         ]);
     }
 

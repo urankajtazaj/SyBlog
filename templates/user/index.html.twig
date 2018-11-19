@@ -58,7 +58,7 @@
                         <td style="min-width: 110px">{{ post.dateCreated | date('d/m/Y') }}</td>
                         <td style="min-width: 150px" class="text-center">
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="#" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete">Delete</a>
+                            <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn btn-sm btn-danger btn-delete">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
