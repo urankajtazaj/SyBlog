@@ -8,6 +8,10 @@
     transition: 250ms ease;
 }
 
+* {
+    transition: 250ms ease;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -250,9 +254,11 @@ blockquote p {
     transition: 250ms ease;
 }
 
-.hover:hover {
-    text-decoration: none !important;
-    background-color: #f5f5f5 !important;
+.hover:hover img {
+    /* text-decoration: none !important; */
+    /* background-color: #f5f5f5 !important; */
+    transform: scale(0.93);
+    opacity: .5;
 }
 
 .dark {
