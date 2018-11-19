@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CRUD - Blog{% endblock %} | Blog.com</title>
+    {{ include('inc/link.html.twig') }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="body">
+            <div class="sidebar">
+                <ul class="list-unstyled m-0">
+                    <li>
+                        <a href="#" class="sidebar-item"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-item"><i class="fas fa-font"></i> Posts</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="sidebar-item"><i class="fas fa-tag"></i> Categories</a>
+                        <ul>
+                            <li><a href="#" class="sidebar-item"> View</a></li>
+                            <li><a href="#" class="sidebar-item"> Add</a></li>
+                            <li><a href="#" class="sidebar-item"> Edit</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-item"><i class="fas fa-user"></i> Users</a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-item"><i class="fas fa-power-off"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-fluid" style="padding: 20px">
+                <div class="row">
+                    <div class="col-md-10 col-12">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    {{ include('inc/footer.html.twig') }}
+
+    </div>
+
+    {{ include('inc/script.html.twig') }}
+    {% block javascripts %}{% endblock %}
+</body>
+
+</html>
