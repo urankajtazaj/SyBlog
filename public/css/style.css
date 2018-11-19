@@ -38,6 +38,15 @@ p {
     font-size: 19px;
 }
 
+p a {
+    font-style: italic;
+    color: inherit;
+}
+
+p a:hover {
+    color: inherit;
+}
+
 .post .content p {
     font-size: 21px;
     color: #2b2b2b;
@@ -132,6 +141,13 @@ footer {
 .img img {
     min-width: 100%;
     max-width: 110%;
+}
+
+.thumbnail img {
+    min-height: 100%;
+    max-height: 110%;
+    min-width: unset;
+    max-width: unset;
 }
 
 .post-thumbnail {

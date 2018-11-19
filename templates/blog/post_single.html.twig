@@ -9,13 +9,15 @@
             <div class="col-md-10 col-sm-12 col-12">
                 <h1 class="display-4">{{ post.title }}</h1>
                 <br>
-                <p title="{{ post.dateCreated | date('d/m/Y H:i') }}" class="faded">{{ post.dateCreated | time_ago }}</p>
-                <p class="faded">By {{ post.user.name }} in {{ post.category.name }}</p>
-                <a href="#comments" class="text-white">
-                    <p class="faded">
-                    {% if post.comments | length > 0 %}
+                <p title="{{ post.dateCreated | date('d/m/Y H:i') }}" class="faded">{{ post.dateCreated | time_ago }}
+                    {% if post.comments | length > 0 %}|
                         {{ post.comments | length }} comment{% if post.comments | length > 1 %}s{% endif %} 
                     {% endif %}
+                </p>
+                <p class="faded">By {{ post.user.name }} in <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a></p>
+                <a href="#comments" class="text-white">
+                    <p class="faded">
+                    
                     </p>
                 </a>
             </div>
@@ -49,8 +51,8 @@
                 <hr>
                 {% endif %}
 
-                <h4>{{ comments | length }} Comment{% if comments | length > 1 or comments | length == 0 %}s{%
-                    endif %}</h4>
+                <h5>{{ comments | length }} Comment{% if comments | length != 1 %}s{%
+                    endif %}</h5>
                 {% if comments | length > 0 %}
                 {% for comment in comments %}
                 <div class="comment">
@@ -79,7 +81,7 @@
                     Delete</a>
                 <hr>
                 <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
-                <p class="lead">&nbsp;&nbsp;{{ post.comments | length }} Comments</p>
+                <p class="lead">&nbsp;&nbsp;<a href="#comments">{{ post.comments | length }} Comments</p></a>
             </div>
             {% endif %}
 
