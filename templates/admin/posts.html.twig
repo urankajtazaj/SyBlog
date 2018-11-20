@@ -6,10 +6,11 @@
     <div class="col-md-12 col-12">
         <h3>Posts <a href="{{ path('post_new') }}" class="btn btn-sm btn-primary">Add new</a></h3>
         <br><br>
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <th></th>
                 <th>Title</th>
+                <th>Categories</th>
                 <th>Date</th>
                 <th>Comments</th>
             </thead>
@@ -24,6 +25,11 @@
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="text-dark">Edit</a> | 
                             <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="text-danger btn-delete">Delete</a>
                         </small>
+                    </td>
+                    <td>
+                        {% for category in post.category %}
+                            <a class="text-primary" href="{{ path('archive_cat', {'category': category.name}) }}">{{ category.name }}</a><br>
+                        {% endfor %}
                     </td>
                     <td>{{ post.dateCreated | date('d/m/Y') }}</td>
                     <td>{{ post.comments | length }}</td>

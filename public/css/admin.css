@@ -7,8 +7,8 @@
 
 .sidebar,
 .info-bar {
-    color: rgba(0, 0, 0, 0.8);
-    background-color: #e9e9e9;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #1b1d22;
 }
 
 .sidebar-item .fas {
@@ -47,7 +47,7 @@
 
 .sidebar .sidebar-item:hover,
 .sidebar-item.active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-item.active .fas {

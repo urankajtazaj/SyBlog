@@ -89,7 +89,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/posts/new", name="post_new")
+     * @Route("/admin/post/new", name="post_new")
      */
     public function post_new(Request $request) {
         $post = new Post();
@@ -132,7 +132,8 @@ class BlogController extends AbstractController
             "blog/post_new.html.twig",
             [
                 'form' => $form->createView(),
-                'headline' => 'New Post'
+                'headline' => 'New Post',
+                'current' => 'posts'
             ]
         );
     }

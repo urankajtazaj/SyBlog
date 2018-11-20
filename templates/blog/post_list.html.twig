@@ -36,7 +36,11 @@
                 {% endif %}
 
                 <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                <p class="faded">{{ post.category.name }}</p>
+                <p class="faded">
+                {% for category in post.category %}
+                    {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
+                {% endfor %}
+                </p>
                 <p class="faded">{{ post.dateCreated | time_ago }}</p>
             </a>
         </div>
