@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PostForm extends AbstractType {
@@ -43,13 +44,17 @@ class PostForm extends AbstractType {
                     'rows' => 20
                 ]
             ])
-            ->add('category', ChoiceType::class, [
+            ->add('category', EntityType::class, [
+                'label' => ' ',
+                'class' => Category::class,
                 'choices' => $category,
+                'multiple' => true,
+                'expanded' => true,
                 'choice_label' => function($category) {
                     return $category->getName();
                 },
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'mb-3 categories'
                 ]
             ])
             ->add('save', SubmitType::class, [

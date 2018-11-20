@@ -46,7 +46,7 @@ class Post
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="posts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -138,7 +138,7 @@ class Post
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory()
     {
         return $this->category;
     }

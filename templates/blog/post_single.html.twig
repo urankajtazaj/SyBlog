@@ -14,7 +14,13 @@
                         {{ post.comments | length }} comment{% if post.comments | length > 1 %}s{% endif %} 
                     {% endif %}
                 </p>
-                <p class="faded">By {{ post.user.name }} in <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a></p>
+                <p class="faded">By {{ post.user.name }}<br>
+                {% for cat in post.category %}
+                    <a href="{{ path('archive_cat', {'category': cat.name}) }}">{{ cat.name }}</a> &nbsp;
+                {% endfor %}
+
+                </p>
+                
                 <a href="#comments" class="text-white">
                     <p class="faded">
                     

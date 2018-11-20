@@ -52,3 +52,17 @@
 /* .dropdown:hover ul {
     display: block;
 } */
+
+.categories {
+    border: 1px solid #eee;
+    text-align: left;
+    padding: 10px;
+    overflow-y: auto;
+    height: 200px;
+    flex-wrap: wrap;
+}
+
+.categories input {
+    margin-left: 30px;
+    margin-right: 5px;
+}
