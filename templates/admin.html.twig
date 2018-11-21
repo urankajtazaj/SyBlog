@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CRUD - Blog{% endblock %} | Blog.com</title>
+    <title>{% block title %}Admin{% endblock %} | Blog.com</title>
     {{ include('inc/link.html.twig') }}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     {% block stylesheets %}{% endblock %}
@@ -31,6 +31,9 @@
                     </li>
                     <li>
                         <a href="#" class="sidebar-item"><i class="fas fa-user"></i> Users</a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-item"><i class="fas fa-sliders-h"></i> Settings</a>
                     </li>
                     <li>
                         <a href="{{ path('app_logout') }}" class="sidebar-item"><i class="fas fa-power-off"></i> Logout</a>

@@ -21,14 +21,16 @@
                             {{ post.content | striptags | slice(0, 200) | replace({'&rsquo;': '\'', '&nbsp;': ' '})
                             }}... <br>
                         </p>
-                        <p class="faded">
+                        <span class="faded">
                             <small>
                                 By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length
                                 }}
                                 comment{% if post.comments | length != 1 %}s{% endif %}
-                            </small><br>
-                            <small>In {{ post.category.name }}</small>
-                        </p>
+                                | {% for category in post.category %}
+                                {{ category.name }}{% if loop.index != post.category | length %},{% endif %}
+                                {% endfor %}
+                            </small>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -43,12 +45,15 @@
                 </div>
                 <br>
                 <h4>{{ post.title }}</h4>
-                <p class="faded">
+                <span class="faded">
                     <small>
-                        {{post.category.name}} | {{ post.dateCreated | time_ago }} | {{ post.comments | length }}
+                        {{ post.dateCreated | time_ago }} | {{ post.comments | length }}
                         comment{% if post.comments | length != 1 %}s{% endif %}
+                        | {% for category in post.category %}
+                        {{ category.name }}{% if loop.index != post.category | length %},{% endif %}
+                        {% endfor %}
                     </small><br>
-                </p>
+                </span>
             </div>
         </a>
     </div>

@@ -38,7 +38,7 @@ class ArchiveController extends AbstractController
         $cat = $em->getRepository(Category::class)->findOneBy(['name' => $category]);
 
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
-            ->where('p.category = :category')
+            ->where(':category member of p.category')
             ->setParameter('category', $cat)
             ->orderBy('p.id', 'DESC')
             ->getQuery();
