@@ -7,7 +7,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6 col-12">
         <h4>Categories</h4><br>
-        <table class="table table-sm table-striped table-bordered">
+        <table class="table table-sm">
             <thead>
                 <th>Name</th>
                 <th></th>
@@ -18,7 +18,7 @@
                     <td>{{ category.name }}</td>
                     <td style="width: 120px" class="text-right">
                         <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm text-dark">Edit</a>
-                        <a href="#" data-url="/category/delete/" data-id="{{ category.id }}" class="btn btn-sm text-danger btn-delete">Delete</a>
+                        <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-sm text-danger btn-delete">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

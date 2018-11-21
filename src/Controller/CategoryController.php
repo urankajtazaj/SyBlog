@@ -11,7 +11,7 @@ use App\Entity\Category;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/add", name="category_add")
+     * @Route("/admin/category/add", name="category_add")
      */
     public function index(Request $request)
     {
@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/edit/{id}", name="category_edit")
+     * @Route("/admin/category/edit/{id}", name="category_edit")
      */
     public function edit(Request $request, $id)
     {
@@ -77,7 +77,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/delete/{id}", name="category_delete")
+     * @Route("/admin/category/delete/{id}", name="category_delete")
      */
     public function delete($id) {
         $em = $this->getDoctrine()->getManager();
