@@ -26,7 +26,8 @@ class CommentsController extends AbstractController
         return $this->render('comments/index.html.twig', [
             'controller_name' => 'CommentsController',
             'comments' => $comments,
-            'current' => 'comments'
+            'current' => 'comments',
+            'headline' => 'Comments'
         ]);
     }
 }

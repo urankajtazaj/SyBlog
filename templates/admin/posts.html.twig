@@ -4,10 +4,13 @@
 
 <div class="row">
     <div class="col-md-12 col-12">
-        <h3>Posts <a href="{{ path('post_new') }}" class="btn btn-sm btn-primary">Add new</a></h3>
-        <br><br>
+        <div>
+            <a href="{{ path('post_new') }}" class="btn"><b><i class="fas fa-plus"></i> NEW POST</b></a>
+        </div>
+        <br>
         <table class="table table-sm">
             <thead>
+                <th></th>
                 <th></th>
                 <th>Title</th>
                 <th>Categories</th>
@@ -18,6 +21,11 @@
                 {% for post in posts %}
                 <tr>
                     <td>{{ loop.index }}</td>
+                    <td style="max-width: 60px; padding-right: 10px">
+                        <div class="img post-thumbnail" style="max-height: 80px">
+                            <img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                        </div>
+                    </td>
                     <td>
                         {{ post.title }}<br>
                         <small>

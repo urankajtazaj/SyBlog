@@ -48,4 +48,14 @@ class UserController extends AbstractController
             'title' => 'User'
         ]);
     }
+
+    /**
+     * @Route("/admin/users", name="users")
+     */
+    public function list_users() {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(UseR::class)->findAll();
+
+        return $this->render();
+    }
 }

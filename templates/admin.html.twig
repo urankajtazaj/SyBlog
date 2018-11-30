@@ -41,8 +41,19 @@
                 </ul>
             </div>
             <div style="width: 100%">
-                <div class="info-bar text-right">
-                    <span>Hello, {{ app.user.name }}</span>
+                <div class="row align-items-center info-bar">
+                    {#<div class="row">#}
+                        <div class="col-md-6">
+                            <span class="headline">
+                                {% if headline is defined %}
+                                    {{ headline }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            Hello, {{ app.user.name }}
+                        </div>
+                    {#</div>#}
                 </div>
                 <div class="container-fluid" style="padding: 20px">
                     {% block body %}{% endblock %}

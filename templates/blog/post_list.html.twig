@@ -4,127 +4,130 @@
 
 {% block body %}
 
-{# <div class="row">
-    <div class="col-md-12 col-12">
-        {{ form_start(form) }}
-        <div class="post card">
-            <div class="row align-items-center">
-                <div class="col-md-10 col-12">
-                    {{ form_row(form.query) }}
-                </div>
-                <div class="col-md-2 col-12">
-                    {{ form_row(form.search) }}
-                </div>
-            </div>
-        </div>
-        {{ form_end(form) }}
-    </div>
-</div> #}
-<div class="row">
-    {% if posts %}
-
-    {% set break = false %}
-    {% for post in posts if not break %}
-    <div class="col-md-6 col-12">
-        <div class="post card">
-            <a href="{{ path('post_single', {'slug': post.slug}) }}">
-
-                {% if post.cover %}
-                <div class="img post-thumbnail">
-                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
-                </div>
-                {% endif %}
-
-                <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                <p class="faded">
-                {% for category in post.category %}
-                    {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
-                {% endfor %}
-                </p>
-                <p class="faded">{{ post.dateCreated | time_ago }}</p>
-            </a>
-        </div>
-    </div>
-    {% if loop.index == 2 %}
-    {% set break = true %}
-    {% endif %}
-    {% endfor %}
-    {% else %}
-    <div class="col-md-12 col-12">
-        <p class="lead text-center">No posts found :(</p>
-    </div>
-    {% endif %}
-</div>
-<br>
-<hr>
-<br>
-<br>
-<div class="row">
-    <div class="col-md-8 col-12">
-        {% if posts | length > 2 %}
-        {% for post in posts %}
-        {% if loop.index > 2 %}
-        <div class="row align-items-center hover">
-            <div class="col-md-4 col-12 mb-3">
-                <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
-                    {% if post.cover %}
-                    <div style="height: 200px; width: 100%;" class="img thumbnail">
-                        <img src="{{ asset('uploads/images/') ~ post.cover }}" alt="{{ post.title }}">
+    {# <div class="row">
+        <div class="col-md-12 col-12">
+            {{ form_start(form) }}
+            <div class="post card">
+                <div class="row align-items-center">
+                    <div class="col-md-10 col-12">
+                        {{ form_row(form.query) }}
                     </div>
-                    {% endif %}
+                    <div class="col-md-2 col-12">
+                        {{ form_row(form.search) }}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8 col-12">
-                <h4>{{ post.title }}</h4>
-                </a>
-                {# <br> #}
-                <span class="faded">
-                    {{ post.dateCreated | time_ago }} | <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a>
+            {{ form_end(form) }}
+        </div>
+    </div> #}
+    <div class="row">
+        {% if posts %}
+
+            {% set break = false %}
+            {% for post in posts if not break %}
+                <div class="col-md-6 col-12">
+                    <div class="post card">
+                        <a href="{{ path('post_single', {'slug': post.slug}) }}">
+
+                            {% if post.cover %}
+                                <div class="img post-thumbnail">
+                                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                                </div>
+                            {% endif %}
+
+                            <h3><b class="text-capitalize">{{ post.title }}</b></h3>
+                            <p class="faded">
+                                {% for category in post.category %}
+                                    {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            <p class="faded">{{ post.dateCreated | time_ago }}</p>
+                        </a>
+                    </div>
+                </div>
+                {% if loop.index == 2 %}
+                    {% set break = true %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12 col-12">
+                <p class="lead text-center">No posts found :(</p>
+            </div>
+        {% endif %}
+    </div>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-8 col-12">
+            {% if posts | length > 2 %}
+                {% for post in posts %}
+                    {% if loop.index > 2 %}
+                        <div class="row align-items-center hover">
+                            <div class="col-md-4 col-12 mb-3">
+                                <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
+                                    {% if post.cover %}
+                                        <div style="height: 200px; width: 100%;" class="img thumbnail">
+                                            <img src="{{ asset('uploads/images/') ~ post.cover }}"
+                                                 alt="{{ post.title }}">
+                                        </div>
+                                    {% endif %}
+                            </div>
+                            <div class="col-md-8 col-12">
+                                <h4>{{ post.title }}</h4>
+                                </a>
+                                {# <br> #}
+                                <span class="faded">
+                    {{ post.dateCreated | time_ago }} | <a class="text-dark"
+                                                           href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a>
                 </span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if posts | length == 3 %}
+                    <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-4 col-12">
+            {% if popular and popular | length > 5 %}
+                <div class="post dark">
+                    <p>Popular</p>
+                    <hr>
+                    <ul class="list-unstyled">
+                        {% for p in popular %}
+                            <li>
+                                <a href="{{ path('post_single', {'slug': p.slug}) }}">
+                                    {{ p.title }} <br>
+                                    <small><i>{{ p.dateCreated | time_ago }}</i></small>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {# {% if popular %}
+            <div class="post dark">
+                <p>Latest comments</p>
+                <hr>
+                <ul class="list-unstyled">
+                    {% for c in comments %}
+                    <li>
+                        <a href="{{ path('post_single', {'slug': c.post.slug}) }}#comments">
+                            {{ c.user.name }} <i class="faded">commented on</i> {{ c.post.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+            {% endif %} #}
 
-        {% if posts | length == 3 %}
-        <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
-        {% endif %}
-        {% endif %}
-    </div>
-    <div class="col-md-4 col-12">
-        {% if popular and popular | length > 5 %}
-        <div class="post dark">
-            <p>Popular</p>
-            <hr>
-            <ul class="list-unstyled">
-                {% for p in popular %}
-                <li>
-                    <a href="{{ path('post_single', {'slug': p.slug}) }}">
-                        {{ p.title }} <br><small><i>{{ p.dateCreated | time_ago }}</i></small>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
         </div>
-        {% endif %}
-
-        {# {% if popular %}
-        <div class="post dark">
-            <p>Latest comments</p>
-            <hr>
-            <ul class="list-unstyled">
-                {% for c in comments %}
-                <li>
-                    <a href="{{ path('post_single', {'slug': c.post.slug}) }}#comments">
-                        {{ c.user.name }} <i class="faded">commented on</i> {{ c.post.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %} #}
 
     </div>
-
-</div>
 
 {% endblock %}

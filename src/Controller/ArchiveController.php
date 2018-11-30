@@ -46,7 +46,7 @@ class ArchiveController extends AbstractController
         $posts = $posts_qb->setMaxResults(10)->execute();
 
         return $this->render('archive/index.html.twig', [
-            'controller_name' => 'ArchiveController',
+            'category' => $category,
             'posts' => $posts
         ]);
     }

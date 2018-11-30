@@ -133,7 +133,7 @@ class BlogController extends AbstractController
             [
                 'form' => $form->createView(),
                 'headline' => 'New Post',
-                'current' => 'posts'
+                'current' => 'posts',
             ]
         );
     }

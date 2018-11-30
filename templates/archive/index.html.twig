@@ -7,6 +7,9 @@
     {% for post in posts %}
     {% if loop.index == 1 %}
     <div class="col-md-12 col-12">
+        {% if category is defined %}
+            <p class="display-4">Posts in {{ category }}</p><br>
+        {% endif %}
         <a href="{{ path('post_single', {'slug': post.slug}) }}">
             <div class="post">
                 <div class="row align-items-center">
@@ -41,7 +44,7 @@
         <a href="{{ path('post_single', {'slug': post.slug}) }}">
             <div class="post">
                 <div style="height: 200px; width: 100%;" class="img thumbnail">
-                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="">
+                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
                 </div>
                 <br>
                 <h4>{{ post.title }}</h4>

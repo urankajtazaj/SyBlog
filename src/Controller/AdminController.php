@@ -38,7 +38,8 @@ class AdminController extends AbstractController
 
         return $this->render('admin/posts.html.twig', [
             'current' => 'posts',
-            'posts' => $posts
+            'posts' => $posts,
+            'headline' => 'All posts'
         ]);
     }
 
