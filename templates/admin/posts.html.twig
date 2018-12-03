@@ -23,7 +23,7 @@
                     <td>{{ loop.index }}</td>
                     <td style="max-width: 60px; padding-right: 10px">
                         <div class="img post-thumbnail" style="max-height: 80px">
-                            <img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
+                            {% if post.cover %}<img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">{% endif %}
                         </div>
                     </td>
                     <td>

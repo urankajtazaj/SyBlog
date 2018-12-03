@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Entity\Post;
@@ -28,7 +28,6 @@ class AdminController extends AbstractController
      * @Route("/admin/posts", name="admin_posts")
      */
     public function posts() {
-
         $em = $this->getDoctrine()->getManager();
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
@@ -59,13 +58,10 @@ class AdminController extends AbstractController
         }
 
         $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
-
             if ($data->getCover()) {
                 $file = $post->getCover();
                 $filename = md5(uniqid()) . "." . $file->guessExtension();
