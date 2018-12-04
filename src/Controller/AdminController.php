@@ -18,9 +18,18 @@ class AdminController extends AbstractController
      */
     public function index()
     {
+
+        $em = $this->getDoctrine()->getManager();
+        
+        $posts = $em->getRepository(Post::class)->findAll();
+        $comments = $em->getRepository(\App\Entity\Comment::class)->findAll();
+        $users = $em->getRepository(\App\Entity\User::class)->findAll();
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'current' => 'home'
+            'current' => 'admin',
+            'posts' => sizeof($posts),
+            'comments' => sizeof($comments),
+            'users' => sizeof($users),
         ]);
     }
 

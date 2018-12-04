@@ -14,9 +14,13 @@
     <div class="wrapper">
         <div class="body">
             <div class="sidebar">
+                <br>
                 <ul class="list-unstyled m-0">
                     <li>
-                        <a href="#" class="sidebar-item"><i class="fas fa-home"></i> Dashboard</a>
+                        <a href="/" class="sidebar-item"><i class="fas fa-link"></i> Visit Site</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><i class="fas fa-home"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><i
@@ -55,9 +59,6 @@
         </div>
         <br><br>
     </div>
-
-    {{ include('inc/footer.html.twig') }}
-
     </div>
 
     {{ include('inc/script.html.twig') }}

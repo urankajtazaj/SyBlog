@@ -4,5 +4,27 @@
 
 
 {% block body %}
-
+<h1>Blog statistics</h1>
+<hr>
+<br><br>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12 text-center">
+        <a href="{{ path('admin_posts') }}">
+            <h1 class="display-3">{{ posts }}</h1>
+            <h4>Posts</h4>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 col-12 text-center">
+        <a href="{{ path('comments') }}">
+            <h1 class="display-3">{{ comments }}</h1>
+            <h4>Comments</h4>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 col-12 text-center">
+        <a href="{{ path('users') }}">
+            <h1 class="display-3">{{ users }}</h1>
+            <h4>Users</h4>
+        </a>
+    </div>
+</div>
 {% endblock %}
