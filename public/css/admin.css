@@ -33,6 +33,12 @@ a:hover {
     padding: 5px 10px 5px 0;
 }
 
+.info-box {
+    background-color: #f2f2f2;
+    padding: 15px 30px;
+    box-sizing: border-box;
+}
+
 .sidebar ul {
     list-style: none;
     margin: 0;

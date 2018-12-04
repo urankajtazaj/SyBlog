@@ -27,9 +27,9 @@ class AdminController extends AbstractController
 
         return $this->render('admin/index.html.twig', [
             'current' => 'admin',
-            'posts' => sizeof($posts),
-            'comments' => sizeof($comments),
-            'users' => sizeof($users),
+            'posts' => $posts,
+            'comments' => $comments,
+            'users' => $users,
         ]);
     }
 
