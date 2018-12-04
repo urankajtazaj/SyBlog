@@ -1,0 +1,31 @@
+{% extends 'admin.html.twig' %}
+
+
+{% block body %}
+<h2>All Users</h2>
+<a href="{{ path('register') }}" class="btn"><b><i class="fas fa-plus"></i> ADD NEW</b></a>
+<br>
+<br>
+<table class="table">
+    <thead>
+        <th></th>
+        <th>Name</th>
+        <th>Username</th>
+        <th></th>
+        {# <th>Date Created</th> #}
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td style="width: 100px">{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.name }}</td>
+                <th class="text-right">
+                    <a href="#" class="btn text-danger">Delete</a>
+                </th>
+                {# <td>{{ user.dateCreated | date("d/m/Y") }}</td> #}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

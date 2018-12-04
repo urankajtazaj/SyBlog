@@ -30,7 +30,7 @@
                         <a href="{{ path('comments') }}" class="{% if current == 'comments' %}active{% endif %} sidebar-item"><i class="fas fa-comment"></i> Comments</a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-item"><i class="fas fa-user"></i> Users</a>
+                        <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item"><i class="fas fa-user"></i> Users</a>
                     </li>
                     <li>
                         <a href="#" class="sidebar-item"><i class="fas fa-sliders-h"></i> Settings</a>
@@ -42,15 +42,8 @@
             </div>
             <div style="width: 100%">
                 <div class="row align-items-center info-bar">
-                    {#<div class="row">#}
-                        <div class="col-md-6">
-                            <span class="headline">
-                                {% if headline is defined %}
-                                    {{ headline }}
-                                {% endif %}
-                            </span>
-                        </div>
-                        <div class="col-md-6 text-right">
+                    {#<div class="row">#} 
+                        <div class="col-md-12 text-right">
                             Hello, {{ app.user.name }}
                         </div>
                     {#</div>#}
