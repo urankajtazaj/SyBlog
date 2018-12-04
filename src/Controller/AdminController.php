@@ -21,12 +21,25 @@ class AdminController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         
-        $posts = $em->getRepository(Post::class)->findAll();
-        $comments = $em->getRepository(\App\Entity\Comment::class)->findAll();
-        $users = $em->getRepository(\App\Entity\User::class)->findAll();
+        $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
+
+        $comments_qb = $em->getRepository(\App\Entity\Comment::class)->createQueryBuilder('c')
+        ->orderBy('c.id', 'DESC')
+        ->getQuery();
+
+        $users_qb = $em->getRepository(\App\Entity\User::class)->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->getQuery();
+
+        $posts = $posts_qb->execute();
+        $comments = $comments_qb->execute();
+        $users = $users_qb->execute();
 
         return $this->render('admin/index.html.twig', [
             'current' => 'admin',
+            'headline' => 'Dashboard',
             'posts' => $posts,
             'comments' => $comments,
             'users' => $users,

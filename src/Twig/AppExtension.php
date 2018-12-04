@@ -22,8 +22,8 @@ class AppExtension extends AbstractExtension
         $range = null;
         $char = null;
 
-        if ($diff->format('%W') > 0) {
-            return  $dateTime->format('d/m/Y');
+        if ($diff->format('%d') > 7) {
+            return  $dateTime->format('d/m/Y (H:i)');
         } else if ($diff->format('%d') > 0) {
 
             if ($diff->format('%d') == 1) {

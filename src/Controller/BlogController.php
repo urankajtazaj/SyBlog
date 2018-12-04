@@ -100,6 +100,8 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // dd($form->get('category'));
+
             $data = $form->getData();
 
             if ($data->getCover()) {
@@ -116,6 +118,7 @@ class BlogController extends AbstractController
 
             $user = $this->getUser();
 
+            // $data->setCategory($form->get('category'));
             $data->setSlug($this->slugify($form->get('title')->getData()));
             $data->setUser($user);
             $data->setViewCount(0);

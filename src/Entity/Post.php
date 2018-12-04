@@ -145,7 +145,7 @@ class Post
 
     public function setCategory(?Category $category): self
     {
-        $this->category = $category;
+        $this->category[] = $category;
 
         return $this;
     }
