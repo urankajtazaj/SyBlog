@@ -34,9 +34,10 @@ a:hover {
 }
 
 .info-box {
-    background-color: #f2f2f2;
+    background-color: #fff;
     padding: 15px 30px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    box-shadow: 0 15px 35px rgba(0,0,0, 0.08);
 }
 
 .sidebar ul {
