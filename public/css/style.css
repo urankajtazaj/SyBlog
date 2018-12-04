@@ -20,7 +20,7 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: "Montserrat";
+    font-family: "Source Sans Pro";
     color: #333;
 }
 
@@ -38,8 +38,7 @@ h6 {
 }
 
 p {
-    font-family: "Lora";
-    font-size: 19px;
+    font-family: "Merriweather";
 }
 
 p a {
@@ -51,9 +50,21 @@ p a:hover {
 }
 
 .post .content p {
-    font-size: 21px;
+    font-size: 18px;
     color: #2b2b2b;
-    ;
+    line-height: 1.7;
+}
+
+.content p:first-of-type::first-letter  {
+    font-size: 90px;
+    margin-top: 100px;
+    float: left;
+    line-height: -.03em;
+    line-height: .83em;
+    margin-top: 7px;
+    padding-right: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 body {
@@ -110,7 +121,7 @@ footer {
 
 .cover-img::before {
     content: '';
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -243,10 +254,10 @@ blockquote p {
 }
 
 .content a {
-    /*text-decoration: underline;*/
-    color: #2b2b2b !important;
+    text-decoration: underline;
+    color: inherit !important;
     transition: 200ms ease;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .content a:hover {

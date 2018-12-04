@@ -37,6 +37,8 @@ class AdminController extends AbstractController
         $comments = $comments_qb->execute();
         $users = $users_qb->execute();
 
+        // dd($comments);
+
         return $this->render('admin/index.html.twig', [
             'current' => 'admin',
             'headline' => 'Dashboard',

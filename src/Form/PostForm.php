@@ -50,6 +50,7 @@ class PostForm extends AbstractType {
                 'choices' => $category,
                 'multiple' => true,
                 'expanded' => true,
+                // 'mapped' => false,
                 'choice_label' => function($category) {
                     return $category->getName();
                 },

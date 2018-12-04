@@ -14,6 +14,7 @@
                 <th></th>
                 <th></th>
                 <th>Title</th>
+                <th>Author</th>
                 <th>Categories</th>
                 <th>Date</th>
                 <th>Comments</th>
@@ -35,6 +36,7 @@
                             <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="text-danger btn-delete">Delete</a>
                         </small>
                     </td>
+                    <td>{{ post.user.name }}</td>
                     <td>
                         {% for category in post.category %}
                             <a class="text-primary" href="{{ path('archive_cat', {'category': category.name}) }}">{{ category.name }}</a><br>

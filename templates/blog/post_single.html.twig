@@ -11,23 +11,11 @@
             <div class="col-md-{{ colWidth }} col-sm-12 col-12">
                 <h1 class="display-4">{{ post.title }}</h1>
                 <br>
-                <p title="{{ post.dateCreated | date('d/m/Y H:i') }}" class="faded">{{ post.dateCreated | time_ago }}
+                <p title="{{ post.dateCreated | date('d/m/Y H:i') }}">{{ post.dateCreated | time_ago }}
                     {% if post.comments | length > 0 %}|
                         {{ post.comments | length }} comment{% if post.comments | length > 1 %}s{% endif %} 
                     {% endif %}
                 </p>
-                <p class="faded">By {{ post.user.name }}<br>
-                {% for cat in post.category %}
-                    <a href="{{ path('archive_cat', {'category': cat.name}) }}">{{ cat.name }}</a> &nbsp;
-                {% endfor %}
-
-                </p>
-                
-                <a href="#comments" class="text-white">
-                    <p class="faded">
-                    
-                    </p>
-                </a>
             </div>
         </div>
     </div>
@@ -36,8 +24,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-12">
+            <br>
+            <p class="float-right">By <b>{{ post.user.name }}</b> in 
+            {% for cat in post.category %}
+                <a href="{{ path('archive_cat', {'category': cat.name}) }}">{{ cat.name }}</a>{% if loop.index < post.category | length %},{% endif %}
+            {% endfor %} </p>
             <div class="post">
-                <br><br>
+            <br><br>
                 <div class="content">
                     {{ post.content | raw }}
                 </div>
@@ -47,7 +40,7 @@
 
             {# COMMENTS SECTION #}
             <div class="post dark" id="comments">
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
                 {{ form_start(comment_form) }}
                 {{ form_widget(comment_form) }}
                 {{ form_end(comment_form) }}
