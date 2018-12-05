@@ -20,7 +20,7 @@
         {% endif %}
         <a href="{{ path('post_single', {'slug': post.slug}) }}">
             <div class="post">
-                <div class="row align-items-center">
+                <div class="row">
                     <div class="col-md-6 col-12">
                         <div style="height: 300px; width: 100%;" class="img thumbnail">
                             <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="">
@@ -29,7 +29,7 @@
                     <div class="col-md-6 col-12">
                         <h4>{{ post.title }}</h4>
                         <p class="faded">
-                            {{ post.content | striptags | slice(0, 200) | replace({'&rsquo;': '\'', '&nbsp;': ' '})
+                            {{ post.content | striptags | slice(0, 250) | replace({'&rsquo;': '\'', '&nbsp;': ' '})
                             }}... <br>
                         </p>
                         <span class="faded">
