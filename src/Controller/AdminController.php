@@ -86,6 +86,9 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            // dd($form->get('category'));
+
             if ($data->getCover()) {
                 $file = $post->getCover();
                 $filename = md5(uniqid()) . "." . $file->guessExtension();

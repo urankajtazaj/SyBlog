@@ -20,6 +20,8 @@ class PostForm extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $category = $options['cats']->getRepository(Category::class)->findAll();
+        
+        // dd($category);
 
         $builder
             ->add('cover', FileType::class, [
@@ -45,17 +47,17 @@ class PostForm extends AbstractType {
                 ]
             ])
             ->add('category', EntityType::class, [
-                'label' => ' ',
+                // 'label' => ' ',
+                // 'choices' => $category,
                 'class' => Category::class,
-                'choices' => $category,
-                'multiple' => true,
-                'expanded' => true,
+                // 'multiple' => true,
+                // 'expanded' => true,
                 // 'mapped' => false,
                 'choice_label' => function($category) {
                     return $category->getName();
                 },
                 'attr' => [
-                    'class' => 'mb-3 categories'
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('save', SubmitType::class, [

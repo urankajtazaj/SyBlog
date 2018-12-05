@@ -99,9 +99,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // dd($form->get('category'));
-
+            
             $data = $form->getData();
 
             if ($data->getCover()) {

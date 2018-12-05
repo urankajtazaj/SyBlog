@@ -46,8 +46,8 @@ class Post
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="posts")
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $category;
 
@@ -145,7 +145,7 @@ class Post
 
     public function setCategory(?Category $category): self
     {
-        $this->category[] = $category;
+        $this->category = $category;
 
         return $this;
     }

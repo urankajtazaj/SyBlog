@@ -23,6 +23,14 @@ class CategoryForm extends AbstractType {
                     'class' => 'form-control'
                 ]
             ])
+            ->add('exerpt', TextareaType::class, [
+                'label' => 'Description',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => 5
+                ]
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success'

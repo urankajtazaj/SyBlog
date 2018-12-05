@@ -24,9 +24,14 @@ class Category
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="category")
      */
     private $posts;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $exerpt;
 
 
     public function __construct()
@@ -78,6 +83,18 @@ class Category
                 $post->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getExerpt(): ?string
+    {
+        return $this->exerpt;
+    }
+
+    public function setExerpt(?string $exerpt): self
+    {
+        $this->exerpt = $exerpt;
 
         return $this;
     }
