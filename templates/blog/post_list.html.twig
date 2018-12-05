@@ -37,12 +37,13 @@
 
                             <h3><b class="text-capitalize">{{ post.title }}</b></h3>
                             <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\''}) | slice(0, 150) }}</p>
-                            {# <p class="faded">
-                                {% for category in post.category %}
-                                    {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
-                                {% endfor %}
-                            </p> #}
-                            <p class="faded">{{ post.dateCreated | time_ago }}</p>
+                            <span class="faded">
+                                <b>{{ post.dateCreated | time_ago }}</b> in <b>
+                                    {% for category in post.category %}
+                                        {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
+                                    {% endfor %}
+                                </b>
+                            </span>
                         </a>
                     </div>
                 </div>

@@ -17,6 +17,7 @@
                 <th>Author</th>
                 <th>Categories</th>
                 <th>Date</th>
+                <th>Views</th>
                 <th>Comments</th>
             </thead>
             <tbody>
@@ -24,16 +25,17 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td style="max-width: 60px; padding-right: 10px">
-                        <div class="img post-thumbnail" style="max-height: 80px">
+                        {# <div class="img post-thumbnail" style="max-height: 80px">
                             {% if post.cover %}<img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">{% endif %}
-                        </div>
+                        </div> #}
                     </td>
                     <td>
-                        {{ post.title }}<br>
+                        <a href="{{ path('post_edit', {'id': post.id}) }}" class="text-dark">{{ post.title }}</a><br>
                         <small>
-                            <a href="{{ path('post_single', {'slug': post.slug}) }}" class="text-dark">View</a> |
-                            <a href="{{ path('post_edit', {'id': post.id}) }}" class="text-dark">Edit</a> | 
-                            <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="text-danger btn-delete">Delete</a>
+                            <b>
+                                <a href="{{ path('post_single', {'slug': post.slug}) }}" class="text-dark">View</a> |
+                                <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="text-danger btn-delete">Delete</a>
+                            </b>
                         </small>
                     </td>
                     <td>{{ post.user.name }}</td>
@@ -43,6 +45,7 @@
                         {% endfor %}
                     </td>
                     <td>{{ post.dateCreated | date('d/m/Y') }}</td>
+                    <td>{{ post.viewCount }}</td>
                     <td>{{ post.comments | length }}</td>
                 </tr>
                 {% endfor %}

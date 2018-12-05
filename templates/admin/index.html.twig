@@ -13,8 +13,7 @@
 <div class="row justify-content-center">
     <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
-            <h1 class="display-3">{{ posts | length }}</h1>
-            {# <h4>Posts</h4> #}
+            <h1>{{ posts | length }} <small>Posts</small></h1>
             <hr>
             <p class="text-dark"><b>Recent posts</b></p>
             {% set break = false %}
@@ -35,8 +34,7 @@
     </div>
     <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
-            <h1 class="display-3">{{ comments | length}}</h1>
-            {# <h4>Comments</h4> #}
+            <h1>{{ comments | length}} <small>Comments</small></h1>
             <hr>
             <p class="text-dark"><b>Recent comments</b></p>
             {% if comments %}
@@ -59,8 +57,7 @@
     </div>
     <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
-            <h1 class="display-3">{{ users | length }}</h1>
-            {# <h4>Users</h4> #}
+            <h1>{{ users | length }} <small>Users</small></h1>
             <hr>
             <p class="text-dark"><b>Recently registered users</b></p>
             {% set break = false %}
