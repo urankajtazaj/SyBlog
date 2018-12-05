@@ -37,8 +37,6 @@ class AdminController extends AbstractController
         $comments = $comments_qb->execute();
         $users = $users_qb->execute();
 
-        // dd($comments);
-
         return $this->render('admin/index.html.twig', [
             'current' => 'admin',
             'headline' => 'Dashboard',
@@ -86,8 +84,6 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-
-            // dd($form->get('category'));
 
             if ($data->getCover()) {
                 $file = $post->getCover();
