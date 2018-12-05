@@ -58,16 +58,16 @@
         {% endif %}
     </div>
     <br>
-    <hr>
+    <br>
     <br>
     <br>
     <div class="row">
-        <div class="col-md-8 col-12">
+        <div class="col-md-9 col-12">
             {% if posts | length > 2 %}
                 {% for post in posts %}
                     {% if loop.index > 2 %}
-                        <div class="row align-items-center hover">
-                            <div class="col-md-4 col-12 mb-3">
+                        <div class="row hover">
+                            <div class="col-md-5 col-12 mb-3">
                                 <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
                                     {% if post.cover %}
                                         <div style="height: 200px; width: 100%;" class="img thumbnail">
@@ -76,15 +76,15 @@
                                         </div>
                                     {% endif %}
                             </div>
-                            <div class="col-md-8 col-12">
+                            <div class="col-md-7 col-12">
                                 <h4>{{ post.title }}</h4>
                                 <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\''}) | slice(0, 150) }}...</p>
                                 </a>
                                 {# <br> #}
                                 <span class="faded">
-                    {{ post.dateCreated | time_ago }} | <a class="text-dark"
-                                                           href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a>
-                </span>
+                                    {{ post.dateCreated | time_ago }} | 
+                                    <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a>
+                                </span>
                             </div>
                         </div>
                     {% endif %}
@@ -95,25 +95,14 @@
                 {% endif %}
             {% endif %}
         </div>
-        <div class="col-md-4 col-12">
+        {# <div class="col-md-3 col-12">
             {% if popular and popular | length > 5 %}
-                <div class="post dark">
-                    <p>Popular</p>
-                    <hr>
-                    <ul class="list-unstyled">
-                        {% for p in popular %}
-                            <li>
-                                <a href="{{ path('post_single', {'slug': p.slug}) }}">
-                                    {{ p.title }} <br>
-                                    <small><i>{{ p.dateCreated | time_ago }}</i></small>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                <div class="post">
+                    <h5>Popular tags</h5>
                 </div>
             {% endif %}
 
-            {# {% if popular %}
+            {% if popular %}
             <div class="post dark">
                 <p>Latest comments</p>
                 <hr>
@@ -127,9 +116,9 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %} #}
+            {% endif %}
 
-        </div>
+        </div> #}
 
     </div>
 
