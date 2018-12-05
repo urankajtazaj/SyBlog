@@ -36,11 +36,12 @@
                             {% endif %}
 
                             <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                            <p class="faded">
+                            <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\''}) | slice(0, 150) }}</p>
+                            {# <p class="faded">
                                 {% for category in post.category %}
                                     {{ category.name }}{% if loop.index != post.category | length %}, {% endif %}
                                 {% endfor %}
-                            </p>
+                            </p> #}
                             <p class="faded">{{ post.dateCreated | time_ago }}</p>
                         </a>
                     </div>
@@ -76,6 +77,7 @@
                             </div>
                             <div class="col-md-8 col-12">
                                 <h4>{{ post.title }}</h4>
+                                <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\''}) | slice(0, 150) }}...</p>
                                 </a>
                                 {# <br> #}
                                 <span class="faded">
