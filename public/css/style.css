@@ -364,3 +364,8 @@ blockquote p {
     color: #333;
     border-color: transparent;
 }
+
+.required:after {
+    content: "*";
+    color: red;
+}

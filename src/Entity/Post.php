@@ -68,6 +68,11 @@ class Post
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $subheading;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -201,6 +206,18 @@ class Post
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSubheading(): ?string
+    {
+        return $this->subheading;
+    }
+
+    public function setSubheading(?string $subheading): self
+    {
+        $this->subheading = $subheading;
 
         return $this;
     }

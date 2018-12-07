@@ -10,6 +10,9 @@
         <div class="row align-items-center">
             <div class="col-md-{{ colWidth }} col-sm-12 col-12">
                 <h1 class="display-4">{{ post.title }}</h1>
+                {% if post.subheading %}
+                    <p class="faded lead">{{ post.subheading }}</p>
+                {% endif %}
                 <br>
                 <p title="{{ post.dateCreated | date('d/m/Y H:i') }}">{{ post.dateCreated | time_ago }}
                     {% if post.comments | length > 0 %}|

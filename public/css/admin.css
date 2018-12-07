@@ -141,3 +141,8 @@ a:hover {
     background: linear-gradient(to right, rgba(255,255,255,.1), transparent);
     font-size: 18px;
 }
+
+.required:after {
+    content: " *";
+    color: red;
+}

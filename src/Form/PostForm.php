@@ -40,6 +40,12 @@ class PostForm extends AbstractType {
                     'class' => 'form-control mb-3'
                 ]
             ])
+            ->add('subheading', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb3'
+                ]
+            ])
             ->add('content', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3',
