@@ -53,12 +53,7 @@ class PostForm extends AbstractType {
                 ]
             ])
             ->add('category', EntityType::class, [
-                // 'label' => ' ',
-                // 'choices' => $category,
                 'class' => Category::class,
-                // 'multiple' => true,
-                // 'expanded' => true,
-                // 'mapped' => false,
                 'choice_label' => function($category) {
                     return $category->getName();
                 },
