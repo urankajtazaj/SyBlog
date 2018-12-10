@@ -46,6 +46,7 @@ class ArchiveController extends AbstractController
 
         return $this->render('archive/index.html.twig', [
             'category' => $category,
+            'tag' => null,
             'posts' => $posts
         ]);
     }
@@ -54,7 +55,20 @@ class ArchiveController extends AbstractController
      * @Route("/archive/tags/{tag}", name="tag_single")
      */
     public function findTag($tag) {
-        
+        $em = $this->getDoctrine()->getManager();
+
+        $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+            ->where('p.tags like :tag')
+            ->setParameter(':tag', '%' . $tag . '%')
+            ->getQuery();
+
+        $posts = $posts_qb->execute();
+
+        return $this->render('archive/index.html.twig', [
+            'tag' => $tag,
+            'category' => null,
+            'posts' => $posts
+        ]);
     }
 
 }

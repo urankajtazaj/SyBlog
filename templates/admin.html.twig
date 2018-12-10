@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    {# <div class="wrapper"> #}
         <div class="body">
             <div class="sidebar">
                 <br>
@@ -53,14 +53,14 @@
                         </div>
                     {#</div>#}
                 </div>
-                <div class="container-fluid" style="padding: 20px">
+                <div class="cms container-fluid" style="padding: 20px">
                     {% block body %}{% endblock %}
                 </div>
             </div>
         </div>
         <br><br>
     </div>
-    </div>
+    {# </div> #}
 
     {{ include('inc/script.html.twig') }}
     {% block javascripts %}{% endblock %}

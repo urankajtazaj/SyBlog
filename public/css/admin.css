@@ -146,3 +146,8 @@ a:hover {
     content: " *";
     color: red;
 }
+
+.cms {
+    overflow-y: auto;
+    max-height: 100vh;
+}

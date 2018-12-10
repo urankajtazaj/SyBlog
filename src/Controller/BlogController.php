@@ -118,7 +118,7 @@ class BlogController extends AbstractController
             $user = $this->getUser();
 
             if ($form->get('tags')) {
-                $tags_str = $form->get('tags');
+                $tags_str = $form->get('tags')->getData();
                 $tags_arr = explode(',', $tags_str);
 
                 for ($i = 0; $i < sizeof($tags_arr); $i++) {
