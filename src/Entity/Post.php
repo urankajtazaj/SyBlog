@@ -73,6 +73,16 @@ class Post
      */
     private $subheading;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $tags = [];
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $sharing_icons;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -218,6 +228,30 @@ class Post
     public function setSubheading(?string $subheading): self
     {
         $this->subheading = $subheading;
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?array $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getSharingIcons(): ?bool
+    {
+        return $this->sharing_icons;
+    }
+
+    public function setSharingIcons(bool $sharing_icons): self
+    {
+        $this->sharing_icons = $sharing_icons;
 
         return $this;
     }

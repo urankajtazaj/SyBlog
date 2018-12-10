@@ -56,6 +56,15 @@
                 {{ form_row(form.category) }}
                 <a href="{{ path('category_add') }}">Add category</a>
             </div>
+            <hr>
+            <br>
+            <div class="form-group">
+                {{ form_row(form.tags) }}
+            </div>
+
+            <hr>
+            <br>
+            {{ form_widget(form.sharing_icons) }} {{ form_label(form.sharing_icons) }}
 
             <hr>
             <br>

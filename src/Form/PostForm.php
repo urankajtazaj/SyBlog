@@ -21,8 +21,6 @@ class PostForm extends AbstractType {
 
         $category = $options['cats']->getRepository(Category::class)->findAll();
         
-        // dd($category);
-
         $builder
             ->add('cover', FileType::class, [
                 'label' => 'Cover image',
@@ -34,6 +32,10 @@ class PostForm extends AbstractType {
             ->add('delete_cover', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false
+            ])
+            ->add('sharing_icons', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Allow sharing via social media'
             ])
             ->add('title', TextType::class, [
                 'attr' => [
@@ -65,13 +67,23 @@ class PostForm extends AbstractType {
                 'attr' => [
                     'class' => 'btn btn-success'
                 ]
+            ])
+            ->add('tags', TextType::class, [
+                'required' => false,
+                'mapped' => false,
+                'data' => $options['tags'],
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                    'placeholder' => 'Banana, Apple...'
+                ]
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
             'data_class' => Post::class,
-            'cats' => null
+            'cats' => null,
+            'tags' => null
         ]);
     }
 

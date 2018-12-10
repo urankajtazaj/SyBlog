@@ -22,6 +22,7 @@ use App\Entity\Category;
 use App\Form\SearchForm;
 use App\Form\PostForm;
 use App\Form\CommentForm;
+use App\Entity\Sharer;
 
 class BlogController extends AbstractController
 {
@@ -116,6 +117,17 @@ class BlogController extends AbstractController
 
             $user = $this->getUser();
 
+            if ($form->get('tags')) {
+                $tags_str = $form->get('tags');
+                $tags_arr = explode(',', $tags_str);
+
+                for ($i = 0; $i < sizeof($tags_arr); $i++) {
+                    $tags_arr[$i] = strtolower(trim($tags_arr[$i]));
+                }
+
+                $data->setTags($tags_arr);
+            }
+
             // $data->setCategory($form->get('category'));
             $data->setSlug($this->slugify($form->get('title')->getData()));
             $data->setUser($user);
@@ -168,6 +180,12 @@ class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
 
+        $icons = null;
+
+        if ($post->getSharingIcons()) {
+            $icons = $em->getRepository(Sharer::class)->findAll();
+        }
+
         $comments = $post->getComments();
 
         $comment_form = $this->createForm(CommentForm::class, []);
@@ -200,7 +218,7 @@ class BlogController extends AbstractController
             ->createQueryBuilder('p')
             ->andWhere('p.id != :id')
             ->setParameter('id', $post->getId())
-            ->orderBy('p.id', 'DESC')
+            ->orderBy('p.view_count', 'DESC')
             ->getQuery();
 
         $all_posts = $qb->setMaxResults(5)->execute();
@@ -211,7 +229,8 @@ class BlogController extends AbstractController
                 'post' => $post,
                 'posts' => $all_posts,
                 'comments' => $comments,
-                'comment_form' => $comment_form->createView()
+                'comment_form' => $comment_form->createView(),
+                'icons' => $icons
             ]
         );
         

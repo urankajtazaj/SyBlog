@@ -50,4 +50,11 @@ class ArchiveController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/archive/tags/{tag}", name="tag_single")
+     */
+    public function findTag($tag) {
+        
+    }
+
 }

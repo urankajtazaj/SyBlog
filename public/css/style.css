@@ -402,3 +402,23 @@ blockquote p {
 .widget h5 {
     text-transform: uppercase;
 }
+
+.tag {
+    border-radius: 0;
+    background-color: #eee;
+    padding: 3px 12px;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 5px;
+    text-decoration: none !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.content .tag {
+    color: #666 !important;
+}
+
+.tag:hover {
+    background-color: #ddd;
+}

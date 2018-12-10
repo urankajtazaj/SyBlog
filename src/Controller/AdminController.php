@@ -73,13 +73,20 @@ class AdminController extends AbstractController
 
         $prevFilename = $post->getCover();
 
+        $tags_str = null;
+
+        if ($post->getTags()) {
+            $tags_str = implode(',', $post->getTags());
+        }
+
         if ($post->getCover()) {
             $post->setCover(
                 new File($this->getParameter('cover_folder') . '/' . $post->getCover())
             );
         }
 
-        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
+        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager(), 'tags' => $tags_str]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -110,6 +117,19 @@ class AdminController extends AbstractController
                     $data->setCover($prevFilename);
                 }
             }
+
+            
+            if ($form->get('tags')) {
+                $tags_str = $form->get('tags')->getData();
+                $tags_arr = explode(',', $tags_str);
+
+                for ($i = 0; $i < sizeof($tags_arr); $i++) {
+                    $tags_arr[$i] = strtolower(trim($tags_arr[$i]));
+                }
+
+                $data->setTags($tags_arr);
+            }
+
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();

@@ -25,19 +25,25 @@
             <br>
             <div class="row">
                 <div class="col-md-1 col-12">
+                    {% if icons %}
                     <div class="position-sticky" style="top: 100px">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-reddit-alien"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        {% for social_icon in icons %}
+                        <a target="_blank" title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="social-icon">
+                            <i class="{{ social_icon.icon }}"></i>
+                        </a>
+                        {% endfor %}
                     </div>
-
+                    {% endif %}
                 </div>
 
                 <div class="col-md-11 col-12">
                 <div class="post">
                     <div class="content">
                         {{ post.content | raw }}
+                        <br><br>
+                        {% for tag in post.tags %}
+                            <a href="{{ path('tag_single', {'tag': tag}) }}" class="tag">{{ tag }}</a>
+                        {% endfor %}
                     </div>
                     <br>
                 </div>
@@ -52,7 +58,7 @@
         <div class="position-sticky" style="top: 100px">
         {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
             <div class="post widget widget-right">
-                <p>Admin</p>
+                <h5>admin</h5>
                 <hr>
                 <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><b>Edit</b></a><br>
                 <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><b>Delete</b></a>
@@ -64,12 +70,14 @@
 
         {% if posts %}
             <div class="post widget widget-right">
-                <p>Other Posts</p>
+                <h5>Other Posts</h5>
+                <hr>
                 <ul class="list-unstyled">
                     {% for p in posts %}
                         <li class="mb-3">
                             <a href="{{ path('post_single', {'slug': p.slug}) }}">
-                                {{ p.title }} <br><small><i>{{ p.dateCreated | time_ago }}</i></small>
+                                {{ p.title }} <br>
+                                <small>{{ p.category.name }} / {{ p.dateCreated | time_ago }}</small>
                             </a>
                         </li>
                     {% endfor %}
@@ -85,7 +93,7 @@
     </div>
 </div>
 
-<div class="dark">
+{# <div class="dark"> #}
     <div class="container">
         <div class="row">
             <div class="col-md-9 col-12">
@@ -121,5 +129,5 @@
             </div>
         </div>
     </div>
-</div>
+{# </div> #}
 {% endblock %}
