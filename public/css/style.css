@@ -280,17 +280,6 @@ blockquote p {
     background-color: #eee;
 } */
 
-.dark {
-    background-color: #fff;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-    margin-bottom: 50px;
-}
-
-.dark li {
-    /*padding: 5px;*/
-    transition: 200ms ease;
-}
-
 .divider {
     width: 100%;
     height: 1px;
@@ -384,4 +373,32 @@ blockquote p {
     width: 60px;
     border-radius: 100px;
     color: #222;
+}
+
+.dark {
+    background-color: #f7f7f7;
+    padding: 70px 0 70px 0;
+    /* box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.05); */
+}
+
+#comments {
+    background-color: #fff;
+}
+
+.widget {
+    background-color: #fff;
+    border: 1px solid #eee;
+    /* box-shadow: 0 5px 25px rgba(0,0,0,0.05); */
+}
+
+.widget-right {
+    margin-left: 20px;
+}
+
+.widget-left {
+    margin-right: 20px;
+}
+
+.widget h5 {
+    text-transform: uppercase;
 }

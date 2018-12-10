@@ -18,7 +18,7 @@ class CommentForm extends AbstractType {
             ->add('comment', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3',
-                    'rows' => 6
+                    'rows' => 4
                 ]
             ])
             ->add('send', SubmitType::class, [

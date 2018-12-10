@@ -42,36 +42,6 @@
                     <br>
                 </div>
                 {# END POST CONTENT #}
-
-                {# COMMENTS SECTION #}
-                <div class="post dark" id="comments">
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
-                        {{ form_start(comment_form) }}
-                        {{ form_widget(comment_form) }}
-                        {{ form_end(comment_form) }}
-                        <br>
-                        <hr>
-                        <br>
-                    {% else %}
-                        <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br>
-                        <hr>
-                    {% endif %}
-
-                    <h5>{{ comments | length }} Comment{% if comments | length != 1 %}s{%
-                            endif %}</h5>
-                    {% if comments | length > 0 %}
-                        {% for comment in comments %}
-                            <div class="comment">
-                                <h5>{{ comment.user.name }}</h5>
-                                <p>{{ comment.comment | nl2br }}</p>
-                                <small><i>&mdash; {{ comment.dateCreated | time_ago }}</i></small>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="faded">Be the first to comment</p>
-                    {% endif %}
-                {# END COMMENTS SECTION #}
-                </div>
                 </div>
             </div>
         </div>
@@ -81,21 +51,19 @@
         <br><br>
         <div class="position-sticky" style="top: 100px">
         {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
-            <div class="post dark">
+            <div class="post widget widget-right">
                 <p>Admin</p>
                 <hr>
-                <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><i class="fas fa-cog text-dark"></i>
-                    Edit</a><br>
-                <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><i class="fas fa-trash-alt text-dark"></i>
-                    Delete</a>
+                <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><b>Edit</b></a><br>
+                <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><b>Delete</b></a>
                 <hr>
-                <p class="lead">&nbsp;&nbsp;{{ post.viewCount }} Views</p>
-                <p class="lead">&nbsp;&nbsp;<a href="#comments">{{ post.comments | length }} Comments</p></a>
+                <p>&nbsp;&nbsp;{{ post.viewCount }} Views</p>
+                <p>&nbsp;&nbsp;<a href="#comments">{{ post.comments | length }} Comments</p></a>
             </div>
         {% endif %}
 
         {% if posts %}
-            <div class="post dark">
+            <div class="post widget widget-right">
                 <p>Other Posts</p>
                 <ul class="list-unstyled">
                     {% for p in posts %}
@@ -114,6 +82,44 @@
 
     {#<div class="row">#}
 
+    </div>
+</div>
+
+<div class="dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-12">
+            {# COMMENTS SECTION #}
+                <div class="post" id="comments">
+                    <h3>{{ comments | length }} Comment{% if comments | length != 1 %}s{%
+                            endif %}</h3><br>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
+                        {{ form_start(comment_form) }}
+                        {{ form_widget(comment_form) }}
+                        {{ form_end(comment_form) }}
+                        <br>
+                        <hr>
+                        <br>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br>
+                        <hr>
+                    {% endif %}
+
+                    {% if comments | length > 0 %}
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <h5>{{ comment.user.name }}</h5>
+                                <p>{{ comment.comment | nl2br }}</p>
+                                <small><i>&mdash; {{ comment.dateCreated | time_ago }}</i></small>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="faded">Be the first to comment</p>
+                    {% endif %}
+                {# END COMMENTS SECTION #}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

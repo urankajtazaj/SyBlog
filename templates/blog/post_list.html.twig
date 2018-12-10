@@ -78,7 +78,6 @@
                                 {# <br> #}
                                 <small class="faded">
                                     <b>{{ post.category.name }}</b> / {{ post.dateCreated | time_ago }} 
-                                    {# <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}#comments">{{ post.comments | length }} comment{% if post.comments | length != 1 %}s{% endif %}</a> #}
                                 </small>
                             </div>
                         </div>
@@ -89,6 +88,21 @@
                     <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
                 {% endif %}
             {% endif %}
+        </div>
+        <div class="col-md-3 col-12">
+            <div class="post widget widget-right">
+                <h5>Tags</h5>
+                <hr>
+                <ul class="list-unstyled">
+                    <li>Testing the tag</li>
+                    <li>Testing the tag</li>
+                    <li>Testing the tag</li>
+                    <li>Testing the tag</li>
+                    <li>Hello world</li>
+                    <li>Hello world</li>
+                    <li>Hello world</li>
+                </ul>
+            </div>
         </div>
         {# <div class="col-md-3 col-12">
             {% if popular and popular | length > 5 %}
