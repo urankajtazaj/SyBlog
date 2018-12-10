@@ -48,9 +48,15 @@ class BlogController extends AbstractController
             ->orderBy('c.id', 'DESC')
             ->getQuery();
 
+        // $tags_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
+        //     ->select('p.tags')
+        //     ->distinct('')
+        //     ->getQuery();
+
         $posts = $posts_qb->setMaxResults(10)->execute();
         $popular_posts = $popular_qb->setMaxResults(7)->execute();
         $comments = $comment_qb->setMaxResults(5)->execute();
+        // $tags = $tags_qb->execute();
 
         $searchForm = [];
 
@@ -79,6 +85,7 @@ class BlogController extends AbstractController
                 'popular' => $popular_posts,
                 'comments' => $comments,
                 'form' => $form->createView()
+                // 'tags' => $tags
             ]
         );
     }

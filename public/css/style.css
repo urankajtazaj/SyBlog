@@ -421,7 +421,7 @@ blockquote p {
     text-transform: uppercase;
 }
 
-.content .tag {
+.tag, .content .tag {
     color: #666 !important;
 }
 

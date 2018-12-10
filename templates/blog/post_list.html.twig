@@ -89,16 +89,15 @@
                 {% endif %}
             {% endif %}
         </div>
-        <div class="col-md-3 col-12">
+        {# <div class="col-md-3 col-12">
             <div class="post widget widget-right">
                 <h5>Tags</h5>
                 <hr>
-                <a href="#" class="tag">Tag 1</a>
-                <a href="#" class="tag">Tag 2</a>
-                <a href="#" class="tag">Tag 3</a>
-                <a href="#" class="tag">Tag 4</a>
+                {% for tag in tags %}
+                    <a href="#" class="tag">{{ tag }}</a>
+                {% endfor %}
             </div>
-        </div>
+        </div> #}
         {# <div class="col-md-3 col-12">
             {% if popular and popular | length > 5 %}
                 <div class="post">

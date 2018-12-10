@@ -16,7 +16,7 @@
             {% endif %}
             <br>
             <p>
-                <small class="faded">By {{ post.user.name }} / {{ post.category.name }} / {{ post.dateCreated | time_ago }}</small>
+                <small class="faded">By {{ post.user.name }} / <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a> / {{ post.dateCreated | time_ago }}</small>
             </p>
             <br>
             <div class="img cover-img">

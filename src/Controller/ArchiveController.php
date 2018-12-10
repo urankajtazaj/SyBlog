@@ -60,6 +60,7 @@ class ArchiveController extends AbstractController
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
             ->where('p.tags like :tag')
             ->setParameter(':tag', '%' . $tag . '%')
+            ->orderBy('p.id', 'DESC')
             ->getQuery();
 
         $posts = $posts_qb->execute();
