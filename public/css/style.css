@@ -143,6 +143,7 @@ footer {
 }
 
 .img {
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,13 +154,6 @@ footer {
 .img img {
     min-width: 100%;
     max-width: 110%;
-}
-
-.thumbnail img {
-    min-height: 100%;
-    max-height: 110%;
-    min-width: unset;
-    max-width: unset;
 }
 
 .post-thumbnail {
@@ -264,7 +258,7 @@ blockquote p {
 }
 
 .hover {
-    border-top: 1px solid #eee;
+    /* border-top: 1px solid #eee; */
     padding: 0 5px 5px 5px;
     transition: 250ms ease;
 }
