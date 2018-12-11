@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="row">
-    <div class="col-md-6 col-12">
+    <div class="col-md-6 col-sm-12 col-12">
         <div class="info-box">
             <h4>Add Category</h4>
             <br>
@@ -21,28 +21,33 @@
             </div>
             {{ form_end(form) }}
             <br>
-            </div>
-            <div class="info-box">
-                <h4>All Categories</h4>
-                <br>
-                <table class="table table-sm">
-                    <thead>
-                        <th>Name</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        {% for category in categories %}
-                        <tr>
-                            <td>{{ category.name }}</td>
-                            <td style="width: 120px" class="text-center">
-                                <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm btn-blue"><i class="fas fa-cog"></i></a>
-                                <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-sm btn-blue btn-red btn-delete"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-12">
+        <div class="info-box">
+            <h4>All Categories</h4>
+            <br>
+            <table class="table table-sm">
+                <thead>
+                    <th>Name</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>
+                            <h5><b>{{ category.name }}</b></h5>
+                            <p>{{ category.exerpt }}</p>
+                        </td>
+                        <td class="text-right">
+                            <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
+                            <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
