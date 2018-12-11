@@ -11,11 +11,12 @@
 {% set maxPosts = 5 %}
 
 <div class="row justify-content-center">
-    <div class="col-md-3 col-sm-6 col-12">
+    <div class="col-md-4 col-sm-12 col-12">
         <div class="info-box">
-            <h1>{{ posts | length }} <small>Posts</small></h1>
+            {# <h1>{{ posts | length }} <small>Posts</small></h1>
+            <hr> #}
+            <h5 class="text-dark"><b>Recent posts</b></h5>
             <hr>
-            <p class="text-dark"><b>Recent posts</b></p>
             {% set break = false %}
             {% for post in posts if not break %}
                 <a target="_blank" href="{{ path('post_single', {'slug': post.slug}) }}">{{ post.title | slice(0, 50) }}... </a>&mdash; {{ post.user.name }}<br>
@@ -29,14 +30,15 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <a href="#"><b>+ Add post</b></a>
+            <a href="{{ path('post_new') }}"><b>+ Add post</b></a>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-12">
+    <div class="col-md-4 col-sm-12 col-12">
         <div class="info-box">
-            <h1>{{ comments | length}} <small>Comments</small></h1>
+            {# <h1>{{ comments | length}} <small>Comments</small></h1>
+            <hr> #}
+            <h5 class="text-dark"><b>Recent comments</b></h5>
             <hr>
-            <p class="text-dark"><b>Recent comments</b></p>
             {% if comments %}
                 {% set break = false %}
                 {% for comment in comments if not break %}
@@ -55,11 +57,12 @@
             {% endif %}
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-12">
+    <div class="col-md-4 col-sm-12 col-12">
         <div class="info-box">
-            <h1>{{ users | length }} <small>Users</small></h1>
+            {# <h1>{{ users | length }} <small>Users</small></h1>
+            <hr> #}
+            <h5 class="text-dark"><b>Recently registered users</b></h5>
             <hr>
-            <p class="text-dark"><b>Recently registered users</b></p>
             {% set break = false %}
             {% for user in users if not break %}
                 <a target="_blank" href="#">{{ user.name }}</a><br>

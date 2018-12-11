@@ -3,26 +3,28 @@
 {% block body %}
 <div class="row">
     <div class="col-md-12 col-12">
-    <h2>{{ headline }}</h2>
-    <br>
-        <table class="table">
-            <thead>
-                <th></th>
-                <th>Post title</th>
-                <th>User</th>
-                <th>Date</th>
-            </thead>
-            <tbody>
-                {% for comment in comments %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ comment.post.title }}</td>
-                    <td>{{ comment.user.name }}</td>
-                    <td>{{ comment.dateCreated | date('d/m/Y') }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="info-box">
+            <h2>{{ headline }}</h2>
+            <br>
+            <table class="table">
+                <thead>
+                    <th></th>
+                    <th>Post title</th>
+                    <th>User</th>
+                    <th>Date</th>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ comment.post.title }}</td>
+                        <td>{{ comment.user.name }}</td>
+                        <td>{{ comment.dateCreated | date('d/m/Y') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}

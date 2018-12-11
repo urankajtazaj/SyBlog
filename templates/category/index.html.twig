@@ -6,37 +6,43 @@
 
 <div class="row">
     <div class="col-md-6 col-12">
-        <h2>{{ headline }}</h4><b2>
-        <br>
-        {{ form_start(form) }}
-        <div class="form-group">
-            {{ form_row(form.name) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(form.exerpt) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(form.save) }}
-        </div>
-        {{ form_end(form) }}
-        <br><br>
-        <table class="table table-sm table-bordered">
-            <thead>
-                <th>Name</th>
-                <th></th>
-            </thead>
-            <tbody>
-                {% for category in categories %}
-                <tr>
-                    <td>{{ category.name }}</td>
-                    <td style="width: 120px" class="text-right">
-                        <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm text-dark">Edit</a>
-                        <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-sm text-danger btn-delete">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="info-box">
+            <h4>Add Category</h4>
+            <br>
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.exerpt) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.save) }}
+            </div>
+            {{ form_end(form) }}
+            <br>
+            </div>
+            <div class="info-box">
+                <h4>All Categories</h4>
+                <br>
+                <table class="table table-sm">
+                    <thead>
+                        <th>Name</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td style="width: 120px" class="text-center">
+                                <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm btn-blue"><i class="fas fa-cog"></i></a>
+                                <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-sm btn-blue btn-red btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
     </div>
 </div>
 

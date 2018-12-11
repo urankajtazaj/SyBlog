@@ -33,7 +33,7 @@ class CategoryForm extends AbstractType {
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-blue'
                 ]
             ]);
     }

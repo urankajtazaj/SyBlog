@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Entity\Post;
+use App\Entity\Comment;
+use App\Entity\User;
 
 use App\Form\PostForm;
 
@@ -25,11 +27,11 @@ class AdminController extends AbstractController
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
-        $comments_qb = $em->getRepository(\App\Entity\Comment::class)->createQueryBuilder('c')
+        $comments_qb = $em->getRepository(Comment::class)->createQueryBuilder('c')
         ->orderBy('c.id', 'DESC')
         ->getQuery();
 
-        $users_qb = $em->getRepository(\App\Entity\User::class)->createQueryBuilder('u')
+        $users_qb = $em->getRepository(User::class)->createQueryBuilder('u')
             ->orderBy('u.id', 'DESC')
             ->getQuery();
 

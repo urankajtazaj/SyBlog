@@ -18,41 +18,39 @@
                 <br>
                 <ul class="list-unstyled m-0">
                     <li>
-                        <a href="/" class="sidebar-item"><i class="fas fa-link"></i> Visit Site</a>
+                        <a href="/" class="sidebar-item"><div class="icon"><i class="fas fa-link"></i></div> Visit Site</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><i class="fas fa-home"></i> Dashboard</a>
+                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-home"></i></div> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><i
-                                class="fas fa-font"></i> Posts</a>
+                        <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><div class="icon"><i
+                                class="fas fa-font"></i></div> Posts</a>
                     </li>
                     <li>
-                        <a href="{{ path('category_add') }}" class="{% if current == 'category' %}active{% endif %} sidebar-item"><i
-                                class="fas fa-tag"></i> Categories</a>
+                        <a href="{{ path('category_add') }}" class="{% if current == 'category' %}active{% endif %} sidebar-item"><div class="icon"><i
+                                class="fas fa-tag"></i></div> Categories</a>
                     </li>
                     <li>
-                        <a href="{{ path('comments') }}" class="{% if current == 'comments' %}active{% endif %} sidebar-item"><i class="fas fa-comment"></i> Comments</a>
+                        <a href="{{ path('comments') }}" class="{% if current == 'comments' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-comment"></i></div> Comments</a>
                     </li>
                     <li>
-                        <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item"><i class="fas fa-user"></i> Users</a>
+                        <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-user"></i></div> Users</a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-item"><i class="fas fa-sliders-h"></i> Settings</a>
+                        <a href="#" class="sidebar-item"><div class="icon"><i class="fas fa-sliders-h"></i></div> Settings</a>
                     </li>
                     <li>
-                        <a href="{{ path('app_logout') }}" class="sidebar-item"><i class="fas fa-power-off"></i> Logout</a>
+                        <a href="{{ path('app_logout') }}" class="sidebar-item"><div class="icon"><i class="fas fa-power-off"></i></div> Logout</a>
                     </li>
                 </ul>
             </div>
             <div style="width: 100%">
-                <div class="row align-items-center info-bar">
-                    {#<div class="row">#} 
-                        <div class="col-md-12 text-right">
-                            Hello, {{ app.user.name }}
-                        </div>
-                    {#</div>#}
-                </div>
+                {# <div class="row align-items-center info-bar">
+                    <div class="col-md-12 text-right">
+                        Hello, {{ app.user.name }}
+                    </div>
+                </div> #}
                 <div class="cms container-fluid" style="padding: 20px">
                     {% block body %}{% endblock %}
                 </div>

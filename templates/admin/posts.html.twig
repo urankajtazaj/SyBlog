@@ -4,52 +4,56 @@
 
 <div class="row">
     <div class="col-md-12 col-12">
+        <div class="info-box">
         <h2>{{ headline }}</h2>
         <div>
-            <a href="{{ path('post_new') }}" class="btn"><b><i class="fas fa-plus"></i> NEW POST</b></a>
+            <a href="{{ path('post_new') }}" class="btn btn-blue"><i class="fas fa-plus"></i> New Post</a>
         </div>
-        <br>
-        <table class="table table-sm">
-            <thead>
-                <th></th>
-                {# <th></th> #}
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th>Views</th>
-                <th>Comments</th>
-            </thead>
-            <tbody>
-                {% for post in posts %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    {# <td style="max-width: 60px; padding-right: 10px"> #}
-                        {# <div class="img post-thumbnail" style="max-height: 80px">
-                            {% if post.cover %}<img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">{% endif %}
-                        </div> #}
-                    {# </td> #}
-                    <td>
-                        <a href="{{ path('post_edit', {'id': post.id}) }}" class="text-dark">{{ post.title }}</a><br>
-                        <small>
-                            <b>
-                                <a href="{{ path('post_single', {'slug': post.slug}) }}" class="text-dark">View</a> |
-                                <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="text-danger btn-delete">Delete</a>
-                            </b>
-                        </small>
-                    </td>
-                    <td>{{ post.user.name }}</td>
-                    <td>
-                        <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a>
-                    </td>
-                    <td>{{ post.dateCreated | date('d/m/Y') }}</td>
-                    <td>{{ post.viewCount }}</td>
-                    <td>{{ post.comments | length }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+        <br><br>
+            <table class="table table-sm">
+                <thead>
+                    <th></th>
+                    {# <th></th> #}
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Views</th>
+                    <th>Comments</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        {# <td style="max-width: 60px; padding-right: 10px"> #}
+                            {# <div class="img post-thumbnail" style="max-height: 80px">
+                                {% if post.cover %}<img src="{{ asset('/uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">{% endif %}
+                            </div> #}
+                        {# </td> #}
+                        <td>
+                            <a href="{{ path('post_edit', {'id': post.id}) }}" class="text-dark">{{ post.title }}</a><br>
+                            <small>
+                                <b>
+                                </b>
+                            </small>
+                        </td>
+                        <td>{{ post.user.name }}</td>
+                        <td>
+                            <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a>
+                        </td>
+                        <td>{{ post.dateCreated | date('d/m/Y') }}</td>
+                        <td>{{ post.viewCount }}</td>
+                        <td>{{ post.comments | length }}</td>
+                        <td class="text-right">
+                            <a href="{{ path('post_single', {'slug': post.slug}) }}" class="btn btn-sm btn-blue"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="btn btn-sm btn-blue btn-red btn-delete"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -10,71 +10,72 @@
 {{ form_start(form) }}
 <div class="row">
     <div class="col-md-8 col-12">
-        <h2>{{ headline }}</h2><br>
-        <div class="post">
+        <div class="info-box">
+            <h2>{{ headline }}</h2><br>
+            <div class="post">
 
-            <div class="form-group">
-                {{ form_row(form.title) }}
-            </div>
+                <div class="form-group">
+                    {{ form_row(form.title) }}
+                </div>
 
-            <div class="form-group">
-                {{ form_row(form.subheading) }}
-            </div>
+                <div class="form-group">
+                    {{ form_row(form.subheading) }}
+                </div>
 
-            <div class="form-group">
-                {{ form_row(form.content) }}
+                <div class="form-group">
+                    {{ form_row(form.content) }}
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-4 col-12">
-        <br>
-        <br>
-        <br>
-        <br>
+        
+        <div class="info-box">
 
-        <div class="form-group">
-            {{ form_row(form.cover) }}
-        </div>
-
-        {% if post is defined and post.cover %}
-        <div class="form-group">
-            Current image<br>
-            <div class="img post-thumbnail">
-                <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_widget(form.delete_cover) }} {{ form_label(form.delete_cover) }}
-        </div>
-        {% endif %}
-        <hr>
-        <div class="form-group">
-
-            <br>
             <div class="form-group">
-                {{ form_row(form.category) }}
-                <a href="{{ path('category_add') }}">Add category</a>
+                {{ form_row(form.cover) }}
             </div>
-            <hr>
-            <br>
+
+            {% if post is defined and post.cover %}
             <div class="form-group">
-                {{ form_row(form.tags) }}
+                Current image<br>
+                <div class="img post-thumbnail">
+                    <img src="{{ asset('uploads/images/' ~ cover_img) }}" alt="{{ post.title }}">
+                </div>
             </div>
-
-            <hr>
-            <br>
-            {{ form_widget(form.sharing_icons) }} {{ form_label(form.sharing_icons) }}
-
-            <hr>
-            <br>
-            {{ form_widget(form.save) }}
-
-            {% if post is defined %}
-            <a href="{{ path('post_single', {'slug': post.slug}) }}" target="_blank" class="btn btn-primary">View
-                post</a>
+            <div class="form-group">
+                {{ form_widget(form.delete_cover) }} {{ form_label(form.delete_cover) }}
+            </div>
             {% endif %}
+            <hr>
+            <div class="form-group">
 
+                <br>
+                <div class="form-group">
+                    {{ form_row(form.category) }}
+                    <a href="{{ path('category_add') }}">Add category</a>
+                </div>
+                <hr>
+                <br>
+                <div class="form-group">
+                    {{ form_row(form.tags) }}
+                </div>
+
+                <hr>
+                <br>
+                {{ form_widget(form.sharing_icons) }} {{ form_label(form.sharing_icons) }}
+
+                <hr>
+                <br>
+                {{ form_widget(form.save) }}
+
+                {% if post is defined %}
+                <a href="{{ path('post_single', {'slug': post.slug}) }}" target="_blank" class="btn btn-primary">View
+                    post</a>
+                {% endif %}
+
+            </div>
         </div>
     </div>
 </div>
