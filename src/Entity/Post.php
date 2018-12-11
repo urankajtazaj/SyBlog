@@ -83,6 +83,11 @@ class Post
      */
     private $sharing_icons;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $allow_comments;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -252,6 +257,18 @@ class Post
     public function setSharingIcons(bool $sharing_icons): self
     {
         $this->sharing_icons = $sharing_icons;
+
+        return $this;
+    }
+
+    public function getAllowComments(): ?bool
+    {
+        return $this->allow_comments;
+    }
+
+    public function setAllowComments(bool $allow_comments): self
+    {
+        $this->allow_comments = $allow_comments;
 
         return $this;
     }
