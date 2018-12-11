@@ -4,13 +4,17 @@
 
 
 {% block body %}
-<h1>{{ headline }}</h1>
-<hr>
-<br><br>
+{# <hr>
+<br><br> #}
 
 {% set maxPosts = 5 %}
 
 <div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="info-box">
+            <h1>{{ headline }}</h1>
+        </div>
+    </div>
     <div class="col-md-4 col-sm-12 col-12">
         <div class="info-box">
             {# <h1>{{ posts | length }} <small>Posts</small></h1>

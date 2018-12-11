@@ -228,4 +228,7 @@ td {
     padding-bottom: 10px !important;
 }
 
+.faded {
+    opacity: .8;
+}
 /* END TABLE DESIGN */
