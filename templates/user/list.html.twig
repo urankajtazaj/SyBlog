@@ -9,11 +9,12 @@
             <a href="{{ path('register') }}" class="btn btn-blue"><i class="fas fa-plus"></i> Add New</a>
             <br>
             <br>
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <th></th>
                     <th>Username</th>
                     <th>Name</th>
+                    <th>Role</th>
                     <th></th>
                     {# <th>Date Created</th> #}
                 </thead>
@@ -23,7 +24,15 @@
                         <td style="width: 100px">{{ loop.index }}</td>
                         <td>{{ user.username }}</td>
                         <td>{{ user.name }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                {{ role }}
+                            {% endfor %}
+                        </td>
                         <th class="text-right">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="#" class="btn"><i class="fas fa-cog"></i></a>
+                            {% endif %}
                             <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
                         </th>
                         {# <td>{{ user.dateCreated | date("d/m/Y") }}</td> #}

@@ -24,6 +24,12 @@ class UserType extends AbstractType {
                     'class' => 'form-control mb-3'
                 ]
             ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
+            ])
             ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3'
@@ -61,7 +67,7 @@ class UserType extends AbstractType {
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-lg btn-primary'
+                    'class' => 'btn btn-lg btn-blue'
                 ]
             ]);
     }
