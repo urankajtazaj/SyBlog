@@ -28,7 +28,7 @@
                     {% if icons %}
                     <div class="position-sticky text-center" style="top: 100px">
                         {% for social_icon in icons %}
-                        <a target="_blank" title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="social-icon">
+                        <a target="_blank" title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="social-icon d-inline-block d-sm-block">
                             <i class="{{ social_icon.icon }}"></i>
                         </a>
                         {% endfor %}
@@ -57,7 +57,7 @@
         <br><br>
         <div class="position-sticky" style="top: 100px">
         {% if is_granted('ROLE_ADMIN') and post.getUser().getId() == app.user.id %}
-            <div class="post widget widget-right">
+            <div class="post widget">
                 <h5>admin</h5>
                 <hr>
                 <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><b>Edit</b></a><br>
@@ -69,7 +69,7 @@
         {% endif %}
 
         {% if posts %}
-            <div class="post widget widget-right">
+            <div class="post widget">
                 <h5>Other Posts</h5>
                 <hr>
                 <ul class="list-unstyled">

@@ -158,7 +158,7 @@ footer {
 
 .post-thumbnail {
     width: 100%;
-    height: 250px;
+    max-height: 250px;
     margin-bottom: 20px;
 }
 
@@ -413,7 +413,7 @@ blockquote p {
     margin-bottom: 5px;
     text-decoration: none !important;
     font-weight: bold;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .tag, .content .tag {

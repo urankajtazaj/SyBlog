@@ -22,7 +22,6 @@
     </div> #}
     <div class="row">
         {% if posts %}
-
             {% set break = false %}
             {% for post in posts if not break %}
                 <div class="col-md-6 col-12">
@@ -59,7 +58,9 @@
     <div class="row">
         <div class="col-md-9 col-12">
             {% if posts | length > 2 %}
-                {% for post in posts %}
+            {% set break = false %}
+            {% set limit = 5 %}
+                {% for post in posts if not break %}
                     {% if loop.index > 2 %}
                         <div class="row hover">
                             <div class="col-md-5 col-12 mb-3">
@@ -81,16 +82,16 @@
                                 </small>
                             </div>
                         </div>
+                        {% if loop.index > 5 %}
+                            {% set break = true %}
+                            <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
-
-                {% if posts | length == 3 %}
-                    <a href="#" class="d-block btn btn-lg btn-secondary">LOAD MORE</a>
-                {% endif %}
             {% endif %}
         </div>
-        {# <div class="col-md-3 col-12">
-            <div class="post widget widget-right">
+        <div class="col-md-3 col-12">
+            {# <div class="post widget widget-right">
                 <h5>Tags</h5>
                 <hr>
                 {% for tag in tags %}
@@ -103,9 +104,9 @@
                 <div class="post">
                     <h5>Popular tags</h5>
                 </div>
-            {% endif %}
+            {% endif %} #}
 
-            {% if popular %}
+            {# {% if popular %}
             <div class="post dark">
                 <p>Latest comments</p>
                 <hr>
@@ -121,8 +122,8 @@
             </div>
             {% endif %}
 
-        </div> #}
+        </div>
 
-    </div>
+    </div> #}
 
 {% endblock %}
