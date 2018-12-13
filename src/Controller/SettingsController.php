@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\SettingsFormType;
 use App\Entity\Settings;
 
+/**
+ * TODO: Fix the settings
+ */
+
 class SettingsController extends AbstractController
 {
     /**
