@@ -70,5 +70,10 @@
     </div>
     {% endif %}
     {% endfor %}
+    <div class="col-md-12 col-12 text-center">
+        <div class="d-inline-block navigation text-center">  
+            {{ knp_pagination_render(posts) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

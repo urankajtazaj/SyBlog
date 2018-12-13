@@ -20,8 +20,16 @@ $(document).ready(function() {
         $(".pop-up").hide();
     });
 
-});
+    $(".newWindow").each(function(i, e) {
+        var el = $(e);
 
+        el.click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), 'Share Post', 'width=700,height=600');
+        });
+    });
+
+});
 
 // Show popup
 function showPopup() {

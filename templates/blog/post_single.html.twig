@@ -28,7 +28,7 @@
                     {% if icons %}
                     <div class="position-sticky text-center" style="top: 100px">
                         {% for social_icon in icons %}
-                        <a target="_blank" title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="social-icon d-inline-block d-sm-block">
+                        <a title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="newWindow social-icon d-inline-block d-sm-block">
                             <i class="{{ social_icon.icon }}"></i>
                         </a>
                         {% endfor %}

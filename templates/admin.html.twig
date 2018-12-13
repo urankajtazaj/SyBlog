@@ -37,7 +37,7 @@
                         <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-user"></i></div> Users</a>
                     </li>
                     <li>
-                        <a href="#" class="sidebar-item"><div class="icon"><i class="fas fa-sliders-h"></i></div> Settings</a>
+                        <a href="{{ path('settings') }}" class="{% if current == 'settings' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-sliders-h"></i></div> Settings</a>
                     </li>
                     <li>
                         <a href="{{ path('app_logout') }}" class="sidebar-item"><div class="icon"><i class="fas fa-power-off"></i></div> Logout</a>

@@ -57,12 +57,11 @@ class UserType extends AbstractType {
                 ],
                 'data' => 'w',
                 'required' => false,
-                'expanded' => true,
                 'mapped' => false,
                 'placeholder' => false,
-                'label' => ' ',
+                'label' => 'Role',
                 'attr' => [
-                    'class' => 'mb-3'
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('save', SubmitType::class, [

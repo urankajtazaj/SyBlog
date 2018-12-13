@@ -23,10 +23,10 @@ use App\Form\SearchForm;
 use App\Form\PostForm;
 use App\Form\CommentForm;
 use App\Entity\Sharer;
+use App\Entity\Settings;
 
 class BlogController extends AbstractController
 {
-
     /**
      * @Route("/", name="post_list")
      */
@@ -84,7 +84,8 @@ class BlogController extends AbstractController
                 'posts' => $posts,
                 'popular' => $popular_posts,
                 'comments' => $comments,
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'base' => new SettingService()
                 // 'tags' => $tags
             ]
         );
@@ -237,7 +238,7 @@ class BlogController extends AbstractController
                 'posts' => $all_posts,
                 'comments' => $comments,
                 'comment_form' => $comment_form->createView(),
-                'icons' => $icons
+                'icons' => $icons,
             ]
         );
         

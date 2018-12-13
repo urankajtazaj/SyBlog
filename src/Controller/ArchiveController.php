@@ -2,24 +2,41 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 use App\Entity\Post;
 use App\Entity\Category;
 
-class ArchiveController extends AbstractController
+class ArchiveController extends Controller
 {
+
+    protected $itemsPerPage = 16;
+
+    private function createPagination($query, $page, int $itemsPerPage) {
+        $paginator = $this->get('knp_paginator');
+
+        return $paginator->paginate(
+            $query,
+            $page,
+            $itemsPerPage
+        );
+    }
+
     /**
      * @Route("/archive", name="archive")
      */
-    public function index()
+    public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
-        $posts = $posts_qb->setMaxResults(10)->execute();
+        $page = $request->get('page') ? $request->get('page') : 1;
+
+        $posts = $this->createPagination($posts_qb, $page, $this->itemsPerPage);
 
         return $this->render('archive/index.html.twig', [
             'controller_name' => 'ArchiveController',
@@ -30,7 +47,7 @@ class ArchiveController extends AbstractController
     /**
      * @Route("/archive/{category}", name="archive_cat")
      */
-    public function post_category($category)
+    public function post_category(Request $request, $category)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -42,7 +59,8 @@ class ArchiveController extends AbstractController
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
-        $posts = $posts_qb->setMaxResults(10)->execute();
+        $page = $request->get('page') ? $request->get('page') : 1;
+        $posts = $this->createPagination($posts_qb, $page, $this->itemsPerPage);
 
         return $this->render('archive/index.html.twig', [
             'category' => $category,
@@ -54,7 +72,7 @@ class ArchiveController extends AbstractController
     /**
      * @Route("/archive/tags/{tag}", name="tag_single")
      */
-    public function findTag($tag) {
+    public function findTag(Request $request, $tag) {
         $em = $this->getDoctrine()->getManager();
 
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
@@ -62,8 +80,9 @@ class ArchiveController extends AbstractController
             ->setParameter(':tag', '%' . $tag . '%')
             ->orderBy('p.id', 'DESC')
             ->getQuery();
-
-        $posts = $posts_qb->execute();
+            
+        $page = $request->get('page') ? $request->get('page') : 1;
+        $posts = $this->createPagination($posts_qb, $page, $this->itemsPerPage);
 
         return $this->render('archive/index.html.twig', [
             'tag' => $tag,

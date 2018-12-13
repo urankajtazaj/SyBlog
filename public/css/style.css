@@ -241,11 +241,6 @@ blockquote {
     position: relative;
 }
 
-blockquote p {
-    font-size: 20px !important;
-    /* font-weight: bold; */
-}
-
 .content a {
     text-decoration: underline;
     color: inherit !important;
@@ -255,6 +250,10 @@ blockquote p {
 
 .content a:hover {
     text-decoration: underline;
+}
+
+.content img {
+    max-width: 100%;
 }
 
 .hover {
@@ -422,4 +421,31 @@ blockquote p {
 
 .tag:hover {
     background-color: #ddd;
+}
+
+.navigation {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    /* background-color: #fafafa; */
+    /* box-shadow: 0 10px 30px rgba(0,0,0, 0.05); */
+}
+
+.navigation span a,
+.navigation .current {
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 18px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation span a {
+    color: #888;
+}
+
+.navigation span a:hover,
+.navigation .current {
+    background-color: #f2f2f2;
 }
