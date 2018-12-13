@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\File;
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 
 use App\Entity\Post;
 use App\Entity\Comment;
@@ -13,8 +14,11 @@ use App\Entity\User;
 
 use App\Form\PostForm;
 
-class AdminController extends AbstractController
+class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
 {
+
+    protected $itemsPerPage = 10;
+
     /**
      * @Route("/admin", name="admin")
      */
@@ -51,13 +55,24 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/posts", name="admin_posts")
      */
-    public function posts() {
+    public function posts(Request $request) {
         $em = $this->getDoctrine()->getManager();
+
+        $page = $request->get('page') ? $request->get('page') : 1;
+
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
             ->getQuery();
 
-        $posts = $posts_qb->execute();
+        $paginator = $this->get('knp_paginator');
+
+        $posts = $paginator->paginate(
+            $posts_qb,
+            $page,
+            $this->itemsPerPage
+        );
+
+        // dd($posts);
 
         return $this->render('admin/posts.html.twig', [
             'current' => 'posts',

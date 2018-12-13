@@ -11,7 +11,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\UserInfoForm;
 
-class UserController extends AbstractController
+class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
 {
     /**
      * @Route("/profile", name="profile")
@@ -36,9 +36,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-
             $em->flush();
-
         }
 
         return $this->render('user/index.html.twig', [
@@ -52,9 +50,18 @@ class UserController extends AbstractController
     /**
      * @Route("/admin/users", name="users")
      */
-    public function list_users() {
+    public function list_users(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(UseR::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
+
+        $page = $request->get('page') ? $request->get('page') : 1;
+        $paginator = $this->get('knp_paginator');
+
+        $users = $paginator->paginate(
+            $users,
+            $page,
+            10
+        );
 
         return $this->render(
             'user/list.html.twig', [

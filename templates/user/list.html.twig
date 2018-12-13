@@ -6,8 +6,9 @@
     <div class="col-md-12 col-12">
         <div class="info-box">
             <h2>All Users</h2>
-            <a href="{{ path('register') }}" class="btn btn-blue"><i class="fas fa-plus"></i> Add New</a>
-            <br>
+            <div class="text-right">
+                <a href="{{ path('register') }}" class="btn btn-blue"><i class="fas fa-plus"></i> Add New</a>
+            </div>
             <br>
             <table class="table table-sm">
                 <thead>
@@ -40,6 +41,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="d-inline-block navigation text-center">
+                {{ knp_pagination_render(users) }}
+            </div>
         </div>
     </div>
 </div>

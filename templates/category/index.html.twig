@@ -36,8 +36,8 @@
                     {% for category in categories %}
                     <tr>
                         <td>
-                            <h5><b>{{ category.name }}</b></h5>
-                            <p>{{ category.exerpt }}</p>
+                            <p class="lead"><b>{{ category.name }}</p></h5>
+                            <p>{{ category.exerpt | slice(0, 100) }}</p>
                         </td>
                         <td class="text-right">
                             <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
