@@ -25,12 +25,14 @@ use App\Form\CommentForm;
 use App\Entity\Sharer;
 use App\Entity\Settings;
 
+use App\Service\SettingService;
+
 class BlogController extends AbstractController
 {
     /**
      * @Route("/", name="post_list")
      */
-    public function post_list(Request $request) {
+    public function post_list(Request $request, SettingService $setting) {
 
         $em = $this->getDoctrine()->getManager();
         $posts_qb = $em->getRepository(Post::class)
@@ -85,8 +87,7 @@ class BlogController extends AbstractController
                 'popular' => $popular_posts,
                 'comments' => $comments,
                 'form' => $form->createView(),
-                'base' => new SettingService()
-                // 'tags' => $tags
+                'base' => $setting->get()
             ]
         );
     }
@@ -100,7 +101,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/admin/post/new", name="post_new")
      */
-    public function post_new(Request $request) {
+    public function post_new(Request $request, SettingService $setting) {
         $post = new Post();
 
         $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager()]);
@@ -155,8 +156,98 @@ class BlogController extends AbstractController
                 'form' => $form->createView(),
                 'headline' => 'New Post',
                 'current' => 'posts',
+                'base' => $setting->get()
             ]
         );
+    }
+
+
+    /**
+     * @Route("/admin/post/edit/{id}", name="post_edit")
+     */
+    public function post_edit(Request $request, SettingService $setting, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository(Post::class)->find($id);
+
+        $prevFilename = $post->getCover();
+
+        $tags_str = null;
+
+        if ($post->getTags()) {
+            $tags_str = implode(',', $post->getTags());
+        }
+
+        if ($post->getCover()) {
+            $post->setCover(
+                new File($this->getParameter('cover_folder') . '/' . $post->getCover())
+            );
+        }
+
+        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager(), 'tags' => $tags_str]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if ($data->getCover()) {
+                $file = $post->getCover();
+                $filename = md5(uniqid()) . "." . $file->guessExtension();
+    
+                if (!empty($prevFilename) && $prevFilename != null) {
+                    unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
+                }
+
+                $data->setCover($filename);
+    
+                $file->move(
+                    $this->getParameter('cover_folder'),
+                    $filename
+                );
+            } else {                
+                if ($form->get('delete_cover')->getData()) {
+                    $data->setCover(null);
+
+                    if (!empty($prevFilename) && $prevFilename != null) {
+                        unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
+                    }
+                } else {
+                    $data->setCover($prevFilename);
+                }
+            }
+
+            
+            if ($form->get('tags')) {
+                $tags_str = $form->get('tags')->getData();
+                $tags_arr = explode(',', $tags_str);
+
+                for ($i = 0; $i < sizeof($tags_arr); $i++) {
+                    $tags_arr[$i] = strtolower(trim($tags_arr[$i]));
+                }
+
+                $data->setTags($tags_arr);
+            }
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute("admin_posts");
+        }
+
+        return $this->render(
+            "blog/post_new.html.twig",
+            [
+                'form' => $form->createView(),
+                'post' => $post,
+                'cover_img' => $prevFilename,
+                'headline' => 'Edit Post',
+                'id' => $id,
+                'current' => 'posts',
+                'base' => $setting->get()
+            ]
+        );
+
     }
 
 
@@ -184,7 +275,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/post/{slug}", name="post_single")
      */
-    public function post_single(Request $request, $slug) {
+    public function post_single(Request $request, SettingService $setting, $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
 
@@ -239,6 +330,7 @@ class BlogController extends AbstractController
                 'comments' => $comments,
                 'comment_form' => $comment_form->createView(),
                 'icons' => $icons,
+                'base' => $setting->get()
             ]
         );
         

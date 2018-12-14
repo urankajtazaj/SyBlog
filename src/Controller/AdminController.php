@@ -11,7 +11,7 @@ use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\User;
-
+use App\Service\SettingService;
 use App\Form\PostForm;
 
 class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
@@ -22,7 +22,7 @@ class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Control
     /**
      * @Route("/admin", name="admin")
      */
-    public function index()
+    public function index(SettingService $setting)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -49,13 +49,14 @@ class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Control
             'posts' => $posts,
             'comments' => $comments,
             'users' => $users,
+            'base' => $setting->get()
         ]);
     }
 
     /**
      * @Route("/admin/posts", name="admin_posts")
      */
-    public function posts(Request $request) {
+    public function posts(Request $request, SettingService $setting) {
         $em = $this->getDoctrine()->getManager();
 
         $page = $request->get('page') ? $request->get('page') : 1;
@@ -77,94 +78,8 @@ class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Control
         return $this->render('admin/posts.html.twig', [
             'current' => 'posts',
             'posts' => $posts,
-            'headline' => 'All posts'
+            'headline' => 'All posts',
+            'base' => $setting->get()
         ]);
-    }
-
-    /**
-     * @Route("/admin/post/edit/{id}", name="post_edit")
-     */
-    public function post_edit(Request $request, $id) {
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->find($id);
-
-        $prevFilename = $post->getCover();
-
-        $tags_str = null;
-
-        if ($post->getTags()) {
-            $tags_str = implode(',', $post->getTags());
-        }
-
-        if ($post->getCover()) {
-            $post->setCover(
-                new File($this->getParameter('cover_folder') . '/' . $post->getCover())
-            );
-        }
-
-        $form = $this->createForm(PostForm::class, $post, ['cats' => $this->getDoctrine()->getManager(), 'tags' => $tags_str]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            if ($data->getCover()) {
-                $file = $post->getCover();
-                $filename = md5(uniqid()) . "." . $file->guessExtension();
-    
-                if (!empty($prevFilename) && $prevFilename != null) {
-                    unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
-                }
-
-                $data->setCover($filename);
-    
-                $file->move(
-                    $this->getParameter('cover_folder'),
-                    $filename
-                );
-            } else {                
-                if ($form->get('delete_cover')->getData()) {
-                    $data->setCover(null);
-
-                    if (!empty($prevFilename) && $prevFilename != null) {
-                        unlink($this->getParameter('cover_folder') . '/' . $prevFilename);
-                    }
-                } else {
-                    $data->setCover($prevFilename);
-                }
-            }
-
-            
-            if ($form->get('tags')) {
-                $tags_str = $form->get('tags')->getData();
-                $tags_arr = explode(',', $tags_str);
-
-                for ($i = 0; $i < sizeof($tags_arr); $i++) {
-                    $tags_arr[$i] = strtolower(trim($tags_arr[$i]));
-                }
-
-                $data->setTags($tags_arr);
-            }
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return $this->redirectToRoute("admin_posts");
-        }
-
-        return $this->render(
-            "blog/post_new.html.twig",
-            [
-                'form' => $form->createView(),
-                'post' => $post,
-                'cover_img' => $prevFilename,
-                'headline' => 'Edit Post',
-                'id' => $id,
-                'current' => 'posts'
-            ]
-        );
-
     }
 }
