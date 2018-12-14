@@ -3,16 +3,21 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\File;
+
 use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\User;
+
 use App\Service\SettingService;
+
 use App\Form\PostForm;
+
 
 class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
 {
@@ -72,8 +77,6 @@ class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Control
             $page,
             $this->itemsPerPage
         );
-
-        // dd($posts);
 
         return $this->render('admin/posts.html.twig', [
             'current' => 'posts',

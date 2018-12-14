@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Service\SettingService;
+
 use App\Entity\Post;
 use App\Entity\Category;
 
@@ -27,7 +29,7 @@ class ArchiveController extends Controller
     /**
      * @Route("/archive", name="archive")
      */
-    public function index(Request $request)
+    public function index(Request $request, SettingService $setting)
     {
         $em = $this->getDoctrine()->getManager();
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
@@ -40,14 +42,15 @@ class ArchiveController extends Controller
 
         return $this->render('archive/index.html.twig', [
             'controller_name' => 'ArchiveController',
-            'posts' => $posts
+            'posts' => $posts,
+            'base' => $setting->get()
         ]);
     }
 
     /**
      * @Route("/archive/{category}", name="archive_cat")
      */
-    public function post_category(Request $request, $category)
+    public function post_category(Request $request, SettingService $setting, $category)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -65,14 +68,15 @@ class ArchiveController extends Controller
         return $this->render('archive/index.html.twig', [
             'category' => $category,
             'tag' => null,
-            'posts' => $posts
+            'posts' => $posts,
+            'base' => $setting->get()
         ]);
     }
 
     /**
      * @Route("/archive/tags/{tag}", name="tag_single")
      */
-    public function findTag(Request $request, $tag) {
+    public function findTag(Request $request, SettingService $setting, $tag) {
         $em = $this->getDoctrine()->getManager();
 
         $posts_qb = $em->getRepository(Post::class)->createQueryBuilder('p')
@@ -87,7 +91,8 @@ class ArchiveController extends Controller
         return $this->render('archive/index.html.twig', [
             'tag' => $tag,
             'category' => null,
-            'posts' => $posts
+            'posts' => $posts,
+            'base' => $setting->get()
         ]);
     }
 

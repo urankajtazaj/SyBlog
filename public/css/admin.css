@@ -10,6 +10,7 @@
 .sidebar {
     min-height: 100vh;
     padding: 20px;
+    box-sizing: border-box;
     width: 290px;
     z-index: 2;
     /* box-shadow: 5px 0 30px rgba(0, 0, 0, 0.05); */

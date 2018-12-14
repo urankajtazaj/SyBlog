@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Service\SettingService;
+
 use App\Entity\Comment;
 
 class CommentsController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
@@ -13,7 +15,7 @@ class CommentsController extends \Symfony\Bundle\FrameworkBundle\Controller\Cont
     /**
      * @Route("/admin/comments", name="comments")
      */
-    public function index(Request $request)
+    public function index(Request $request, SettingService $setting)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -37,7 +39,8 @@ class CommentsController extends \Symfony\Bundle\FrameworkBundle\Controller\Cont
             'controller_name' => 'CommentsController',
             'comments' => $comments,
             'current' => 'comments',
-            'headline' => 'Comments'
+            'headline' => 'Comments',
+            'base' => $setting->get()
         ]);
     }
 }

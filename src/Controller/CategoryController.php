@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+
+use App\Service\SettingService;
+
 use App\Form\CategoryForm;
 use App\Entity\Category;
 
@@ -13,7 +16,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/category/add", name="category_add")
      */
-    public function index(Request $request)
+    public function index(Request $request, SettingService $setting)
     {
         $category = new Category();
         $form = $this->createForm(CategoryForm::class, $category);
@@ -39,14 +42,15 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
             'headline' => 'Categories',
             'categories' => $categories,
-            'current' => 'category'
+            'current' => 'category',
+            'base' => $setting->get()
         ]);
     }
 
     /**
      * @Route("/admin/category/edit/{id}", name="category_edit")
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, SettingService $setting, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository(Category::class)->find($id);
@@ -72,7 +76,8 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
             'headline' => 'Edit Category',
             'categories' => $categories,
-            'current' => 'category'
+            'current' => 'category',
+            'base' => $setting->get()
         ]);
     }
 

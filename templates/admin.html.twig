@@ -17,10 +17,10 @@
             <div class="sidebar">
                 <ul class="list-unstyled m-0">
                     <li>
-                        <a href="/" class="sidebar-item"><div class="icon"><i class="fas fa-link"></i></div> Visit Site</a>
+                        <a href="/" class="sidebar-item"><div class="icon"><i class="fas fa-home"></i></div> {{ base.pageName }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-home"></i></div> Dashboard</a>
+                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-tachometer-alt"></i></div> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><div class="icon"><i

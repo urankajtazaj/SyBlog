@@ -9,16 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\SettingsFormType;
 use App\Entity\Settings;
 
-/**
- * TODO: Fix the settings
- */
+use App\Service\SettingService;
 
 class SettingsController extends AbstractController
 {
     /**
      * @Route("/admin/settings", name="settings")
      */
-    public function index(Request $request)
+    public function index(Request $request, SettingService $s)
     {
         // Get Settings
         $setting = $this->getDoctrine()->getManager()->getRepository(Settings::class)->find(1);
@@ -35,6 +33,7 @@ class SettingsController extends AbstractController
         return $this->render('settings/index.html.twig', [
             'current' => 'settings',
             'headline' => 'Settings',
+            'base' => $s->get(),
             'form' => $form->createView()
         ]);
     }

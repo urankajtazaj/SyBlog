@@ -11,12 +11,14 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\UserInfoForm;
 
+use App\Service\SettingService;
+
 class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
 {
     /**
      * @Route("/profile", name="profile")
      */
-    public function index(Request $request)
+    public function index(Request $request, SettingService $setting)
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Post::class);
@@ -43,14 +45,15 @@ class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controll
             'controller_name' => 'UserController',
             'posts' => $posts,
             'form' => $form->createView(),
-            'title' => 'User'
+            'title' => 'User',
+            'base' => $setting->get()
         ]);
     }
 
     /**
      * @Route("/admin/users", name="users")
      */
-    public function list_users(Request $request) {
+    public function list_users(Request $request, SettingService $setting) {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(User::class)->findAll();
 
@@ -65,9 +68,9 @@ class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controll
 
         return $this->render(
             'user/list.html.twig', [
-                'users' => $users,
-                'current' => 'users'
-            ]
-        );
+            'users' => $users,
+            'current' => 'users',
+            'base' => $setting->get()
+        ]);
     }
 }

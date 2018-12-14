@@ -9,12 +9,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use App\Form\UserType;
 
+use App\Service\SettingService;
+
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $encoder)
+    public function index(Request $request, SettingService $setting, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -42,6 +44,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/index.html.twig', [
             'current' => 'users',
             'headline' => 'Add User',
+            'setting' => $setting->get(),
             'form' => $form->createView()
         ]);
     }
