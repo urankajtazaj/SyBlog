@@ -5,11 +5,17 @@
     border-radius: 0px;
     margin-bottom: 20px;
     color: initial;
+    border-radius: 20px;
     transition: 250ms ease;
+    border: 2px solid transparent;
+}
+
+.post:hover {
+    border-color: #eee;
 }
 
 * {
-    transition: 250ms ease;
+    transition: 350ms ease;
 }
 
 a:hover {
@@ -46,7 +52,7 @@ p a:hover {
     color: inherit;
 }
 
-.post .content p {
+.content p {
     font-size: 18px;
     color: #2b2b2b;
     line-height: 1.7;
@@ -239,6 +245,10 @@ blockquote {
     padding: 20px 10px 20px 20px;
     font-style: italic;
     position: relative;
+}
+
+.content {
+    border-width: 0;
 }
 
 .content a {

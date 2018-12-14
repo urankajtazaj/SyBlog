@@ -5,66 +5,34 @@
 {% block body %}
 <div class="row">
     {% for post in posts %}
-    {% if loop.index == 1 %}
-    <div class="col-md-12 col-12">
-        {% if category is defined %}
-            <div class="row justify-content-center">
-                <div class="text-center col-md-6">
-                    <h1 class="text-center text-capitalize">{{ tag ? tag : category }}</h1>
-                    {% if not tag and post.category.exerpt %}
-                        <p>{{ post.category.exerpt }}</p>
-                    {% endif %}
-                </div>
+        {% if loop.index == 1 %}
+            <div class="text-center col-md-12">
+                <h1 class="text-center text-capitalize">{{ tag ? tag : category }}</h1>
+                {% if not tag and post.category.exerpt %}
+                    <p>{{ post.category.exerpt }}</p>
+                {% endif %}
+                <hr>
             </div>
-            <hr>
         {% endif %}
-        <a href="{{ path('post_single', {'slug': post.slug}) }}">
-            <div class="post">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div style="height: 300px; width: 100%;" class="img thumbnail">
-                            <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="">
-                        </div>
+        <div class="col-md-4 col-12"> 
+            <a href="{{ path('post_single', {'slug': post.slug}) }}">
+                <div class="post">
+                    <div style="height: 200px; width: 100%;" class="img thumbnail">
+                        <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
                     </div>
-                    <div class="col-md-6 col-12">
-                        <h4>{{ post.title }}</h4>
-                        <p class="faded">
-                            {{ post.content | excerpt(40, '...') }} <br>
-                        </p>
-                        <span class="faded">
-                            <small>
-                                By {{ post.user.name }} / {{ post.dateCreated | time_ago }} / {{ post.comments | length
-                                }}
-                                comment{% if post.comments | length != 1 %}s{% endif %}
-                                / {{ post.category.name }}
-                            </small>
-                        </span>
-                    </div>
+                    <br>
+                    <h4>{{ post.title }}</h4>
+                    <p class="faded">{{ post.content | excerpt(10, '...') }}</p>
+                    <span class="faded">
+                        <small>
+                            {{ post.dateCreated | time_ago }} / {{ post.comments | length }}
+                            comment{% if post.comments | length != 1 %}s{% endif %}
+                            / {{ post.category.name }}
+                        </small><br>
+                    </span>
                 </div>
-            </div>
-        </a>
-    </div>
-    {% else %}
-    <div class="col-md-4 col-12">
-        <a href="{{ path('post_single', {'slug': post.slug}) }}">
-            <div class="post">
-                <div style="height: 200px; width: 100%;" class="img thumbnail">
-                    <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
-                </div>
-                <br>
-                <h4>{{ post.title }}</h4>
-                <p class="faded">{{ post.content | excerpt(10, '...') }}</p>
-                <span class="faded">
-                    <small>
-                        {{ post.dateCreated | time_ago }} / {{ post.comments | length }}
-                        comment{% if post.comments | length != 1 %}s{% endif %}
-                        / {{ post.category.name }}
-                    </small><br>
-                </span>
-            </div>
-        </a>
-    </div>
-    {% endif %}
+            </a>
+        </div>
     {% endfor %}
     <div class="col-md-12 col-12 text-center">
         <div class="d-inline-block navigation text-center">  

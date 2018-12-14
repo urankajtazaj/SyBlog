@@ -63,8 +63,8 @@
             {% set limit = 5 %}
                 {% for post in posts if not break %}
                     {% if loop.index > 2 %}
-                        <div class="row hover">
-                            <div class="col-md-5 col-12 mb-3">
+                        <div class="row post">
+                            <div class="col-md-5 col-12">
                                 <a class="text-dark" href="{{ path('post_single', {'slug': post.slug}) }}">
                                     {% if post.cover %}
                                         <div style="height: 200px; width: 100%;" class="img thumbnail">

@@ -72,17 +72,6 @@ a:hover {
     margin-bottom: 30px;
 }
 
-.sidebar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar ul li ul {
-    display: none;
-    /* background-color: rgba(23, 22, 27, 0.08); */
-}
-
 .sidebar ul li li .sidebar-item {
    padding-left: 50px;
    z-index: 1;
@@ -108,6 +97,14 @@ a:hover {
     font-weight: bold;
     text-transform: capitalize;
     border-radius: 50px;
+}
+
+.active ul {
+    display: block;
+}
+
+.sidebar-item.active ul {
+    display: block;
 }
 
 .btn:not(.btn-sm) {
