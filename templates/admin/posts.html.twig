@@ -35,7 +35,7 @@
                         <td>
                             <a href="{{ path('archive_cat', {'category': post.category.name}) }}"><b>{{ post.category.name }}</b></a> / {{ post.dateCreated | time_ago }}
                             <h5><b>{{ post.title }}</b></h5>
-                            <p class="faded lead">{{ post.content | striptags | slice(0, 110) }}...</p>
+                            <p class="faded lead">{{ post.content | excerpt(21, '...') }}</p>
                         </td>
                         <td class="text-right">
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn"><i class="fas fa-cog"></i></a>

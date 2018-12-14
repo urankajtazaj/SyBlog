@@ -23,7 +23,7 @@
             <hr>
             {% set break = false %}
             {% for post in posts if not break %}
-                <a target="_blank" href="{{ path('post_single', {'slug': post.slug}) }}">{{ post.title | slice(0, 50) }}... </a>&mdash; {{ post.user.name }}<br>
+                <a target="_blank" href="{{ path('post_single', {'slug': post.slug}) }}">{{ post.title | excerpt(10, '...') }} </a>&mdash; {{ post.user.name }}<br>
                 {{ post.dateCreated | time_ago }}<br><br>
                 {% if loop.index == maxPosts %}
                     {% set break = true %}
@@ -46,7 +46,7 @@
             {% if comments %}
                 {% set break = false %}
                 {% for comment in comments if not break %}
-                    {{ comment.user.name }} <i>commented on</i> <a target="_blank" href="{{ path('post_single', {'slug': comment.post.slug}) }}#comments">{{ comment.post.title | slice(0, 25) }}...</a><br>
+                    {{ comment.user.name }} <i>commented on</i> <a target="_blank" href="{{ path('post_single', {'slug': comment.post.slug}) }}#comments">{{ comment.post.title | excerpt(10, '...') }}</a><br>
                     {{ comment.dateCreated | time_ago }} <br><br>
                     {% if loop.index == maxPosts %}
                         {% set break = true %}

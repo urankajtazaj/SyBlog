@@ -29,17 +29,14 @@
                     <div class="col-md-6 col-12">
                         <h4>{{ post.title }}</h4>
                         <p class="faded">
-                            {{ post.content | striptags | slice(0, 250) | replace({'&rsquo;': '\'', '&nbsp;': ' '})
-                            }}... <br>
+                            {{ post.content | excerpt(40, '...') }} <br>
                         </p>
                         <span class="faded">
                             <small>
-                                By {{ post.user.name }} | {{ post.dateCreated | time_ago }} | {{ post.comments | length
+                                By {{ post.user.name }} / {{ post.dateCreated | time_ago }} / {{ post.comments | length
                                 }}
                                 comment{% if post.comments | length != 1 %}s{% endif %}
-                                | {% for category in post.category %}
-                                {{ category.name }}{% if loop.index != post.category | length %},{% endif %}
-                                {% endfor %}
+                                / {{ post.category.name }}
                             </small>
                         </span>
                     </div>
@@ -56,13 +53,12 @@
                 </div>
                 <br>
                 <h4>{{ post.title }}</h4>
+                <p class="faded">{{ post.content | excerpt(10, '...') }}</p>
                 <span class="faded">
                     <small>
-                        {{ post.dateCreated | time_ago }} | {{ post.comments | length }}
+                        {{ post.dateCreated | time_ago }} / {{ post.comments | length }}
                         comment{% if post.comments | length != 1 %}s{% endif %}
-                        | {% for category in post.category %}
-                        {{ category.name }}{% if loop.index != post.category | length %},{% endif %}
-                        {% endfor %}
+                        / {{ post.category.name }}
                     </small><br>
                 </span>
             </div>

@@ -17,7 +17,7 @@
                     {% for comment in comments %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td>{{ comment.post.title }}</td>
+                        <td>{{ comment.post.title | excerpt(20, '...') }}</td>
                         <td>{{ comment.user.name }}</td>
                         <td>{{ comment.dateCreated | date('d/m/Y') }}</td>
                     </tr>

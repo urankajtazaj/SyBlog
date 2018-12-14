@@ -22,8 +22,6 @@
             {{ form_end(form) }}
             <br>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-12 col-12">
         <div class="info-box">
             <h4>All Categories</h4>
             <br>
@@ -36,7 +34,7 @@
                     {% for category in categories %}
                     <tr>
                         <td>
-                            <p class="lead"><b>{{ category.name }}</p></h5>
+                            <p><b>{{ category.name }}</p></h5>
                             <p>{{ category.exerpt | slice(0, 100) }}</p>
                         </td>
                         <td class="text-right">

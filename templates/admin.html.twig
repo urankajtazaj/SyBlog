@@ -17,10 +17,7 @@
             <div class="sidebar">
                 <ul class="list-unstyled m-0">
                     <li>
-                        <a href="/" class="sidebar-item"><div class="icon"><i class="fas fa-home"></i></div> {{ base.pageName }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-tachometer-alt"></i></div> Dashboard</a>
+                        <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-home"></i></div> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item"><div class="icon"><i
@@ -37,19 +34,26 @@
                         <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-user"></i></div> Users</a>
                     </li>
                     <li>
-                        <a href="{{ path('settings') }}" class="{% if current == 'settings' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-sliders-h"></i></div> Settings</a>
+                        <a href="{{ path('settings') }}" class="{% if current == 'settings' %}active{% endif %} sidebar-item"><div class="icon"><i class="fas fa-cog"></i></div> Settings</a>
                     </li>
-                    <li>
-                        <a href="{{ path('app_logout') }}" class="sidebar-item"><div class="icon"><i class="fas fa-power-off"></i></div> Logout</a>
-                    </li>
+                    <hr>
+                    <div class="text-center">
+                        <small style="opacity: .3">
+                            <b>SyBlog v0.1</b>
+                            / About
+                        </small>
+                    </div>
                 </ul>
             </div>
             <div style="width: 100%">
-                {# <div class="row align-items-center info-bar">
-                    <div class="col-md-12 text-right">
-                        Hello, {{ app.user.name }}
+                <div class="row align-items-center info-bar">
+                    <div class="col-md-6 col-12">
+                        <a href="/">{{ base.pageName }}</a>
                     </div>
-                </div> #}
+                    <div class="col-md-6 text-right">
+                        {{ app.user.name }} | <a href="{{ path('app_logout') }}" class="text-danger">Logout</a>
+                    </div>
+                </div>
                 <div class="cms container-fluid" style="padding: 20px">
                     {% block body %}{% endblock %}
                 </div>

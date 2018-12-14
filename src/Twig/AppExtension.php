@@ -11,7 +11,19 @@ class AppExtension extends AbstractExtension
     {
         return array(
             new TwigFilter('time_ago', array($this, 'getTimeAgo')),
+            new TwigFilter('excerpt', array($this, 'stripContent')),
         );
+    }
+
+    public function stripContent($content, int $wordCount = 20, string $more = '[Read more]'): string {
+        $content = strip_tags(html_entity_decode($content));
+        $exploded = explode(' ', $content);
+
+        if (sizeof($exploded) > $wordCount) {
+            return implode(' ', array_slice($exploded, 0, $wordCount)) . ' ' . $more;
+        } else {
+            return implode(' ', array_slice($exploded, 0, $wordCount));
+        }
     }
 
     public function getTimeAgo($dateTime)

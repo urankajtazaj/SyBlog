@@ -13,8 +13,11 @@
     box-sizing: border-box;
     width: 290px;
     z-index: 2;
-    /* box-shadow: 5px 0 30px rgba(0, 0, 0, 0.05); */
-    /* margin-right: 10px; */
+    font-weight: bold;
+}
+
+.sidebar,
+.info-bar {
     background-color: #fff;
 }
 
@@ -54,7 +57,6 @@ a:hover {
 .sidebar,
 .info-bar {
     color: #354757;
-    font-weight: bold;
 }
 
 .info-bar {

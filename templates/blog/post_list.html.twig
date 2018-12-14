@@ -38,7 +38,7 @@
                                 <small><b>{{ post.category.name }}</b> / {{ post.dateCreated | time_ago }}</small>
                             </div><br>
                             <h3><b class="text-capitalize">{{ post.title }}</b></h3>
-                            <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\'', '&mdash;': '-'}) | slice(0, 150) }}...</p>
+                            <p>{{ post.content | excerpt(25, '...') }}</p>
                         </a>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-7 col-12">
                                 <h4>{{ post.title }}</h4>
-                                <p>{{ post.content | striptags | replace({'&nbsp;': ' ', '&eacute;': 'é', '&rsquo;': '\''}) | slice(0, 150) }}...</p>
+                                <p>{{ post.content | excerpt(21, '...') }}</p>
                                 </a>
                                 {# <br> #}
                                 <small class="faded">
