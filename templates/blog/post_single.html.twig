@@ -8,39 +8,38 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9 col-12">
+        <div class="col-md-12 text-center">
             <br><br>
-            <h1>{{ post.title }}</h1>
+            <h1 class="display-4">{{ post.title }}</h1>
             {% if post.subheading %}
                 <p class="faded lead">{{ post.subheading }}</p>
             {% endif %}
             <br>
             <p>
-                <small class="faded">By {{ post.user.name }} / <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a> / {{ post.dateCreated | time_ago }}</small>
+                <small class="faded">By {{ post.user.name }} / <a href="{{ path('archive_cat', {'category': post.category.name}) }}">{{ post.category.name }}</a> / {{ post.dateCreated | time_ago }}</small>            
             </p>
+            {% if icons %}
+                {% for social_icon in icons %}
+                <a title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="newWindow social-icon">
+                    <i class="{{ social_icon.icon }}"></i>
+                </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-9 col-12">
+
             <br>
             <div class="img cover-img">
                 <img src="{{ asset('uploads/images/' ~ post.cover) }}" alt="{{ post.title }}">
             </div>
             <br>
             <div class="row">
-                <div class="col-md-1 col-12">
-                    {% if icons %}
-                    <div class="position-sticky text-center" style="top: 100px">
-                        {% for social_icon in icons %}
-                        <a title="{{ social_icon.name }}" href="{{ social_icon.url }}{{ url('post_single', {'slug': post.slug}) }}" class="newWindow social-icon d-inline-block d-sm-block">
-                            <i class="{{ social_icon.icon }}"></i>
-                        </a>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-
-                <div class="col-md-11 col-12">
-                <div class="">
+                <div class="col-md-12 col-12">
+                <div>
                     <div class="content post">
                         {{ post.content | raw }}
-                        <br><br>
+                        <br>
+                        <b>Tags: </b>
                         {% for tag in post.tags %}
                             <a href="{{ path('tag_single', {'tag': tag}) }}" class="tag">{{ tag }}</a>
                         {% endfor %}

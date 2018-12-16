@@ -12,11 +12,16 @@
 <div class="row">
     <div class="col-md-12 col-12">
         <div class="info-box">
-            <h1>{{ headline }}</h1>
-            <div class="text-right">
-                <a href="{{ path('post_new') }}" class="btn btn-blue"><i class="fas fa-plus"></i> New Post</a>
+            <div class="row align-items-center">
+                <div class="col-md-6 col-12">        
+                    <h1>{{ headline }}</h1>
+                </div>
+                <div class="col-md-6 col-12 text-right">
+                    <a href="{{ path('post_new') }}" class="btn btn-blue"><i class="fas fa-plus"></i> New Post</a>
+                </div>
             </div>
             <br>
+            {% if posts | length > 0 %}
             <table class="table">
                 <thead>
                     <th>Image</th>
@@ -35,9 +40,9 @@
                         <td>
                             <a href="{{ path('archive_cat', {'category': post.category.name}) }}"><b>{{ post.category.name }}</b></a> / {{ post.dateCreated | time_ago }}
                             <h5><b>{{ post.title }}</b></h5>
-                            <p class="faded lead">{{ post.content | excerpt(21, '...') }}</p>
+                            <p class="faded lead">{{ post.content | excerpt(20, '...') }}</p>
                         </td>
-                        <td class="text-right">
+                        <td style="min-width: 300px" class="text-right">
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
                             <a href="{{ path('post_single', {'slug': post.slug}) }}" class="btn"><i class="fas fa-external-link-alt"></i></a>
                             <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
@@ -46,6 +51,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+                <p class="lead">No posts found</p>
+            {% endif %}
             <div class="d-inline-block navigation text-center">
                 {{ knp_pagination_render(posts) }}
             </div>
