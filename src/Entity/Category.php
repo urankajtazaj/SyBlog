@@ -33,6 +33,10 @@ class Category
      */
     private $exerpt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Menu", mappedBy="category", cascade={"persist", "remove"})
+     */
+    private $menu;
 
     public function __construct()
     {
@@ -95,6 +99,24 @@ class Category
     public function setExerpt(?string $exerpt): self
     {
         $this->exerpt = $exerpt;
+
+        return $this;
+    }
+
+    public function getMenu(): ?Menu
+    {
+        return $this->menu;
+    }
+
+    public function setMenu(?Menu $menu): self
+    {
+        $this->menu = $menu;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newCategory = $menu === null ? null : $this;
+        if ($newCategory !== $menu->getCategory()) {
+            $menu->setCategory($newCategory);
+        }
 
         return $this;
     }

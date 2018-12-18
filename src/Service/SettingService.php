@@ -13,4 +13,8 @@ class SettingService {
     public function get() {
         return $this->em->getRepository(\App\Entity\Settings::class)->find(1);
     }
+
+    public function getMenu() {
+        return $this->em->getRepository(\App\Entity\Menu::class)->findAll();
+    }
 }

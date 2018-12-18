@@ -84,6 +84,7 @@ class BlogController extends AbstractController
                 'comments' => $comments,
                 'form' => $form->createView(),
                 'base' => $setting->get(),
+                'menu' => $setting->getMenu(),
                 'category' => $categories
             ]
         );

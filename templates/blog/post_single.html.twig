@@ -41,7 +41,7 @@
                         <br>
                         <b>Tags: </b>
                         {% for tag in post.tags %}
-                            <a href="{{ path('tag_single', {'tag': tag}) }}" class="tag">{{ tag }}</a>
+                            <a href="{{ path('tag_single', {'tag': tag}) }}" class="tag">{{ tag }}</a>{{ loop.index != post.tags | length ? ',' : '' }}
                         {% endfor %}
                     </div>
                     <br>

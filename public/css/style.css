@@ -408,10 +408,6 @@ blockquote {
 }
 
 .tag {
-    border-radius: 0;
-    padding: 3px 8px;
-    display: inline-block;
-    margin-bottom: 5px;
     text-decoration: none !important;
     text-transform: capitalize;
 }

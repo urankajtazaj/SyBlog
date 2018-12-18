@@ -31,6 +31,16 @@ class Settings
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone_1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone_2;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +78,30 @@ class Settings
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPhone1(): ?string
+    {
+        return $this->phone_1;
+    }
+
+    public function setPhone1(?string $phone_1): self
+    {
+        $this->phone_1 = $phone_1;
+
+        return $this;
+    }
+
+    public function getPhone2(): ?string
+    {
+        return $this->phone_2;
+    }
+
+    public function setPhone2(?string $phone_2): self
+    {
+        $this->phone_2 = $phone_2;
 
         return $this;
     }

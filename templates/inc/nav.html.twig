@@ -8,6 +8,11 @@
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto">
+							{% for m in menu %}
+								<li class="nav-item">
+									<a href="{{ path('archive_cat', {'category': m.category.name}) }}" class="nav-link">{{ m.category.name }}</a>
+								</li>
+							{% endfor %}
 						</ul>
 						<ul class="navbar-nav">
 

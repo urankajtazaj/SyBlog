@@ -9,11 +9,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SettingsFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('page_name', TextType::class, [
                 'label' => 'Page Name',
@@ -32,6 +34,18 @@ class SettingsFormType extends AbstractType
                     'class' => 'form-control mb-3'
                 ]
             ])
+            ->add('phone_1', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
+            ])
+            ->add('phone_2', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-blue mt-3'
@@ -43,7 +57,7 @@ class SettingsFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Settings::class,
+            'data_class' => Settings::class
         ]);
     }
 }
