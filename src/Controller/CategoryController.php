@@ -18,6 +18,7 @@ class CategoryController extends AbstractController
      */
     public function index(Request $request, SettingService $setting)
     {
+
         $category = new Category();
         $form = $this->createForm(CategoryForm::class, $category);
 
@@ -90,6 +91,11 @@ class CategoryController extends AbstractController
     
         $em->remove($category);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            "Category has been deleted successfully."
+        );
 
         return $this->redirectToRoute('category_add');
     

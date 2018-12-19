@@ -35,26 +35,11 @@ class SettingsController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
-
-        $category = new \App\Entity\Menu;
-        $menu = $this->createForm(MenuFormType::class, $category, ['em' => $em]);
-        $menu->handleRequest($request);
-
-        if ($menu->isSubmitted() && $menu->isValid()) {
-            $data = $menu->getData();
-            $em->persist($data);
-            $em->flush();
-        }
-
-        $active_menu = $em->getRepository(\App\Entity\Menu::class)->findAll();
-
         return $this->render('settings/index.html.twig', [
             'current' => 'settings',
             'headline' => 'Settings',
             'base' => $s->get(),
-            'active_menu' => $active_menu,
-            'form' => $form->createView(),
-            'menu' => $menu->createView()
+            'form' => $form->createView()
         ]);
     }
 }

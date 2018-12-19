@@ -58,7 +58,7 @@ class Post
     private $cover;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
      * @ORM\OrderBy({"id" = "DESC"})
      */
     private $comments;

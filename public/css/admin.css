@@ -83,7 +83,11 @@ a:hover {
     padding: 12px 20px;
     margin: 3px 0 3px 0;
     color: inherit;
-    border-radius: 50px;
+}
+
+.sidebar-item,
+.btn-blue {
+    border-radius: 5px;
 }
 
 .sidebar-item:hover {
@@ -94,10 +98,9 @@ a:hover {
 .btn-blue{
     background-color: #299FFF;
     color: #fff;
-    box-shadow: 0 8px 25px rgba(41, 159, 255, 0.5);
+    /* box-shadow: 0 8px 25px rgba(41, 159, 255, 0.5); */
     font-weight: bold;
     text-transform: capitalize;
-    border-radius: 50px;
 }
 
 .active ul {

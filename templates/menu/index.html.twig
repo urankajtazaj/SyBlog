@@ -1,0 +1,28 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xl-4 col-md-6 col-12">
+        <div class="info-box">
+            <h5>Add to Menus</h5><br>
+            {{ form_start(menu) }}
+            {{ form_widget(menu) }}
+            {{ form_end(menu) }}
+        </div>
+        <div class="info-box">
+            <h5>Menus</h5><br>
+            <table style="width: 100%">
+                <tbody>
+                    {% for m in active_menu %}
+                    <tr>
+                        <td>{{ m.category.name }}</td>
+                        <td class="text-right"><a href="{{ path('menu_delete', {'id': m.id}) }}" class="text-danger btn-delete"><small>Unlink</small></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

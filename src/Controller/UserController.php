@@ -46,6 +46,7 @@ class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controll
             'posts' => $posts,
             'form' => $form->createView(),
             'title' => 'User',
+            'menu' => $setting->getMenu(),
             'base' => $setting->get()
         ]);
     }
@@ -70,6 +71,7 @@ class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controll
             'user/list.html.twig', [
             'users' => $users,
             'current' => 'users',
+            'menu' => $setting->getMenu(),
             'base' => $setting->get()
         ]);
     }

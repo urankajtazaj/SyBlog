@@ -60,7 +60,7 @@
                 <h5>admin</h5>
                 <hr>
                 <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn text-dark"><b>Edit</b></a><br>
-                <a href="#" data-url="/post/delete/" data-id="{{ post.id }}" class="btn text-dark btn-delete"><b>Delete</b></a>
+                <a href="{{ path('delete', {'id': post.id}) }}" class="btn text-dark btn-delete"><b>Delete</b></a>
                 <hr>
                 <p>&nbsp;&nbsp;{{ post.viewCount }} Views</p>
                 <p>&nbsp;&nbsp;<a href="#comments">{{ post.comments | length }} Comments</p></a>

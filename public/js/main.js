@@ -5,8 +5,7 @@ $(document).ready(function() {
     
         el.click(function(e) {
             e.preventDefault();
-            var id = $(this).data("id");
-            var url = $(this).data("url") + id;
+            var url = $(this).attr('href');
 
             if (confirm("Are you sure you want to execute this action?")) {
                 location.href = url

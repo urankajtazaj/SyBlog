@@ -45,6 +45,7 @@ class RegistrationController extends AbstractController
             'current' => 'users',
             'headline' => 'Add User',
             'setting' => $setting->get(),
+            'menu' => $setting->getMenu(),
             'form' => $form->createView()
         ]);
     }

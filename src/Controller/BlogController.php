@@ -154,7 +154,8 @@ class BlogController extends AbstractController
                 'form' => $form->createView(),
                 'headline' => 'New Post',
                 'current' => 'posts',
-                'base' => $setting->get()
+                'base' => $setting->get(),
+                'menu' => $setting->getMenu()
             ]
         );
     }
@@ -242,6 +243,7 @@ class BlogController extends AbstractController
                 'headline' => 'Edit Post',
                 'id' => $id,
                 'current' => 'posts',
+                'menu' => $setting->getMenu(),
                 'base' => $setting->get()
             ]
         );
@@ -252,21 +254,25 @@ class BlogController extends AbstractController
     /**
      * @Route("/post/delete/{id}", name="delete")
      */
-    public function post_delete($id) {
+    public function post_delete(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
         $comments = $em->getRepository(Comment::class)->findBy(['post' => $id]);
 
         foreach ($comments as $comment) {
-            $comment->setPost(null);
-            $em->persist($comment);
+            $em->remove($comment);
             $em->flush();
-        } 
+        }
 
         $em->remove($post);
         $em->flush();
 
-        return $this->redirectToRoute("post_list");
+        $this->addFlash(
+            'success',
+            "Post has been deleted successfully."
+        );
+
+        return $this->redirectToRoute("admin_posts");
     }
 
 
@@ -328,6 +334,7 @@ class BlogController extends AbstractController
                 'comments' => $comments,
                 'comment_form' => $comment_form->createView(),
                 'icons' => $icons,
+                'menu' => $setting->getMenu(),
                 'base' => $setting->get()
             ]
         );

@@ -45,7 +45,7 @@
                         <td style="min-width: 300px" class="text-right">
                             <a href="{{ path('post_edit', {'id': post.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
                             <a href="{{ path('post_single', {'slug': post.slug}) }}" class="btn"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" data-id="{{ post.id }}" data-url="/post/delete/" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ path('delete', {'id': post.id}) }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

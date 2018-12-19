@@ -43,6 +43,7 @@ class ArchiveController extends Controller
         return $this->render('archive/index.html.twig', [
             'controller_name' => 'ArchiveController',
             'posts' => $posts,
+            'menu' => $setting->getMenu(),
             'base' => $setting->get()
         ]);
     }
@@ -69,6 +70,7 @@ class ArchiveController extends Controller
             'category' => $category,
             'tag' => null,
             'posts' => $posts,
+            'menu' => $setting->getMenu(),
             'base' => $setting->get()
         ]);
     }
@@ -92,6 +94,7 @@ class ArchiveController extends Controller
             'tag' => $tag,
             'category' => null,
             'posts' => $posts,
+            'menu' => $setting->getMenu(),
             'base' => $setting->get()
         ]);
     }

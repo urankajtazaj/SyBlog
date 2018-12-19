@@ -62,6 +62,7 @@ class AdminController extends \Symfony\Bundle\FrameworkBundle\Controller\Control
      * @Route("/admin/posts", name="admin_posts")
      */
     public function posts(Request $request, SettingService $setting) {
+
         $em = $this->getDoctrine()->getManager();
 
         $page = $request->get('page') ? $request->get('page') : 1;

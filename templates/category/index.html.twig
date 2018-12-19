@@ -39,7 +39,7 @@
                         </td>
                         <td class="text-right">
                             <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
-                            <a href="#" data-url="/admin/category/delete/" data-id="{{ category.id }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ path('category_delete', {'id': category.id}) }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
