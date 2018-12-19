@@ -158,8 +158,8 @@ footer {
 }
 
 .img img {
-    min-width: 100%;
-    max-width: 110%;
+    min-width: 110%;
+    max-width: 120%;
 }
 
 .post-thumbnail {
@@ -193,7 +193,7 @@ nav {
     width: 100%;
     z-index: 2;
     background-color: #fff;
-    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .form-control {
@@ -260,7 +260,8 @@ blockquote {
     text-decoration: underline;
 }
 
-.content img {
+.content img,
+.content iframe {
     max-width: 100%;
 }
 
@@ -293,6 +294,7 @@ blockquote {
     border-radius: 0;
     border-color: transparent;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+    left: 0;
 }
 
 .dropdown-hover .dropdown-item {
@@ -309,7 +311,7 @@ blockquote {
 .dropdown-hover {
     position: relative;
     cursor: pointer;
-    margin-left: 20px;
+    padding-left: 35px;
 }
 
 .dropdown-hover:hover .dropdown-menu {

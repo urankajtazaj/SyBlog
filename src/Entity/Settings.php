@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SettingsRepository")
@@ -40,6 +41,12 @@ class Settings
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phone_2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg", "image/jpg", "image/webp" })
+     */
+    private $logo;
 
     public function getId(): ?int
     {
@@ -102,6 +109,18 @@ class Settings
     public function setPhone2(?string $phone_2): self
     {
         $this->phone_2 = $phone_2;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }

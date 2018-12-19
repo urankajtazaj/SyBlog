@@ -98,7 +98,7 @@ a:hover {
 .btn-blue{
     background-color: #299FFF;
     color: #fff;
-    /* box-shadow: 0 8px 25px rgba(41, 159, 255, 0.5); */
+    box-shadow: 0 7px 25px rgba(41, 159, 255, 0.4);
     font-weight: bold;
     text-transform: capitalize;
 }

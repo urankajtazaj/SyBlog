@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 use App\Form\SettingsFormType;
 use App\Form\MenuFormType;
@@ -32,6 +33,22 @@ class SettingsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            if ($data->getLogo()) {
+                $file = $form->get('logo')->getData();
+
+                $filename = 'LOGO.png';
+
+                // $file = $form->get('logo')->getData();
+
+                $file->move(
+                    $this->getParameter('cover_folder'),
+                    $filename
+                );
+
+                $setting->setLogo($filename);
+            }
+
             $this->getDoctrine()->getManager()->flush();
         }
 

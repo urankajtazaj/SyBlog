@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SettingsFormType extends AbstractType
@@ -17,6 +18,12 @@ class SettingsFormType extends AbstractType
     {
 
         $builder
+            ->add('logo', FileType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
+            ])
             ->add('page_name', TextType::class, [
                 'label' => 'Page Name',
                 'attr' => [

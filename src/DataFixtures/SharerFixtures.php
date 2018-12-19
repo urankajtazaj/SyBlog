@@ -10,15 +10,6 @@ class SharerFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-
-        /**
-         * INSERT INTO `sharer` VALUES 
-         * (5,'facebook','fab fa-facebook-f','https://www.facebook.com/sharer/sharer.php?u='),
-         * (6,'twitter','fab fa-twitter','https://twitter.com/home?status='),
-         * (7,'linkedin','fab fa-linkedin-in','https://www.linkedin.com/shareArticle?mini=true&url='),
-         * (8,'reddit','fab fa-reddit-alien','http://www.reddit.com/submit?url=');
-         */
-
         $fb = new Sharer();
         $fb->setName("Facebook");
         $fb->setIcon("fab fa-facebook-f");
