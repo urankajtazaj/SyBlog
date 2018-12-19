@@ -272,3 +272,15 @@ td {
 .navigation span a:hover {
     background-color: #f2f2f2;
 }
+
+.alert {
+    border-radius: 0;
+    border: none;
+    width: 350px;
+    display: block;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    z-index: 999;
+    /* margin-right: auto; */
+}

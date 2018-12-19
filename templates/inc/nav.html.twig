@@ -18,22 +18,24 @@
 
 							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
 							<li class="nav-item nav-link">
-								<div class="dropdown">
-									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-									 aria-expanded="false">
+								<div class="dropdown-hover">
+									{# <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+									 aria-expanded="false"> #}
 										{{ app.user.name }}
-									</button>
+									{# </button> #}
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="{{ path('profile') }}"><i class="material-icons">person_outline</i> Profile</a>
-										<div class="divider"></div>
 										{% if is_granted('ROLE_ADMIN') %}
-										<a href="{{ path('admin') }}" class="dropdown-item"><i class="material-icons">dashboard</i> Dashboard</a>
+										<a href="{{ path('admin') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard</a>
 										<div class="divider"></div>
-										<a class="dropdown-item" href="{{ path('post_new') }}"><i class="material-icons">add</i> Add post</a>
-										<a class="dropdown-item" href="{{ path('category_add') }}"><i class="material-icons">add</i> Add category</a>
+										<a class="dropdown-item" href="{{ path('admin_posts') }}"><i class="fas fa-font"></i> Posts</a>
+										<a href="{{ path('category_add') }}" class="dropdown-item"><i class="fas fa-tag"></i> Categories</a>
+										<a href="{{ path('comments') }}" class="dropdown-item"><i class="fas fa-comment"></i> Comments</a>
+										<a href="{{ path('users') }}" class="dropdown-item"><i class="fas fa-user"></i> Users</a>
+										<a href="{{ path('menu') }}" class="dropdown-item"><i class="fas fa-bars"></i> Menu</a>
+										<a href="{{ path('settings') }}" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
 										<div class="divider"></div>
 										{% endif %}
-										<a class="dropdown-item" href="{{ path('app_logout') }}"><i class="material-icons">power_settings_new</i> Logout</a>
+										<a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-power-off"></i> Logout</a>
 									</div>
 								</div>
 							</li>

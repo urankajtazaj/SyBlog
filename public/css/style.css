@@ -288,16 +288,37 @@ blockquote {
     background-color: #eee;
 }
 
-.dropdown .dropdown-item {
+.dropdown-menu {
+    position: absolute;
+    border-radius: 0;
+    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+}
+
+.dropdown-hover .dropdown-item {
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
     align-items: center;
 }
 
-.material-icons {
-    margin-left: -10px;
+.dropdown-hover .dropdown-item i {
     padding-right: 10px;
+}
+
+.dropdown-hover {
+    position: relative;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.dropdown-hover:hover .dropdown-menu {
+    display: block;
+}
+
+.material-icons {
+    /* margin-left: -10px;
+    padding-right: 10px; */
 }
 
 .btn {
