@@ -327,7 +327,13 @@ class BlogController extends AbstractController
 
         $all_posts = $qb->setMaxResults(5)->execute();
 
-        $votes = $post->getVotes();
+        $votes = $em->getRepository(Votes::class)->createQueryBuilder('u')
+            ->andWhere('u.user = :uid')
+            ->andWhere('u.post = :post')
+            ->setParameter('uid', $this->getUser())
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getResult();
 
         $query = $em->getConnection()->prepare('
             select comment_id, sum(type) count from comment_votes
@@ -350,8 +356,8 @@ class BlogController extends AbstractController
         for ($i = 0; $i < sizeof($votes); $i++) {
             $commentVotes[$votes[$i]->getComment()->getId()] = [
                 'user' => $votes[$i]->getUser(),
-                'type' => $votes[$i]->getUser() == $this->getUser() ? $votes[$i]->getType() : 0,
-                'vid' =>  $votes[$i]->getUser() == $this->getUser() ? $votes[$i]->getId() : 0,
+                'type' => $votes[$i]->getUser()->getId() == $this->getUser()->getId() ? $votes[$i]->getType() : 0,
+                'vid' =>  $votes[$i]->getUser()->getId() == $this->getUser()->getId() ? $votes[$i]->getId() : 0,
             ];
         }
         

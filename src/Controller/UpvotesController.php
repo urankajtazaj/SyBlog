@@ -23,12 +23,27 @@ class UpvotesController extends AbstractController
          */
 
         $em = $this->getDoctrine()->getManager();
+        $comment_ = $em->getRepository(\App\Entity\Comment::class)->find($comment);
         
         $upvote = null;
 
-        if ($uvid > 0)
-            $upvote = $em->getRepository(Upvote::class)->find($uvid);
-        
+        if ($uvid > 0){
+            $upvote = $em->getRepository(Upvote::class)->createQueryBuilder('u')
+                ->andWhere('u.id = :uvid')
+                ->andWhere('u.comment = :cid')
+                ->andWhere('u.user = :uid')
+                ->setParameter('uvid', $uvid)
+                ->setParameter('uid', $this->getUser())
+                ->setParameter('cid', $comment_)
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult();
+                // dd($upvote);
+
+                $upvote = $upvote[0];
+            }
+
+
         $wasNull = false;
 
         if ($upvote == null) {
@@ -42,7 +57,7 @@ class UpvotesController extends AbstractController
         
         $upvote->setType($type);
         $upvote->setUser($this->getUser());
-        $upvote->setComment($em->getRepository(\App\Entity\Comment::class)->find($comment));
+        $upvote->setComment($comment_);
         $upvote->setPost($em->getRepository(\App\Entity\Post::class)->findOneBy(['slug' => $pid]));
 
         if ($uvid == "0") {
