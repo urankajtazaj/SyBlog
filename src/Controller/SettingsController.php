@@ -27,6 +27,14 @@ class SettingsController extends AbstractController
         // Get Settings
         $setting = $em->getRepository(Settings::class)->find(1);
 
+        $filename = 'LOGO.png';
+
+        if ($setting->getLogo()) {
+            $setting->setLogo(
+                null
+            );
+        }
+
         $form = $this->createForm(SettingsFormType::class, $setting);
 
         $form->handleRequest($request);
@@ -36,10 +44,6 @@ class SettingsController extends AbstractController
 
             if ($data->getLogo()) {
                 $file = $form->get('logo')->getData();
-
-                $filename = 'LOGO.png';
-
-                // $file = $form->get('logo')->getData();
 
                 $file->move(
                     $this->getParameter('cover_folder'),

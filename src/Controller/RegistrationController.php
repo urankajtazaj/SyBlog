@@ -44,7 +44,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/index.html.twig', [
             'current' => 'users',
             'headline' => 'Add User',
-            'setting' => $setting->get(),
+            'base' => $setting->get(),
             'menu' => $setting->getMenu(),
             'form' => $form->createView()
         ]);

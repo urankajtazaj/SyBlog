@@ -31,10 +31,12 @@
                             {% endfor %}
                         </td>
                         <th class="text-right">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a href="#" class="btn"><i class="fas fa-cog"></i></a>
+                            {% if app.user.id == user.id %}
+                                <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn"><i class="fas fa-cog"></i></a>
+                                <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            {# {% elseif %} #}
+                                {# <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-delete"><i class="fas fa-trash-alt"></i></a> #}
                             {% endif %}
-                            <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
                         </th>
                         {# <td>{{ user.dateCreated | date("d/m/Y") }}</td> #}
                     </tr>

@@ -1,6 +1,16 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="{{ path('post_list') }}"><b>{{ base.pageName }}</b></a>
+					<a class="navbar-brand" href="{{ path('post_list') }}">
+						{% set logo = asset('uploads/images/LOGO.png') %}
+
+						{{ dump(logo) }}
+
+						{% if logo %}
+							<img src="{{ logo }}" style="max-height: 60px; max-width: 120px">
+						{% else %}
+							<b>{{ base.pageName }}</b>
+						{% endif %}
+					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -19,22 +29,19 @@
 							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
 							<li class="nav-item nav-link">
 								<div class="dropdown-hover">
-									{# <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-									 aria-expanded="false"> #}
-										{{ app.user.name }}
-									{# </button> #}
+									{{ app.user.name }}
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										{% if is_granted('ROLE_ADMIN') %}
-										<a href="{{ path('admin') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard</a>
-										<div class="divider"></div>
-										<a class="dropdown-item" href="{{ path('admin_posts') }}"><i class="fas fa-font"></i> Posts</a>
-										<a href="{{ path('category_add') }}" class="dropdown-item"><i class="fas fa-tag"></i> Categories</a>
-										<a href="{{ path('comments') }}" class="dropdown-item"><i class="fas fa-comment"></i> Comments</a>
-										<a href="{{ path('users') }}" class="dropdown-item"><i class="fas fa-user"></i> Users</a>
-										<a href="{{ path('menu') }}" class="dropdown-item"><i class="fas fa-bars"></i> Menu</a>
-										<a href="{{ path('settings') }}" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
-										<div class="divider"></div>
+											<a href="{{ path('admin') }}" class="dropdown-item"><i class="fas fa-home"></i> Dashboard</a>
+											<div class="divider"></div>
+											<a class="dropdown-item" href="{{ path('admin_posts') }}"><i class="fas fa-font"></i> Posts</a>
+											<a href="{{ path('category_add') }}" class="dropdown-item"><i class="fas fa-tag"></i> Categories</a>
+											<a href="{{ path('comments') }}" class="dropdown-item"><i class="fas fa-comment"></i> Comments</a>
+											<a href="{{ path('menu') }}" class="dropdown-item"><i class="fas fa-bars"></i> Menu</a>
+											<a href="{{ path('settings') }}" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
 										{% endif %}
+										<a href="{{ path('users') }}" class="dropdown-item"><i class="fas fa-user"></i> Users</a>
+										<div class="divider"></div>
 										<a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-power-off"></i> Logout</a>
 									</div>
 								</div>
@@ -42,8 +49,6 @@
 							{% else %}
 							<li class="nav-item form-inline">
 								<a href="{{ path('app_login') }}" class="nav-link">Login</a>
-								or
-								<a href="{{ path('register') }}" class="nav-link">Register</a>
 							</li>
 							{% endif %}
 
