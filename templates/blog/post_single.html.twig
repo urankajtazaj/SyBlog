@@ -100,15 +100,14 @@
             <div class="row">
                 <div class="col-md-9 col-12">
                 {# COMMENTS SECTION #}
-                    <div class="" id="comments">
-                        <h3>{{ comments | length }} Comment{% if comments | length != 1 %}s{%
-                                endif %}</h3><br>
+                    <div id="comments">
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
-                            {{ form_start(comment_form) }}
-                            {{ form_widget(comment_form) }}
-                            {{ form_end(comment_form) }}
-                            <br>
-                            <hr>
+                            <div class="comment">
+                                {{ form_start(comment_form) }}
+                                {{ form_widget(comment_form) }}
+                                {{ form_end(comment_form) }}
+                                <br>
+                            </div>
                             <br>
                         {% else %}
                             <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br>
@@ -117,45 +116,54 @@
 
                         {% if comments | length > 0 %}
                             {# {{ dump(votes) }} #}
+                            <div class="comment">
+                            <h4>{{ comments | length }} Comment{% if comments | length != 1 %}s{%
+                                endif %}</h4>
+                                </div>
                             {% for comment in comments %}
                                 <div class="comment">
                                     <h5>{{ comment.user.name }}</h5>
                                     <small><i>&nbsp; {{ comment.dateCreated | time_ago }}</i></small><br><br>
                                     <p>{{ comment.comment | nl2br }}</p>
+
                                     <div class="votes">
 
-                                            {% set up =  vote[comment.id] is defined and vote[comment.id]['type'] == 1 %}
-                                            {% set down =  vote[comment.id] is defined and vote[comment.id]['type'] == -1 %}
+                                        {% set up =  vote[comment.id] is defined and vote[comment.id]['type'] == 1 %}
+                                        {% set down =  vote[comment.id] is defined and vote[comment.id]['type'] == -1 %}
 
-                                            {% set count = vote_count[comment.id] is defined ? vote_count[comment.id] : 0 %}
+                                        {% set count = vote_count[comment.id] is defined ? vote_count[comment.id] : 0 %}
 
-                                            {% set typeUp =  up ? 0 : 1 %}
-                                            {% set typeDown =  down ? 0 : -1 %}
+                                        {% set typeUp =  up ? 0 : 1 %}
+                                        {% set typeDown =  down ? 0 : -1 %}
 
-                                            {% set vid =  vote[comment.id] is defined ? vote[comment.id]['vid'] : 0 %}
+                                        {% set vid =  vote[comment.id] is defined ? vote[comment.id]['vid'] : 0 %}
 
 
-                                            <a class="{{ up ? 'active' : '' }}" href="{{ 
-                                                path('vote', {
-                                                    'comment': comment.id,
-                                                    'type': typeUp,
-                                                    'uvid': vid,
-                                                    'pid': post.slug
-                                                })
-                                            }}">
-                                                <i class="fas fa-chevron-up"></i>
-                                            </a>
-                                            <small>{{ count }}</small>
-                                            <a class="{{ down ? 'active red' : '' }}" href="{{ 
-                                                path('vote', {
-                                                    'comment': comment.id,
-                                                    'type': typeDown,
-                                                    'uvid': vid,
-                                                    'pid': post.slug
-                                                })
-                                            }}">
-                                                <i class="fas fa-chevron-down"></i>                                    
-                                            </a>
+                                        {% if comment.user != app.user %}                                    
+                                        <a class="{{ up ? 'active' : '' }}" href="{{ 
+                                            path('vote', {
+                                                'comment': comment.id,
+                                                'type': typeUp,
+                                                'uvid': vid,
+                                                'pid': post.slug
+                                            })
+                                        }}">
+                                            <i class="fas fa-chevron-up"></i>
+                                        </a>
+                                        {% endif %}
+                                        <small>{{ count }} {{ (app.user == comment.user ? 'Upvotes' : '') }}</small>
+                                        {% if comment.user != app.user %}                                    
+                                        <a class="{{ down ? 'active red' : '' }}" href="{{ 
+                                            path('vote', {
+                                                'comment': comment.id,
+                                                'type': typeDown,
+                                                'uvid': vid,
+                                                'pid': post.slug
+                                            })
+                                        }}">
+                                            <i class="fas fa-chevron-down"></i>                                    
+                                        </a>
+                                        {% endif %}
 
                                     </div>
                                 </div>
