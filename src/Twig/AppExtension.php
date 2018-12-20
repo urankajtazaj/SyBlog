@@ -12,6 +12,14 @@ class AppExtension extends AbstractExtension
         return array(
             new TwigFilter('time_ago', array($this, 'getTimeAgo')),
             new TwigFilter('excerpt', array($this, 'stripContent')),
+            new TwigFilter('exists', array($this, 'logo_exists')),
+        );
+    }
+
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_Function('file_exists', 'file_exists')
         );
     }
 
@@ -24,6 +32,10 @@ class AppExtension extends AbstractExtension
         } else {
             return implode(' ', array_slice($exploded, 0, $wordCount));
         }
+    }
+
+    public function logo_exists($filename) {
+        return file_exists($filename);
     }
 
     public function getTimeAgo($dateTime)
@@ -42,11 +54,11 @@ class AppExtension extends AbstractExtension
                 return 'Yesterday';
             }
 
-            $range = 'days';    
+            $range = 'days';
             $char = 'd';
         } else if ($diff->format('%h') > 0) {
 
-            $range = 'hours';   
+            $range = 'hours';
             $char = 'h';
 
             if ($diff->format('%h') == 1)
@@ -58,7 +70,7 @@ class AppExtension extends AbstractExtension
                 return 'A minute ago';
             }
 
-            $range = 'minutes';   
+            $range = 'minutes';
             $char = 'i';
         } else {
             return 'Less than a minute ago';
