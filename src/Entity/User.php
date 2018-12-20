@@ -60,10 +60,22 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="user")
+     */
+    private $comment;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="user")
+     */
+    private $commentVotes;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+        $this->commentVotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -231,6 +243,45 @@ class User implements UserInterface
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentVotes[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @return Collection|CommentVotes[]
+     */
+    public function getCommentVotes(): Collection
+    {
+        return $this->commentVotes;
+    }
+
+    public function addCommentVote(CommentVotes $commentVote): self
+    {
+        if (!$this->commentVotes->contains($commentVote)) {
+            $this->commentVotes[] = $commentVote;
+            $commentVote->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentVote(CommentVotes $commentVote): self
+    {
+        if ($this->commentVotes->contains($commentVote)) {
+            $this->commentVotes->removeElement($commentVote);
+            // set the owning side to null (unless already changed)
+            if ($commentVote->getUser() === $this) {
+                $commentVote->setUser(null);
+            }
+        }
 
         return $this;
     }

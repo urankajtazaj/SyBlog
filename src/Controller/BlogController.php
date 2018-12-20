@@ -24,6 +24,7 @@ use App\Form\PostForm;
 use App\Form\CommentForm;
 use App\Entity\Sharer;
 use App\Entity\Settings;
+use App\Entity\CommentVotes as Votes;
 
 use App\Service\SettingService;
 
@@ -326,6 +327,40 @@ class BlogController extends AbstractController
 
         $all_posts = $qb->setMaxResults(5)->execute();
 
+        $votes = $post->getVotes();
+
+        $query = $em->getConnection()->prepare('
+            select comment_id, sum(type) count from comment_votes
+            where post_id = :post
+            group by comment_id
+            order by comment_id asc
+        ');
+        // $query->setParameter(1, $post->getId());
+        $query->execute([
+            'post' => $post->getId()
+        ]);
+
+
+        $q = $query->fetchAll();
+        // dd($q);
+
+        $commentVotes = [];
+        $voteCount = [];
+
+        for ($i = 0; $i < sizeof($votes); $i++) {
+            $commentVotes[$votes[$i]->getComment()->getId()] = [
+                'user' => $votes[$i]->getUser(),
+                'type' => $votes[$i]->getUser() == $this->getUser() ? $votes[$i]->getType() : 0,
+                'vid' =>  $votes[$i]->getUser() == $this->getUser() ? $votes[$i]->getId() : 0,
+            ];
+        }
+        
+        foreach ($q as $count) {
+            $voteCount[$count['comment_id']] = $count['count'];
+        }
+
+        // dd($commentVotes);
+
         return $this->render(
             "blog/post_single.html.twig",
             [
@@ -335,7 +370,9 @@ class BlogController extends AbstractController
                 'comment_form' => $comment_form->createView(),
                 'icons' => $icons,
                 'menu' => $setting->getMenu(),
-                'base' => $setting->get()
+                'base' => $setting->get(),
+                'vote' => $commentVotes,
+                'vote_count' => $voteCount
             ]
         );
         

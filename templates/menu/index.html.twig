@@ -16,7 +16,7 @@
                     {% for m in active_menu %}
                     <tr>
                         <td>{{ m.category.name }}</td>
-                        <td class="text-right"><a href="{{ path('menu_delete', {'id': m.id}) }}" class="text-danger btn-delete"><small>Unlink</small></a></td>
+                        <td class="text-right"><a href="{{ path('menu_delete', {'id': m.id}) }}" class="text-danger btn-delete"><small><i class="fas fa-unlink"></i> Unlink</small></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

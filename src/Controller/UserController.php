@@ -99,7 +99,7 @@ class UserController extends \Symfony\Bundle\FrameworkBundle\Controller\Controll
 
         return $this->render('registration/index.html.twig', [
             'current' => 'users',
-            'headline' => 'Add User',
+            'headline' => 'Edit User',
             'base' => $setting->get(),
             'menu' => $setting->getMenu(),
             'form' => $form->createView()

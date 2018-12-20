@@ -40,7 +40,7 @@ class UserEditFormType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Save Changes',
                 'attr' => [
-                    'class' => 'btn btn-blue'
+                    'class' => 'btn btn-blue mt-3'
                 ]
             ])
         ;

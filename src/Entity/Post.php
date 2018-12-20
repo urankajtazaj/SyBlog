@@ -88,9 +88,16 @@ class Post
      */
     private $allow_comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="post")
+     */
+    private $votes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->commentVotes = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,6 +276,37 @@ class Post
     public function setAllowComments(bool $allow_comments): self
     {
         $this->allow_comments = $allow_comments;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentVotes[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(CommentVotes $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(CommentVotes $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getPost() === $this) {
+                $vote->setPost(null);
+            }
+        }
 
         return $this;
     }

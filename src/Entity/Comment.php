@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Comment
      * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comments")
      */
     private $post;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="comment")
+     */
+    private $commentVotes;
+
+    public function __construct()
+    {
+        $this->commentVotes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentVotes[]
+     */
+    public function getCommentVotes(): Collection
+    {
+        return $this->commentVotes;
+    }
+
+    public function addCommentVote(CommentVotes $commentVote): self
+    {
+        if (!$this->commentVotes->contains($commentVote)) {
+            $this->commentVotes[] = $commentVote;
+            $commentVote->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentVote(CommentVotes $commentVote): self
+    {
+        if ($this->commentVotes->contains($commentVote)) {
+            $this->commentVotes->removeElement($commentVote);
+            // set the owning side to null (unless already changed)
+            if ($commentVote->getComment() === $this) {
+                $commentVote->setComment(null);
+            }
+        }
 
         return $this;
     }

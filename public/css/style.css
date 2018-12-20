@@ -168,11 +168,26 @@ footer {
     margin-bottom: 20px;
 }
 
-.comment {
-    margin: 10px 0;
-    padding: 15px;
+.comments {
+    background-color: #f5f5f5;
+    padding: 50px;
+}
+
+.comments .post {
+    border-radius: 5px;
     border: 1px solid #eee;
+}
+
+.comment {
+    /* margin: 10px 0; */
+    padding: 25px;
+    border: 1px solid #eee;
+    border-top: 1px solid transparent;
     background-color: #fff;
+}
+
+.comment:first-of-type {
+    border-top-color: #eee;
 }
 
 .comment p {
@@ -408,10 +423,6 @@ blockquote {
     /* box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.05); */
 }
 
-#comments {
-    background-color: #fff;
-}
-
 .widget {
     background-color: #fff;
     border: 1px solid #eee;
@@ -468,4 +479,30 @@ blockquote {
 .navigation span a:hover,
 .navigation .current {
     background-color: #f2f2f2;
+}
+
+.votes {
+    padding-left: 10px;
+}
+
+.votes a {
+    padding: 8px 10px;
+    color: #888;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #eee; */
+}
+
+.votes a.active {
+    color: #4b71db;
+    background-color: rgba(75, 113, 219, 0.1);
+}
+
+.votes a.active.red {
+    color: #db4b4b;
+    background-color: rgba(219, 75, 75, 0.1);
 }
