@@ -126,7 +126,7 @@
                                     <small><i>&nbsp; {{ comment.dateCreated | time_ago }}</i></small><br><br>
                                     <p>{{ comment.comment | nl2br }}</p>
 
-                                    <div class="votes">
+                                    <div class="votes" id="votes-{{ comment.id }}">
 
                                         {% set up =  vote[comment.id] is defined and vote[comment.id]['type'] == 1 %}
                                         {% set down =  vote[comment.id] is defined and vote[comment.id]['type'] == -1 %}
@@ -142,7 +142,7 @@
                                         {% if comment.user != app.user %}                                    
                                             <a href="#"
                                             data-cid="{{ comment.id }}"
-                                            data-type="{{ typeUp }}"
+                                            data-type="1"
                                             data-vid="{{ vid }}"
                                             data-pid="{{ post.slug }}"
                                             
@@ -154,7 +154,7 @@
                                         {% if comment.user != app.user %}                                    
                                             <a href="#"
                                             data-cid="{{ comment.id }}"
-                                            data-type="{{ typeDown }}"
+                                            data-type="-1"
                                             data-vid="{{ vid }}"
                                             data-pid="{{ post.slug }}"
 

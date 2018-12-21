@@ -44,14 +44,15 @@ $(document).ready(function() {
             success: function(data) {
                 var count = $("#count-" + comment);
                 $(count).text(data['count']);
-                $(".votes a").removeClass('active');
+                $("#votes-" + comment + " a").removeClass('active');
 
                 if (data['type'] != 0)
                     $(btn).addClass('active');
-                else if (data['type'] == 1) {
-                    $(".votes a:first-of-type").data("type", 1);
+                
+                if (data['type'] == 1) {
+                    $(".votes#votes-" + comment + " a:first-of-type").data("type", 1);
                 } else if (data['type'] == -1) {
-                    $(".votes a:last-of-type").data("type", -1);
+                    $(".votes#votes-" + comment + " a:last-of-type").data("type", -1);
                 }
             }
         });
