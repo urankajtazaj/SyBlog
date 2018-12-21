@@ -16,15 +16,17 @@ class CommentForm extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('comment', TextareaType::class, [
+                'label' => ' ',
                 'attr' => [
                     'class' => 'form-control mb-3',
-                    'rows' => 4
+                    'placeholder' => 'Say something nice',
+                    'rows' => 2
                 ]
             ])
             ->add('send', SubmitType::class, [
                 'label' => 'Post Comment',
                 'attr' => [
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn'
                 ]
             ]);
     }

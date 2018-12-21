@@ -102,12 +102,17 @@
                 {# COMMENTS SECTION #}
                     <div id="comments">
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_WRITER') %}
-                            <div class="comment">
-                                {{ form_start(comment_form) }}
-                                {{ form_widget(comment_form) }}
-                                {{ form_end(comment_form) }}
+                            {# <div class="comment"> #}
+                            {# <div class="row">
+                                <div class="col-md-2 col-12"></div>
+                                <div class="col-md-10 col-12"> #}
+                                    {{ form_start(comment_form) }}
+                                    {{ form_widget(comment_form) }}
+                                    {{ form_end(comment_form) }}
+                                {# </div>
+                            </div> #}
                                 <br>
-                            </div>
+                            {# </div> #}
                             <br>
                         {% else %}
                             <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login to leave a comment</a><br><br>
@@ -132,9 +137,6 @@
                                         {% set down =  vote[comment.id] is defined and vote[comment.id]['type'] == -1 %}
 
                                         {% set count = vote_count[comment.id] is defined ? vote_count[comment.id] : 0 %}
-
-                                        {% set typeUp =  up ? 0 : 1 %}
-                                        {% set typeDown =  down ? 0 : -1 %}
 
                                         {% set vid =  vote[comment.id] is defined ? vote[comment.id]['vid'] : 0 %}
 
