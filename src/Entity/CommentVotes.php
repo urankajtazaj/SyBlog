@@ -19,7 +19,7 @@ class CommentVotes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentVotes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comment")
      */
     private $user;
 

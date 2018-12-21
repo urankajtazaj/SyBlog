@@ -21,7 +21,7 @@ class SettingsFormType extends AbstractType
             ->add('logo', FileType::class, [
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'd-block mb-3'
                 ]
             ])
             ->add('page_name', TextType::class, [

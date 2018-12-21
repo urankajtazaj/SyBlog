@@ -66,9 +66,9 @@ class User implements UserInterface
     private $comment;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="commentVotes")
      */
-    private $commentVotes;
+    // private $commentVotes;
 
     public function __construct()
     {
