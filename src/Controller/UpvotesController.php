@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\CommentVotes as Upvote;
 
@@ -38,7 +39,6 @@ class UpvotesController extends AbstractController
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getResult();
-                // dd($upvote);
 
                 $upvote = $upvote[0];
             }
@@ -54,8 +54,18 @@ class UpvotesController extends AbstractController
         /**
          * @var App\Entity\CommentVotes;
          */
-        
-        $upvote->setType($type);
+
+        $newType = $type;
+
+        if (!$wasNull) {
+            if ($type == 1 && $upvote->getType() == 1) {
+                $newType = 0;
+            } else if ($type == -1 && $upvote->getType() == -1) {
+                $newType = 0;
+            }
+        }
+
+        $upvote->setType($newType);
         $upvote->setUser($this->getUser());
         $upvote->setComment($comment_);
         $upvote->setPost($em->getRepository(\App\Entity\Post::class)->findOneBy(['slug' => $pid]));
@@ -63,12 +73,14 @@ class UpvotesController extends AbstractController
         if ($uvid == "0") {
             $em->persist($upvote);
         }
-        // dd($upvote);
 
         $em->flush();
 
-        return $this->redirectToRoute('post_single', [
-            'slug' => $pid
-        ]);
+        $counter = $em->getRepository(Upvote::class)->getVoteCount($upvote->getPost(), $upvote->getComment());
+        $counter[0]['type'] = $newType;
+
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            $counter[0]
+        );
     }
 }

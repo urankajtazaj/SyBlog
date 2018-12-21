@@ -140,29 +140,27 @@
 
 
                                         {% if comment.user != app.user %}                                    
-                                        <a class="{{ up ? 'active' : '' }}" href="{{ 
-                                            path('vote', {
-                                                'comment': comment.id,
-                                                'type': typeUp,
-                                                'uvid': vid,
-                                                'pid': post.slug
-                                            })
-                                        }}">
-                                            <i class="fas fa-chevron-up"></i>
-                                        </a>
+                                            <a href="#"
+                                            data-cid="{{ comment.id }}"
+                                            data-type="{{ typeUp }}"
+                                            data-vid="{{ vid }}"
+                                            data-pid="{{ post.slug }}"
+                                            
+                                            class="{{ up ? 'active' : '' }}">
+                                                <i class="fas fa-chevron-up"></i>
+                                            </a>
                                         {% endif %}
-                                        <small>{{ count }} {{ (app.user == comment.user ? 'Upvotes' : '') }}</small>
+                                        <small id="count-{{ comment.id }}">{{ count }} {{ (app.user == comment.user ? 'Upvotes' : '') }}</small>
                                         {% if comment.user != app.user %}                                    
-                                        <a class="{{ down ? 'active red' : '' }}" href="{{ 
-                                            path('vote', {
-                                                'comment': comment.id,
-                                                'type': typeDown,
-                                                'uvid': vid,
-                                                'pid': post.slug
-                                            })
-                                        }}">
-                                            <i class="fas fa-chevron-down"></i>                                    
-                                        </a>
+                                            <a href="#"
+                                            data-cid="{{ comment.id }}"
+                                            data-type="{{ typeDown }}"
+                                            data-vid="{{ vid }}"
+                                            data-pid="{{ post.slug }}"
+
+                                            class="{{ down ? 'active' : '' }} red" >
+                                                <i class="fas fa-chevron-down"></i>                                    
+                                            </a>
                                         {% endif %}
 
                                     </div>

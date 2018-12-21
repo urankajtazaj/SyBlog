@@ -28,7 +28,56 @@ $(document).ready(function() {
         });
     });
 
+
+    function changeVote(btn) {
+
+        var comment = $(btn).data("cid");
+        var type = $(btn).data("type");
+        var uid = $(btn).data("vid");
+        var pid = $(btn).data("pid");
+
+        var newUrl = "/upvotes/" + comment + "/" + type + "/" + uid + "/" + pid;
+
+        $.ajax({
+            method: "GET",
+            url: newUrl,
+            success: function(data) {
+                var count = $("#count-" + comment);
+                $(count).text(data['count']);
+                $(".votes a").removeClass('active');
+
+                if (data['type'] != 0)
+                    $(btn).addClass('active');
+                else if (data['type'] == 1) {
+                    $(".votes a:first-of-type").data("type", 1);
+                } else if (data['type'] == -1) {
+                    $(".votes a:last-of-type").data("type", -1);
+                }
+            }
+        });
+    }
+
+
+    $(".votes").each(function(i, el) {
+        var el = $(el);
+
+        var btnUp = $("a:first-of-type", this);
+        var btnDown = $("a:last-of-type", this);
+
+        btnUp.click(function(e) {
+            e.preventDefault();
+            changeVote(this);
+        });
+
+        btnDown.click(function(e) {
+            e.preventDefault();
+            changeVote(this);
+        });
+
+    });
+
 });
+
 
 // Show popup
 function showPopup() {

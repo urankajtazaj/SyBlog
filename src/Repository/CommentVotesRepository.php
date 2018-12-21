@@ -36,6 +36,17 @@ class CommentVotesRepository extends ServiceEntityRepository
     }
     */
 
+    public function getVoteCount($post, $comment) {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.comment = :comment')
+            ->setParameter('comment', $comment)
+            ->andWhere('v.post = :post')
+            ->setParameter('post', $post)
+            ->select('sum(v.type) as count')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?CommentVotes
     {
