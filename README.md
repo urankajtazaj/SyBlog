@@ -4,21 +4,15 @@ A simple blog made with symfony, lightly inspired my Medium.
 Work is still in progress.
 
 
-
-## Post list
-![Image](https://i.imgur.com/UvJj2SI.jpg)
-
-
-
-## Single post
-![Image](https://i.imgur.com/YBnODAL.jpg)
+## Blog Page (Home)
+![Imgur](https://i.imgur.com/YRm3EuK.jpg)
 
 
 
-## User Profile
-![Image](https://i.imgur.com/1mJTQWj.png)
+## Single Post
+![Imgur](https://i.imgur.com/cxFpAaP.jpg)
 
 
 
-## Edit Post
-![Image](https://i.imgur.com/VxCrt7i.png)
+## Posts List - Admin Panel
+![Imgur](https://i.imgur.com/nEFPnBL.png)
