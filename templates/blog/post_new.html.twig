@@ -21,10 +21,11 @@
                 <div class="form-group">
                     {{ form_row(form.subheading) }}
                 </div>
-
-                <div class="form-group">
-                    {{ form_row(form.content) }}
-                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <div class="form-group">
+                {{ form_row(form.content) }}
             </div>
         </div>
     </div>
@@ -79,9 +80,9 @@
             </div>
         </div>
 
-        <div class="info-box">
+        {# <div class="info-box"> #}
             {{ form_widget(form.save) }}
-        </div>
+        {# </div> #}
     </div>
 </div>
 {{ form_end(form) }}
@@ -93,7 +94,7 @@
     <script>
         $(document).ready(function() {
             $('#post_form_content').summernote({
-                height: 700
+                height: 500
             });
         });
     </script>

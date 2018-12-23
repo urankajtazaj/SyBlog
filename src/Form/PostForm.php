@@ -35,10 +35,12 @@ class PostForm extends AbstractType {
             ])
             ->add('sharing_icons', CheckboxType::class, [
                 'required' => false,
+                'data' => true,
                 'label' => 'Allow sharing via social media'
             ])
             ->add('allow_comments', CheckboxType::class, [
                 'required' => false,
+                'data' => true,
                 'label' => 'Allow discussion'
             ])
             ->add('title', TextType::class, [
@@ -69,7 +71,7 @@ class PostForm extends AbstractType {
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-blue'
+                    'class' => 'btn btn-lg btn-blue'
                 ]
             ])
             ->add('tags', TextType::class, [

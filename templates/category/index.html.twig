@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-6 col-sm-12 col-12">
         <div class="info-box">
             <h4>Add Category</h4>
@@ -22,7 +22,11 @@
             {{ form_end(form) }}
             <br>
         </div>
-        <div class="info-box">
+        
+    </div>
+
+    <div class="col-md-6">
+    <div class="info-box">
             <h4>All Categories</h4>
             <br>
             <table class="table table-sm">
@@ -47,6 +51,7 @@
             </table>
         </div>
     </div>
+
 </div>
 
 {% endblock %}
