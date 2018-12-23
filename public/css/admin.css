@@ -1,20 +1,21 @@
 * {
     transition: 250ms ease;
+    font-family: "Open Sans";
 }
 
 .body {
     display: flex;
     background-color: #f7f9fb;
-    background-color: #F0F2FD;
+    /* background-color: #F0F2FD; */
+    /* background-color: #f5f5f5; */
 }
 
 .sidebar {
     min-height: 100vh;
-    padding: 20px;
+    padding: 20px 10px 20px 0px;
     box-sizing: border-box;
-    width: 290px;
+    width: 350px;
     z-index: 2;
-    font-weight: bold;
 }
 
 .sidebar,
@@ -27,8 +28,8 @@ h2,
 h3,
 h4,
 h5 {
-    font-weight: bold;
-    font-family: "Source Sans Pro";
+    font-weight: lighter;
+    /* font-family: "Source Sans Pro"; */
     color: #333;
 }
 
@@ -44,10 +45,9 @@ a:hover {
     align-items: center;
     margin-right: 10px;
     border-radius: 50px;
-    background-color: rgba(0,0,0, 0.08);
-    /* color: #fff; */
     opacity: 1;
     font-size: 12px;
+    float: right;
 }
 
 .btn-blue.icon,
@@ -63,30 +63,32 @@ a:hover {
 
 .info-bar {
     width: 100%;
+    /* display: none; */
     padding: 5px 10px 5px 0;
 }
 
 .info-box {
     background-color: #fff;
     padding: 25px 30px;
-    border-radius: 8px;
-    border: 1px solid #eee;
+    border-radius: 3px;
+    /* border: 1px solid #ddd; */
     /* box-sizing: border-box; */
-    box-shadow: 0 15px 20px rgba(59, 90, 156, 0.05);
+    /* box-shadow: 0 15px 20px rgba(59, 90, 156, 0.05); */
+    box-shadow: 0 3px 5px rgba(68, 155, 236, 0.07);
     margin-bottom: 30px;
 }
 
 .sidebar ul li li .sidebar-item {
-   padding-left: 50px;
    z-index: 1;
 }
 
 .sidebar .sidebar-item {
     display: block;
-    padding: 12px 20px;
+    padding: 12px 10px 12px 25px;
     margin: 3px 0 3px 0;
     color: inherit;
-    border-radius: 50px;
+    color: #aaa;
+    border-left: 5px solid transparent;
 }
 
 .btn-blue {
@@ -94,17 +96,20 @@ a:hover {
 }
 
 .sidebar-item:hover {
-    background-color: rgba(0,0,0,0.08);
+    color: #222;
 }
 
 .sidebar-item.active,
 .btn-blue{
-    /* background-color: #299FFF; */
     color: #fff;
-    /* box-shadow: 0 7px 25px rgba(41, 159, 255, 0.4); */
-    font-weight: bold;
     text-transform: capitalize;
     color: #449BEC;
+}
+
+.sidebar-item.active {
+    /* font-weight: bold; */
+    border-left-color: #449BEC;
+    background: linear-gradient(to right, rgba(68, 155, 236, 0.035), transparent);
 }
 
 .active ul {
@@ -207,6 +212,7 @@ a:hover {
 .cms {
     overflow-y: auto;
     height: 100vh;
+    padding: 50px 20px;
 }
 
 .cmd .row {
@@ -293,4 +299,8 @@ td {
     margin-right: 10px;
     z-index: 999;
     /* margin-right: auto; */
+}
+
+.btn {
+    background-color: transparent;
 }

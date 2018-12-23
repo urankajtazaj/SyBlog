@@ -1,16 +1,18 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-<div class="row">
-    <div class="col-xl-4 col-md-6 col-12">
+<div class="row justify-content-center">
+    <div class="col-md-5 col-sm-12 col-12">
         <div class="info-box">
             <h5>Add to Menus</h5><br>
             {{ form_start(menu) }}
             {{ form_widget(menu) }}
             {{ form_end(menu) }}
         </div>
+    </div>
+    <div class="col-md-5 col-sm-12 col-12">
         <div class="info-box">
-            <h5>Menus</h5><br>
+            <h5>Selected Menus</h5><br>
             <table style="width: 100%">
                 <tbody>
                     {% for m in active_menu %}
@@ -21,7 +23,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

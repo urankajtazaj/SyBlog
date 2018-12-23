@@ -8,6 +8,7 @@
     {{ include('inc/link.html.twig') }}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> 
     {% block stylesheets %}{% endblock %}
 </head>
 
@@ -18,59 +19,68 @@
                 <ul class="list-unstyled m-0">
                     <li>
                         <a href="{{ path('admin') }}" class="{% if current == 'admin' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-home"></i></div> Dashboard
+                            <span class="d-none d-sm-inline-block">Dashboard</span> <div class="icon"><i class="fas fa-home"></i></div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('admin_posts') }}" class="{% if current == 'posts' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-font"></i></div> Posts
+                            <span class="d-none d-sm-inline-block">Posts</span> <div class="icon"><i class="fas fa-font"></i></div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('category_add') }}" class="{% if current == 'category' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-tag"></i></div> Categories
+                            <span class="d-none d-sm-inline-block">Categories</span> <div class="icon"><i class="fas fa-tag"></i></div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('comments') }}" class="{% if current == 'comments' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-comment"></i></div> Comments
+                            <span class="d-none d-sm-inline-block">Comments</span> <div class="icon"><i class="fas fa-comment"></i></div> 
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('users') }}" class="{% if current == 'users' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-user"></i></div> Users
+                            <span class="d-none d-sm-inline-block">Users</span> <div class="icon"><i class="fas fa-user"></i></div> 
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('menu') }}" class="{% if current == 'menus' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-ellipsis-h"></i></div> Menus
+                            <span class="d-none d-sm-inline-block">Menus</span> <div class="icon"><i class="fas fa-ellipsis-h"></i></div> 
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('settings') }}" class="{% if current == 'settings' %}active{% endif %} sidebar-item">
-                            <div class="icon"><i class="fas fa-cog"></i></div> Settings
+                            <span class="d-none d-sm-inline-block">Settings</span> <div class="icon"><i class="fas fa-cog"></i></div> 
                         </a>
                     </li>
                     <hr>
                     <div class="text-center">
-                        <small style="opacity: .3">
-                            <b>SyBlog v0.1</b>
-                            / About
+                        <small>
+                            <p>
+                                <a href="/">View page</a>
+                            </p>
+                            <p>
+                                {{ app.user.name }} <br>
+                                <a href="{{ path('app_logout') }}" class="text-danger">Logout</a>
+                            </p>
+                            <hr>
+                            <span style="opacity: .3">
+                                <b>SyBlog v0.1</b>
+                                / About
+                            </span>
                         </small>
                     </div>
                 </ul>
             </div>
             <div style="width: 100%">
-                <div class="row align-items-center info-bar">
-                    <div class="col-md-6 col-12">
-                        <a href="/">{{ base.pageName }}</a>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        {{ app.user.name }} | <a href="{{ path('app_logout') }}" class="text-danger">Logout</a>
-                    </div>
-                </div>
-                <div class="cms container-fluid" style="padding: 20px">
-
+                <div class="cms container-fluid">
+                    {# <div class="row align-items-center info-bar">
+                        <div class="col-md-6 col-12">
+                            <a href="/">{{ base.pageName }}</a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            {{ app.user.name }} | <a href="{{ path('app_logout') }}" class="text-danger">Logout</a>
+                        </div>
+                    </div> #}
                     {% for label, messages in app.flashes %}
                         {% for msg in messages %}
                         <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
