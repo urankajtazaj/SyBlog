@@ -126,7 +126,7 @@
                                 endif %}</h4>
                                 </div>
                             {% for comment in comments %}
-                                <div class="comment">
+                                <div class="comment" id="comment-{{ comment.id }}">
                                     <h5>{{ comment.user.name }}</h5>
                                     <small><i>&nbsp; {{ comment.dateCreated | time_ago }}</i></small><br><br>
                                     <p>{{ comment.comment | nl2br }}</p>

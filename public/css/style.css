@@ -28,7 +28,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Source Sans Pro";
+    font-family: "Playfair Display";
+    font-weight: 700 !important;
     color: #333;
 }
 
@@ -41,7 +42,9 @@ h6 {
 }
 
 p {
-    font-family: "Merriweather" !important;
+    /* font-family: "Merriweather" !important; */
+    font-family: "Roboto";
+
 }
 
 p a {
@@ -59,13 +62,14 @@ p a:hover {
 }
 
 .content > p:first-of-type::first-letter  {
-    font-size: 90px;
+    font-size: 80px;
     margin-top: 100px;
     float: left;
     line-height: .83em;
     margin-top: 7px;
     padding-right: 10px;
     text-transform: uppercase;
+    font-family: "Playfair Display";
 }
 
 body {

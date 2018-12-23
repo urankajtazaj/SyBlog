@@ -227,6 +227,11 @@ a:hover {
     padding: 10px !important;
 } */
 
+.btn {
+    background-color: transparent;
+    background-color: rgba(68, 155, 236, 0.035);
+}
+
 table .btn {
     border-radius: 50%;
     /* border: 1px solid #f2f2f2; */
@@ -235,6 +240,7 @@ table .btn {
     justify-content: center;
     align-items: center;
     color: #999;
+    background-color: transparent;
     height: 50px;
 }
 
@@ -299,8 +305,4 @@ td {
     margin-right: 10px;
     z-index: 999;
     /* margin-right: auto; */
-}
-
-.btn {
-    background-color: transparent;
 }

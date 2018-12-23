@@ -13,14 +13,21 @@
                     <th>Post title</th>
                     <th>User</th>
                     <th>Date</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     {% for comment in comments %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td>{{ comment.post.title | excerpt(20, '...') }}</td>
+                        <td>
+                            <a href="{{ path('post_single', {'slug': comment.post.slug}) }}#comment-{{ comment.id }}">
+                                {{ comment.post.title | excerpt(20, '...') }}
+                            </a></td>
                         <td>{{ comment.user.name }}</td>
                         <td>{{ comment.dateCreated | date('d/m/Y') }}</td>
+                        <td>
+                            <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
