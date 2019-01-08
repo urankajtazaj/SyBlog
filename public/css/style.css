@@ -5,12 +5,12 @@
     border-radius: 0px;
     margin-bottom: 20px;
     color: initial;
-    border-radius: 20px;
     transition: 250ms ease;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .post:hover {
+    box-shadow: 0 3px 4px rgba(0,0,0,0.05);
     border-color: #eee;
 }
 
@@ -47,9 +47,7 @@ h1,
 }
 
 p {
-     font-family: "Merriweather" !important;
-    font-family: "Roboto";
-
+    font-family: "Merriweather" !important;
 }
 
 p a {
@@ -158,7 +156,6 @@ footer {
 }
 
 .img {
-    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
