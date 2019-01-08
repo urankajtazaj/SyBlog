@@ -28,9 +28,14 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Playfair Display";
     font-weight: 700 !important;
     color: #333;
+}
+
+h1,
+.post h3,
+.post h4{
+    font-family: "Playfair Display";
 }
 
 .post a:not(.btn) {
@@ -42,7 +47,7 @@ h6 {
 }
 
 p {
-    /* font-family: "Merriweather" !important; */
+     font-family: "Merriweather" !important;
     font-family: "Roboto";
 
 }
