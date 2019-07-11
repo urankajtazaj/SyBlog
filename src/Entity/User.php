@@ -65,11 +65,6 @@ class User implements UserInterface
      */
     private $comment;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CommentVotes", mappedBy="commentVotes")
-     */
-    // private $commentVotes;
-
     public function __construct()
     {
         $this->posts = new ArrayCollection();
