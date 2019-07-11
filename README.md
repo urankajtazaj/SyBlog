@@ -7,7 +7,7 @@ Work is still in progress.
 #
 
 
-Installation
+### Installation
 * Clone the project
 * Navigate to project `cd SyBlog`
 * Run `composer install`
