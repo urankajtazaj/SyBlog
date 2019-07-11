@@ -15,6 +15,7 @@ Installation
 * Run `php bin/console doctrine:database:create`
 * Run `php bin/console doctrine:migrations:migrate`
 * Run `php bin/console doctrine:fixtures:load --append`
+* Start the server by using `php bin/console server:run`
 * Use `admin` for the username and password
 
 
